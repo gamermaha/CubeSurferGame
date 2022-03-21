@@ -119,5 +119,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5116a7ab92c5f847a556c2fb791bba2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weightPoints: {fileID: 6457773065158607915, guid: bfb79d339e5da16478aaa3fc8722adad,
+  wayPoints: {fileID: 6457773065158607915, guid: bfb79d339e5da16478aaa3fc8722adad,
     type: 3}
+  playerPositions: []

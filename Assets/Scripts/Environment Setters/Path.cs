@@ -7,7 +7,7 @@ namespace Environment_Setters
 {
     public class Path : MonoBehaviour
     {
-        public GameObject weightPoints;
+        public GameObject wayPoints;
 
         public List<GameObject> playerPositions = new List<GameObject>();
         private float _distanceInWeightPoints;
@@ -33,16 +33,16 @@ namespace Environment_Setters
             
             xValue = transform.position.x - _pathLength / 2 + _distanceInWeightPoints;
             yValue = transform.position.y + transformLocalScale.y;
-            zValue = transform.position.z + transformLocalScale.z;
+            zValue = transform.position.z + transformLocalScale.z/2;
             
-            weightPointsSpawner();
+            wayPointsSpawner();
         }
 
-        public List<GameObject> weightPointsSpawner()
+        public List<GameObject> wayPointsSpawner()
         {
             while (_temp < _count)
             {
-                playerPositions.Add(Instantiate(weightPoints, new Vector3(xValue, yValue, zValue), Quaternion.identity));
+                playerPositions.Add(Instantiate(wayPoints, new Vector3(xValue, yValue, zValue), Quaternion.identity));
                 
                 Debug.Log("Point " + _temp);
                 Debug.Log("The value of x is: "+ xValue);

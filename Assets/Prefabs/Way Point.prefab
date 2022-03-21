@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6457773065158607914}
   - component: {fileID: 6728105725638106797}
   m_Layer: 0
-  m_Name: Weight Point
+  m_Name: Way Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

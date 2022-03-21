@@ -37,20 +37,14 @@ namespace Managers
                 Destroy(gameObject);
             }
         }
-        private void OnEnable()
-        {
-            throw new NotImplementedException();
-        }
+        
 
         void Start()
         {
             _pathLength = MetaData.Instance.scriptableInstance.pathLength;
             Init();
         }
-        private void OnDisable()
-        {
-            throw new NotImplementedException();
-        }
+      
 
         private void PlayerSetup()
         {
@@ -70,7 +64,7 @@ namespace Managers
         {
             if (x == 1)
             { 
-                _player.PlayerPositions(_path.weightPointsSpawner());
+                _player.PlayerPositions(_path.wayPointsSpawner());
                 x++;
             };
         }
