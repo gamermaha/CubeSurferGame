@@ -35,10 +35,10 @@ namespace Environment_Setters
             yValue = transform.position.y + transformLocalScale.y;
             zValue = transform.position.z + transformLocalScale.z/2;
             
-            wayPointsSpawner();
+            WayPointsSpawner();
         }
 
-        public List<GameObject> wayPointsSpawner()
+        public List<GameObject> WayPointsSpawner()
         {
             while (_temp < _count)
             {
@@ -50,7 +50,6 @@ namespace Environment_Setters
                 xValue += _distanceInWeightPoints;
                 _temp++;
             }
-            //Debug.Log(playerPositions.Length);
             return playerPositions;
         }
 

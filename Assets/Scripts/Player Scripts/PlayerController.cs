@@ -38,35 +38,42 @@ namespace Player_Scripts
         }
         private void FixedUpdate()
         {
-
-            
-            
             if (_playerPositions != null)
             {
-                var trans = _playerPositions[_increment].transform.position;
-                xValue = trans.x;
-                yValue = trans.y;
-                zValue = trans.z;
                 
-                if (Vector3.Distance(transform.position, _playerPositions[_increment].transform.position) <= 0.1) 
-                    transform.position += new Vector3(xValue, yValue, zValue);
+                //Debug.Log(trans);
+
+                if (Vector3.Distance(transform.position, _playerPositions[_increment].transform.position) <= 2 && _playerPositions.Count < _increment)
+                {
+                    Debug.Log("I am here");
+                    var trans = _playerPositions[_increment].transform.position;
+                    xValue = trans.x;
+                    yValue = trans.y;
+                    zValue = trans.z;
+                    transform.position = new Vector3(xValue, yValue, zValue);
+                    _increment++;
+                }
                 else
                 {
-                    transform.position += new Vector3(_mySpeed, 0f, 0f)* _moveForce * Time.deltaTime;
+                    xValue = _mySpeed * _moveForce * Time.deltaTime;
+                    yValue = 0f;
+                    zValue = 0f;
+                    transform.position += new Vector3(xValue, yValue, zValue);
                 }
+                Debug.Log(transform.position);
             } 
             
             
         }
 
         
-        private void OnCollisionEnter2D(Collision2D collision)
+        private void OnCollisionEnter(Collision collision)
         {
             if (collision.gameObject.CompareTag("Path"))
                 _onPath = true;
         }
 
-        private void OnCollisionExit2D(Collision2D other)
+        private void OnCollisionExit(Collision other)
         {
             if (other.gameObject.CompareTag("Path"))
             {
@@ -78,8 +85,7 @@ namespace Player_Scripts
         public void PlayerPositions(List<GameObject> playerPositions)
         {
             _playerPositions = playerPositions;
-            //Debug.Log(_playerPositions.Length);
-            
+            //Debug.Log(_playerPositions[1].transform.position);
         }
         
     }
