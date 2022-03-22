@@ -16,6 +16,8 @@ namespace Player_Scripts
         float yValue;
         float zValue;
         private int x = 1;
+        private Vector3 prevMousePos;
+        private Vector3 prevPlayerPos;
 
         private List<GameObject> _playerPositions;
 
@@ -36,34 +38,67 @@ namespace Player_Scripts
                 _moveForce = MetaData.Instance.scriptableInstance.playerForce;
             }
         }
-        private void FixedUpdate()
+        private void Update()
         {
-            if (_playerPositions != null)
+            if (_onPath)
             {
-                
-                //Debug.Log(trans);
+                transform.position += new Vector3(_mySpeed, 0f, 0f) * (_moveForce * Time.deltaTime);
 
-                if (Vector3.Distance(transform.position, _playerPositions[_increment].transform.position) <= 2 && _playerPositions.Count < _increment)
+                if (transform.position.z <= 1f && transform.position.z >= -1f)
                 {
-                    Debug.Log("I am here");
-                    var trans = _playerPositions[_increment].transform.position;
-                    xValue = trans.x;
-                    yValue = trans.y;
-                    zValue = trans.z;
-                    transform.position = new Vector3(xValue, yValue, zValue);
-                    _increment++;
+                    if (Input.GetMouseButton(0) && (Input.mousePosition.x - prevMousePos.x) > 0)
+                    {
+                        MoveRight();
+                    }
+
+                    if (Input.GetMouseButton(0) && (Input.mousePosition.x - prevMousePos.x) < 0)
+                    {
+                        MoveLeft();
+                    }
                 }
-                else
+                else if (transform.position.z > 1f)
                 {
-                    xValue = _mySpeed * _moveForce * Time.deltaTime;
-                    yValue = 0f;
-                    zValue = 0f;
-                    transform.position += new Vector3(xValue, yValue, zValue);
+                    if (Input.GetMouseButton(0) && (Input.mousePosition.x - prevMousePos.x) < 0)
+                    {
+                        MoveLeft();
+                    }
                 }
-                Debug.Log(transform.position);
-            } 
-            
-            
+                else if (transform.position.z < -1f)
+                {
+                    if (Input.GetMouseButton(0) && (Input.mousePosition.x - prevMousePos.x) > 0)
+                    {
+                        MoveRight();
+                    }
+                }
+
+                if (_playerPositions != null)
+                {
+
+                    if (Vector3.Distance(transform.position, _playerPositions[_increment].transform.position) <= 2 &&
+                        _playerPositions.Count < _increment)
+                    {
+                        Debug.Log("I am here");
+                        var trans = _playerPositions[_increment].transform.position;
+                        xValue = trans.x;
+                        yValue = trans.y;
+                        zValue = trans.z;
+                        transform.position = new Vector3(xValue, yValue, zValue);
+                        _increment++;
+                    }
+                    else
+                    {
+                        xValue = _mySpeed * _moveForce * Time.deltaTime;
+                        yValue = 0f;
+                        zValue = 0f;
+                        transform.position += new Vector3(xValue, yValue, zValue);
+                    }
+
+                    Debug.Log(transform.position);
+                }
+
+                prevPlayerPos = transform.position;
+
+            }
         }
 
         
@@ -77,15 +112,31 @@ namespace Player_Scripts
         {
             if (other.gameObject.CompareTag("Path"))
             {
-                Destroy(gameObject);
+                _onPath = false;
+                Debug.Log(_onPath);
+                //Destroy(gameObject);
+                transform.position = prevPlayerPos;
             }
                 
         }
 
         public void PlayerPositions(List<GameObject> playerPositions)
         {
-            _playerPositions = playerPositions;
-            //Debug.Log(_playerPositions[1].transform.position);
+            //_playerPositions = playerPositions;
+            
+        }
+        private void MoveRight()
+        {
+            Debug.Log("Moving to the right");
+            prevMousePos = Input.mousePosition;
+            transform.Translate(0f, 0f, 0.1f);
+        }
+        
+        private void MoveLeft()
+        {
+            Debug.Log("Moving to the left");
+            prevMousePos = Input.mousePosition;
+            transform.Translate(0f, 0f, -0.1f);
         }
         
     }
