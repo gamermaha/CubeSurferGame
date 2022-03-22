@@ -40,64 +40,41 @@ namespace Player_Scripts
         }
         private void Update()
         {
-            if (_onPath)
+            if (_onPath && _playerPositions != null)
             {
                 transform.position += new Vector3(_mySpeed, 0f, 0f) * (_moveForce * Time.deltaTime);
+                
 
-                if (transform.position.z <= 1f && transform.position.z >= -1f)
+                if (transform.position.z <= _playerPositions[_increment].transform.position.z + 1f &&
+                        transform.position.z >= _playerPositions[_increment].transform.position.z - 1f)
                 {
-                    if (Input.GetMouseButton(0) && (Input.mousePosition.x - prevMousePos.x) > 0)
-                    {
-                        MoveRight();
-                    }
+                        if (Input.GetMouseButton(0) && (Input.mousePosition.x - prevMousePos.x) > 0)
+                        {
+                            MoveRight();
+                        }
 
+                        if (Input.GetMouseButton(0) && (Input.mousePosition.x - prevMousePos.x) < 0)
+                        {
+                            MoveLeft();
+                        }
+                }
+                else if (transform.position.z > _playerPositions[_increment].transform.position.z + 1f)
+                {
                     if (Input.GetMouseButton(0) && (Input.mousePosition.x - prevMousePos.x) < 0)
                     {
                         MoveLeft();
                     }
                 }
-                else if (transform.position.z > 1f)
-                {
-                    if (Input.GetMouseButton(0) && (Input.mousePosition.x - prevMousePos.x) < 0)
-                    {
-                        MoveLeft();
-                    }
-                }
-                else if (transform.position.z < -1f)
+                else if (transform.position.z < _playerPositions[_increment].transform.position.z - 1f)
                 {
                     if (Input.GetMouseButton(0) && (Input.mousePosition.x - prevMousePos.x) > 0)
                     {
                         MoveRight();
                     }
                 }
-
-                if (_playerPositions != null)
-                {
-
-                    if (Vector3.Distance(transform.position, _playerPositions[_increment].transform.position) <= 2 &&
-                        _playerPositions.Count < _increment)
-                    {
-                        Debug.Log("I am here");
-                        var trans = _playerPositions[_increment].transform.position;
-                        xValue = trans.x;
-                        yValue = trans.y;
-                        zValue = trans.z;
-                        transform.position = new Vector3(xValue, yValue, zValue);
-                        _increment++;
-                    }
-                    else
-                    {
-                        xValue = _mySpeed * _moveForce * Time.deltaTime;
-                        yValue = 0f;
-                        zValue = 0f;
-                        transform.position += new Vector3(xValue, yValue, zValue);
-                    }
-
-                    Debug.Log(transform.position);
-                }
-
                 prevPlayerPos = transform.position;
-
+                if (Vector3.Distance(transform.position, _playerPositions[_increment+1].transform.position) <= 2 && _playerPositions.Count < _increment) 
+                    _increment++;
             }
         }
 
@@ -122,7 +99,7 @@ namespace Player_Scripts
 
         public void PlayerPositions(List<GameObject> playerPositions)
         {
-            //_playerPositions = playerPositions;
+            _playerPositions = playerPositions;
             
         }
         private void MoveRight()
