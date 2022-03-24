@@ -41,7 +41,6 @@ namespace Controllers
                     MoveRight();
                 }
             }
-                
         }
 
         private void MoveRight()

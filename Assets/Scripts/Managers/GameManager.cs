@@ -17,6 +17,7 @@ namespace Managers
         [SerializeField] private Path path;
         [SerializeField] private Level01 _level01;
 
+        private Level01 _levelTBD;
         private float _pathLength;
        
         private float _playerXValue;
@@ -49,17 +50,19 @@ namespace Managers
 
         private void PlayerSetup()
         {
+            //// Dynamic WayPoint/Path Implementation
             //_playerXValue = _path.transform.position.x - _pathLength/2 + player.transform.localScale.x;
             //_playerYValue = _path.transform.position.y + player.transform.localScale.y;
             //_playerZValue = _path.transform.position.z + player.transform.localScale.z;
             
-            _playerXValue = _level01.transform.position.x - 7.5f + player.transform.localScale.x/2;
-            _playerYValue = _level01.transform.position.y + _level01.transform.localScale.y + player.transform.localScale.y/2;
-            _playerZValue = _level01.transform.position.z;
+            _playerXValue = LevelDecider().transform.position.x - 7.5f + player.transform.localScale.x/2;
+            _playerYValue = LevelDecider().transform.position.y + LevelDecider().transform.localScale.y + player.transform.localScale.y/2;
+            _playerZValue = LevelDecider().transform.position.z;
             
         }
         private void Init()
         {
+            //// Dynamic WayPoint/Path Implementation
             //_path = Instantiate(path, new Vector3(0, 0, 0), Quaternion.identity);
             PlayerSetup();
             _player = Instantiate(player,new Vector3(_playerXValue, _playerYValue, _playerZValue), Quaternion.identity);
@@ -74,6 +77,11 @@ namespace Managers
                 _player.PlayerPositions(_level01.GiveWayPoints());
                 x++;
             };
+        }
+        private Level01 LevelDecider()
+        {
+            _levelTBD = _level01;
+            return _levelTBD;
         }
     }
     

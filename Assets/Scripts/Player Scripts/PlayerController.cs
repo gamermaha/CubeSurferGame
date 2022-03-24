@@ -8,14 +8,17 @@ namespace Player_Scripts
     public class PlayerController : MonoBehaviour
     {
         private float _mySpeed;
-        private Rigidbody2D _myBody;
         private float _moveForce;
+        
+        private Rigidbody2D _myBody;
+        
         private bool _onPath = true;
         private int _increment = 0;
-        float xValue;
-        float yValue;
-        float zValue;
-        private int x = 1;
+        
+        private float xValue;
+        private float yValue;
+        private float zValue;
+        
         private Vector3 prevMousePos;
         private Vector3 prevPlayerPos;
 
@@ -91,17 +94,13 @@ namespace Player_Scripts
             {
                 _onPath = false;
                 Debug.Log(_onPath);
-                //Destroy(gameObject);
                 transform.position = prevPlayerPos;
             }
                 
         }
 
-        public void PlayerPositions(List<GameObject> playerPositions)
-        {
-            _playerPositions = playerPositions;
-            
-        }
+        public void PlayerPositions(List<GameObject> playerPositions) => _playerPositions = playerPositions;
+        
         private void MoveRight()
         {
             Debug.Log("Moving to the right");
