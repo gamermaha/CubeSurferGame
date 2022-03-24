@@ -56,10 +56,10 @@ namespace Managers
             //_playerYValue = _path.transform.position.y + player.transform.localScale.y;
             //_playerZValue = _path.transform.position.z + player.transform.localScale.z;
             
-            _playerXValue = LevelDecider().transform.position.x - 7.5f + player.transform.localScale.x/2;
-            _playerYValue = LevelDecider().transform.position.y + LevelDecider().transform.localScale.y + player.transform.localScale.y/2;
-            _playerZValue = LevelDecider().transform.position.z;
-            
+            _playerXValue = LevelDecider().transform.position.x;
+            _playerYValue = LevelDecider().transform.position.y + LevelDecider().transform.localScale.y/2 + player.transform.localScale.y/2;
+            _playerZValue = LevelDecider().transform.position.z - 7.5f + player.transform.localScale.z/2;
+            Debug.Log(player.transform.localScale.y);
         }
         private void Init()
         {

@@ -4,21 +4,21 @@ namespace Managers
 {
     public class EventManager : MonoBehaviour
     {
-        private static EventManager eventManager;
+        private static EventManager _eventManager;
 
         public static EventManager instance
         {
             get
             {
-                if (!eventManager)
+                if (!_eventManager)
                 {
-                    eventManager = FindObjectOfType(typeof(EventManager)) as EventManager;
-                    if (!eventManager)
+                    _eventManager = FindObjectOfType(typeof(EventManager)) as EventManager;
+                    if (!_eventManager)
                         Debug.Log("No active Event Manager System.");
                     else
-                        eventManager.Init();
+                        _eventManager.Init();
                 }
-                return eventManager;
+                return _eventManager;
             }
         }
 
