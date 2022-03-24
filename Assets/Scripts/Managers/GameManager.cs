@@ -15,16 +15,17 @@ namespace Managers
         [Header(" GameObjects Imported")]
         [SerializeField] private PlayerController player;
         [SerializeField] private Path path;
-        [SerializeField] private Level01 _level01;
+        [SerializeField] private Level _level01;
 
-        private Level01 _levelTBD;
+        private Level _levelTBD;
+        private Path _path;
+        private PlayerController _player;
+        
         private float _pathLength;
-       
         private float _playerXValue;
         private float _playerYValue;
         private float _playerZValue;
-        private Path _path;
-        private PlayerController _player;
+        
         private int x = 1;
 
         private void Awake()
@@ -78,7 +79,7 @@ namespace Managers
                 x++;
             };
         }
-        private Level01 LevelDecider()
+        private Level LevelDecider()
         {
             _levelTBD = _level01;
             return _levelTBD;

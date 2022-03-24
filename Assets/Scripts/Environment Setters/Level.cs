@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Environment_Setters
 {
-    public class Level01 : MonoBehaviour
+    public class Level : MonoBehaviour
     {
         public List<GameObject> wayPoints;
 

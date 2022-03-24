@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 17380660}
   - component: {fileID: 17380659}
   m_Layer: 0
-  m_Name: Level_01 (1)
+  m_Name: Level_01
   m_TagString: Path
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -272,7 +272,7 @@ GameObject:
   - component: {fileID: 485012730}
   - component: {fileID: 485012734}
   m_Layer: 0
-  m_Name: Level_01
+  m_Name: Level
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -567,7 +567,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd6f6a3f9ff8577429151950d897eafa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerCamera: {fileID: 0}
+  _playerCamera: {fileID: 7018386786426396462, guid: cad62cfed34273d4cac2f07cd10ad0c8,
+    type: 3}
 --- !u!4 &1692703856
 Transform:
   m_ObjectHideFlags: 0
