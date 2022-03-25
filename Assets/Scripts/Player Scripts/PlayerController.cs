@@ -17,8 +17,7 @@ namespace Player_Scripts
         private float xValue;
         private float yValue;
         private float zValue;
-       
-        private bool _onCube = true;
+        
         private bool _onPath = true;
         private Vector3 prevMousePos;
         private Vector3 prevPlayerPos;
@@ -85,7 +84,7 @@ namespace Player_Scripts
                 transform.position = prevPlayerPos;
         }
         
-        
+
         public void PlayerPositions(List<GameObject> playerPositions) => _playerPositions = playerPositions;
         
         private void MoveRight()
