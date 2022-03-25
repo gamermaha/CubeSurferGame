@@ -57,9 +57,9 @@ namespace Managers
             //_playerZValue = _path.transform.position.z + player.transform.localScale.z;
             
             _playerXValue = LevelDecider().transform.position.x;
-            _playerYValue = LevelDecider().transform.position.y + LevelDecider().transform.localScale.y/2 + player.transform.localScale.y/2;
+            _playerYValue = LevelDecider().transform.position.y + LevelDecider().transform.localScale.y/2 + player.transform.localScale.y/2 + 1.25f;
             _playerZValue = LevelDecider().transform.position.z - 7.5f + player.transform.localScale.z/2;
-            Debug.Log(player.transform.localScale.y);
+            Debug.Log(_playerYValue);
         }
         private void Init()
         {

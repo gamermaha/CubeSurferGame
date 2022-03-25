@@ -44,7 +44,7 @@ namespace Player_Scripts
         }
         private void Update()
         {
-            if (_onPath && _playerPositions != null)
+            if (Cubes.OnPath && _playerPositions != null)
             {
                 transform.position += new Vector3(0f, 0f, _mySpeed) * (_moveForce * Time.deltaTime);
 
@@ -81,21 +81,10 @@ namespace Player_Scripts
                 if (Vector3.Distance(transform.position, _playerPositions[_increment+1].transform.position) <= 2 && _playerPositions.Count < _increment) 
                     _increment++;
             }
-            else if (_onPath == false)
+            else if (Cubes.OnPath == false)
                 transform.position = prevPlayerPos;
         }
-        private void OnCollisionEnter(Collision collision)
-        {
-            if (collision.gameObject.CompareTag("Path"))
-                _onPath = true;
-        }
-        private void OnCollisionExit(Collision other)
-        {
-            if (other.gameObject.CompareTag("Path"))
-            {
-                _onPath = false;
-            }
-        }
+        
         
         public void PlayerPositions(List<GameObject> playerPositions) => _playerPositions = playerPositions;
         
