@@ -7,6 +7,7 @@ TagManager:
   - Path
   - Cube
   - CubeAdded
+  - CubeDestroy
   layers:
   - Default
   - TransparentFX
