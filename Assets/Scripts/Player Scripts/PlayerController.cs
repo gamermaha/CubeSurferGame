@@ -43,13 +43,25 @@ namespace Player_Scripts
         }
         private void Update()
         {
+            if (Cubes.AddCube)
+            {
+                transform.Translate(0f, 1f, 0f);
+                Cubes.AddCube = false;
+            }
+            
+            if (Cubes.DestroyCube)
+            {
+                transform.Translate(0f, -1f, 0f);
+                Cubes.DestroyCube = false;
+            }
+                
             if (Cubes.OnPath && _playerPositions != null)
             {
                 transform.position += new Vector3(0f, 0f, _mySpeed) * (_moveForce * Time.deltaTime);
 
-
-                if (transform.position.x <= _playerPositions[_increment].transform.position.x + 1f &&
-                    transform.position.x >= _playerPositions[_increment].transform.position.x - 1f)
+                
+                if (transform.position.x <= _playerPositions[_increment].transform.position.x + 2f &&
+                    transform.position.x >= _playerPositions[_increment].transform.position.x - 2f)
                 {
                         if (Input.GetMouseButton(0) && (Input.mousePosition.x - prevMousePos.x) > 0)
                         {
@@ -61,14 +73,14 @@ namespace Player_Scripts
                             MoveLeft();
                         }
                 }
-                else if (transform.position.x > _playerPositions[_increment].transform.position.x + 1f)
+                else if (transform.position.x > _playerPositions[_increment].transform.position.x + 2f)
                 {
                     if (Input.GetMouseButton(0) && (Input.mousePosition.x - prevMousePos.x) < 0)
                     {
                         MoveLeft();
                     }
                 }
-                else if (transform.position.x < _playerPositions[_increment].transform.position.x - 1f)
+                else if (transform.position.x < _playerPositions[_increment].transform.position.x - 2f)
                 {
                     if (Input.GetMouseButton(0) && (Input.mousePosition.x - prevMousePos.x) > 0)
                     {

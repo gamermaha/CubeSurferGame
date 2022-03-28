@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: GameData
   m_EditorClassIdentifier: 
   playerSpeed: 0.1
-  playerForce: 10
+  playerForce: 5
   pathLength: 20
   distanceInWeightPoints: 2
+  cubeLength: 1

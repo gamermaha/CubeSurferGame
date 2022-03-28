@@ -11,6 +11,8 @@ namespace Player_Scripts
     public class Cubes : MonoBehaviour
     {
         public static bool OnPath;
+        public static bool AddCube;
+        public static bool DestroyCube;
 
         private Vector3 _newPos;
         private double cubeSize;
@@ -19,6 +21,7 @@ namespace Player_Scripts
         void Start()
         {
             cubeSize = MetaData.Instance.scriptableInstance.cubeLength;
+            Debug.Log(cubeSize);
         }
         private void OnCollisionEnter(Collision collision)
         {
@@ -28,10 +31,10 @@ namespace Player_Scripts
             if (collision.gameObject.CompareTag("Cube"))
             {
                 //_cubesAdded.Add(collision.gameObject);
-
+                AddCube = true;
                 var transformPosition = transform.position;
                 _newPos = transformPosition;
-                _newPos.y += (float) cubeSize - 2f;
+                _newPos.y += (float) cubeSize/2 - 1f;
                 _newPos.x = 0;
                 _newPos.z = 0;
                 
@@ -39,33 +42,8 @@ namespace Player_Scripts
                 collision.transform.localPosition = _newPos;
                 
                 collision.gameObject.tag = "CubeAdded";
-                
-                
+            }
 
-            }
-            
-            if (collision.gameObject.CompareTag("CubeDestroy"))
-            {
-                if (transform.parent.childCount > 0)
-                {
-                    Destroy(transform.parent.GetChild(transform.parent.childCount - 1).gameObject);
-                    //Destroy(_cubesAdded[_cubesAdded.Count - 1]);
-                    
-                    var transformPosition = transform.position;
-                    _newPos = transformPosition;
-                    _newPos.y += (float) cubeSize - 2f;
-                    _newPos.x = 0;
-                    _newPos.z = 0;
-                
-                    collision.transform.SetParent(transform.parent);
-                    collision.transform.localPosition = _newPos;
-                
-                    collision.gameObject.tag = "CubeAdded";
-                }
-                else
-                    Destroy(gameObject);
-                
-            }
         }
 
         private void OnTriggerEnter(Collider collision)
@@ -74,10 +52,9 @@ namespace Player_Scripts
             {
                 if (transform.parent.childCount > 0)
                 {
+                    DestroyCube = true;
                     Destroy(transform.parent.GetChild(transform.parent.childCount - 1).gameObject);
                     //Destroy(_cubesAdded[_cubesAdded.Count - 1]);
-                    
-                    
                 }
                 else
                     Destroy(gameObject);
