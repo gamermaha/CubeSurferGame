@@ -50,15 +50,41 @@ namespace Player_Scripts
                 {
                     Destroy(transform.parent.GetChild(transform.parent.childCount - 1).gameObject);
                     //Destroy(_cubesAdded[_cubesAdded.Count - 1]);
+                    
+                    var transformPosition = transform.position;
+                    _newPos = transformPosition;
+                    _newPos.y += (float) cubeSize - 2f;
+                    _newPos.x = 0;
+                    _newPos.z = 0;
+                
+                    collision.transform.SetParent(transform.parent);
+                    collision.transform.localPosition = _newPos;
+                
+                    collision.gameObject.tag = "CubeAdded";
                 }
                 else
                     Destroy(gameObject);
                 
             }
-
-            
-
         }
+
+        private void OnTriggerEnter(Collider collision)
+        {
+            if (collision.gameObject.CompareTag("CubeDestroy"))
+            {
+                if (transform.parent.childCount > 0)
+                {
+                    Destroy(transform.parent.GetChild(transform.parent.childCount - 1).gameObject);
+                    //Destroy(_cubesAdded[_cubesAdded.Count - 1]);
+                    
+                    
+                }
+                else
+                    Destroy(gameObject);
+                
+            }
+        }
+
         private void OnCollisionExit(Collision other)
         {
             if (other.gameObject.CompareTag("Path"))
