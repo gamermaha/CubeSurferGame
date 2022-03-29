@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
 using Managers;
 using UnityEngine;
@@ -12,15 +12,14 @@ namespace Player_Scripts
         
         private Rigidbody2D _myBody;
         
-        private int _increment = 0;
+        private int _increment;
         
-        private float xValue;
-        private float yValue;
-        private float zValue;
+        private float _xValue;
+        private float _yValue;
+        private float _zValue;
         
-        private bool _onPath = true;
-        private Vector3 prevMousePos;
-        private Vector3 prevPlayerPos;
+        private Vector3 _prevMousePos;
+        private Vector3 _prevPlayerPos;
 
         private List<GameObject> _playerPositions;
 
@@ -43,18 +42,18 @@ namespace Player_Scripts
         }
         private void Update()
         {
-            if (Cubes.AddCube)
+            if (PlayerCollider.AddCube)
             {
                 transform.Translate(0f, 1f, 0f);
-                Cubes.AddCube = false;
             }
+            PlayerCollider.AddCube = false;
             
-            if (Cubes.DestroyCube)
+            if (PlayerCollider.DestroyCube)
             {
                 transform.Translate(0f, -1f, 0f);
-                Cubes.DestroyCube = false;
             }
-                
+            PlayerCollider.DestroyCube = false;
+            
             if (Cubes.OnPath && _playerPositions != null)
             {
                 transform.position += new Vector3(0f, 0f, _mySpeed) * (_moveForce * Time.deltaTime);
@@ -63,53 +62,53 @@ namespace Player_Scripts
                 if (transform.position.x <= _playerPositions[_increment].transform.position.x + 2f &&
                     transform.position.x >= _playerPositions[_increment].transform.position.x - 2f)
                 {
-                        if (Input.GetMouseButton(0) && (Input.mousePosition.x - prevMousePos.x) > 0)
-                        {
-                            MoveRight();
-                        }
+                    if (Input.GetMouseButton(0) && (Input.mousePosition.x - _prevMousePos.x) > 0)
+                    {
+                        MoveRight();
+                    }
 
-                        if (Input.GetMouseButton(0) && (Input.mousePosition.x - prevMousePos.x) < 0)
-                        {
-                            MoveLeft();
-                        }
+                    if (Input.GetMouseButton(0) && (Input.mousePosition.x - _prevMousePos.x) < 0)
+                    {
+                        MoveLeft();
+                    }
                 }
                 else if (transform.position.x > _playerPositions[_increment].transform.position.x + 2f)
                 {
-                    if (Input.GetMouseButton(0) && (Input.mousePosition.x - prevMousePos.x) < 0)
+                    if (Input.GetMouseButton(0) && (Input.mousePosition.x - _prevMousePos.x) < 0)
                     {
                         MoveLeft();
                     }
                 }
                 else if (transform.position.x < _playerPositions[_increment].transform.position.x - 2f)
                 {
-                    if (Input.GetMouseButton(0) && (Input.mousePosition.x - prevMousePos.x) > 0)
+                    if (Input.GetMouseButton(0) && (Input.mousePosition.x - _prevMousePos.x) > 0)
                     {
                         MoveRight();
                     }
                 }
                 
-                prevPlayerPos = transform.position;
+                _prevPlayerPos = transform.position;
                 if (Vector3.Distance(transform.position, _playerPositions[_increment+1].transform.position) <= 2 && _playerPositions.Count < _increment) 
                     _increment++;
             }
             else if (Cubes.OnPath == false)
-                transform.position = prevPlayerPos;
+                transform.position = _prevPlayerPos;
+            
         }
         
-
         public void PlayerPositions(List<GameObject> playerPositions) => _playerPositions = playerPositions;
         
         private void MoveRight()
         {
             Debug.Log("Moving to the right");
-            prevMousePos = Input.mousePosition;
+            _prevMousePos = Input.mousePosition;
             transform.Translate(0.1f, 0f, 0f);
         }
         
         private void MoveLeft()
         {
             Debug.Log("Moving to the left");
-            prevMousePos = Input.mousePosition;
+            _prevMousePos = Input.mousePosition;
             transform.Translate(-0.1f, 0f, 0f);
         }
         
