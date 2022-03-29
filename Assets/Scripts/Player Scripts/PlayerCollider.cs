@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
 using Managers;
-using TMPro.SpriteAssetUtilities;
 using UnityEngine;
-using System.Linq;
+using UnityEngine.Serialization;
+
 
 namespace Player_Scripts
 {
@@ -15,7 +12,9 @@ namespace Player_Scripts
         public static bool AddCube;
         public static bool DestroyCube;
 
-        [SerializeField] private GameObject _cubeCollector;
+       [SerializeField] private GameObject cubeCollector;
+
+        private List<GameObject> _cubes = new List<GameObject>();
 
         private Vector3 _newPos;
         private Vector3 _cubePos;
@@ -31,10 +30,11 @@ namespace Player_Scripts
 
         private void OnTriggerEnter(Collider other)
         {
-            Debug.Log("Cube count is : " + _cubeCollector.transform.childCount);
+            //Debug.Log("Cube count is : " + cubeCollector.transform.childCount);
             if (other.gameObject.CompareTag("Cube"))
             {
                 
+                _cubes.Add(other.gameObject);
                 Debug.Log("I have encountered a cube to be added");
                 
                 AddCube = true;
@@ -44,7 +44,7 @@ namespace Player_Scripts
                 _newPos.x = 0;
                 _newPos.z = 0;
                     
-                other.transform.SetParent(_cubeCollector.transform);
+                other.transform.SetParent(cubeCollector.transform);
                 other.transform.localPosition = _newPos;
 
                 other.gameObject.tag = "CubeAdded";
@@ -54,21 +54,20 @@ namespace Player_Scripts
             }
             if (other.gameObject.CompareTag("CubeDestroy"))
             {
-                
-                Debug.Log("I have encountered a cube to be destroyed");
-                if (_cubeCollector.transform.childCount > 0)
+                if (_cubes.Count > 0)
                 {
                     DestroyCube = true;
-                    Destroy(_cubeCollector.transform.GetChild(_cubeCollector.transform.childCount - 1).gameObject);
+                    Debug.Log("I have encountered a cube to be destroyed");
+                    Debug.Log(_cubes.Count);
+                    Destroy(cubeCollector.transform.GetChild(_cubes.Count - 1).gameObject);
+                    _cubes.RemoveAt(_cubes.Count-1);
                 }
                 else
                     Destroy(gameObject);
                 
                 transform.localScale -= new Vector3(0f, (float) _cubeSize, 0f);
-
             }
 
         }
-        
     }
 }

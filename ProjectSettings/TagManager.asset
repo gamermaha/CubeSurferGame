@@ -8,6 +8,7 @@ TagManager:
   - Cube
   - CubeAdded
   - CubeDestroy
+  - CubeEncountered
   layers:
   - Default
   - TransparentFX
