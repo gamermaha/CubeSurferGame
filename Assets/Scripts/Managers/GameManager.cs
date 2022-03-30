@@ -1,4 +1,5 @@
 ﻿using System;
+using Controllers;
 using Environment_Setters;
 using Player_Scripts;
 using UnityEngine;
@@ -58,7 +59,7 @@ namespace Managers
             
             _playerXValue = LevelDecider().transform.position.x;
             _playerYValue = LevelDecider().transform.position.y + LevelDecider().transform.localScale.y/2 + player.transform.localScale.y/2 + 1.25f;
-            _playerZValue = LevelDecider().transform.position.z - 8f + player.transform.localScale.z/2;
+            _playerZValue = LevelDecider().transform.position.z - 9f + player.transform.localScale.z/2;
             //Debug.Log(_playerYValue);
         }
         private void Init()
@@ -67,18 +68,11 @@ namespace Managers
             //_path = Instantiate(path, new Vector3(0, 0, 0), Quaternion.identity);
             PlayerSetup();
             _player = Instantiate(player,new Vector3(_playerXValue, _playerYValue, _playerZValue), Quaternion.identity);
+            _player.GetComponent<InputClass>().PlayerPositions(_level01.GiveWayPoints());
             //Debug.Log(_player.transform.position);
             
         }
 
-        private void LateUpdate()
-        {
-            if (x == 1)
-            {
-                _player.PlayerPositions(_level01.GiveWayPoints());
-                x++;
-            };
-        }
         private Level LevelDecider()
         {
             _levelTBD = _level01;

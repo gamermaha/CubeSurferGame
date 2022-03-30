@@ -26,11 +26,11 @@ namespace Player_Scripts
         private void Start()
         {
             _cubeSize = MetaData.Instance.scriptableInstance.cubeLength;
+            _newPos = Vector3.up * (float)_cubeSize/4;
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            //Debug.Log("Cube count is : " + cubeCollector.transform.childCount);
             if (other.gameObject.CompareTag("Cube"))
             {
                 
@@ -38,14 +38,13 @@ namespace Player_Scripts
                 Debug.Log("I have encountered a cube to be added");
                 
                 AddCube = true;
-                var transformPosition1 = transform.parent.position;
-                _newPos = transformPosition1;
-                _newPos.y += ((float) _cubeSize / 2 - 1f);
-                _newPos.x = 0;
-                _newPos.z = 0;
-                    
-                other.transform.SetParent(cubeCollector.transform);
+                //Debug.Log(transform.position);
+                
+                other.transform.SetParent(cubeCollector.transform, false);
+                
                 other.transform.localPosition = _newPos;
+                _newPos += Vector3.up * (float) _cubeSize;
+                
 
                 other.gameObject.tag = "CubeAdded";
 
@@ -54,12 +53,15 @@ namespace Player_Scripts
             }
             if (other.gameObject.CompareTag("CubeDestroy"))
             {
+                _newPos -= Vector3.up * (float) _cubeSize;
+               
                 if (_cubes.Count > 0)
                 {
                     DestroyCube = true;
+                    
                     Debug.Log("I have encountered a cube to be destroyed");
                     Debug.Log(_cubes.Count);
-                    Destroy(cubeCollector.transform.GetChild(_cubes.Count - 1).gameObject);
+                    Destroy(_cubes[_cubes.Count - 1].gameObject);
                     _cubes.RemoveAt(_cubes.Count-1);
                 }
                 else

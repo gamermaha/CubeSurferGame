@@ -1,5 +1,6 @@
 ﻿
 using System.Collections.Generic;
+using Controllers;
 using Managers;
 using UnityEngine;
 
@@ -7,25 +8,34 @@ namespace Player_Scripts
 {
     public class PlayerController : MonoBehaviour
     {
+        [SerializeField] private Transform player;
+        [SerializeField] private GameObject cubeCollector;
+        [SerializeField] private PlayerCollider playerCollider;
+
+        
+
+        private InputClass inputManager;
         private float _mySpeed;
         private float _moveForce;
+
         
-        private Rigidbody2D _myBody;
         
-        private int _increment;
+        private int _wayPtIncrement;
         
         private float _xValue;
         private float _yValue;
         private float _zValue;
+        private double _cubeSize;
         
         private Vector3 _prevMousePos;
         private Vector3 _prevPlayerPos;
 
-        private List<GameObject> _playerPositions;
+        private List<Transform> _playerPositions;
+        private List<GameObject> _cubes = new List<GameObject>();
 
         void Awake()
         {
-            _myBody = GetComponent<Rigidbody2D>();
+            inputManager = GetComponent<InputClass>();
         }
         private void Start()
         {
@@ -39,77 +49,27 @@ namespace Player_Scripts
                 _mySpeed = MetaData.Instance.scriptableInstance.playerSpeed;
                 _moveForce = MetaData.Instance.scriptableInstance.playerForce;
             }
+            _cubeSize = MetaData.Instance.scriptableInstance.cubeLength;
         }
         private void Update()
         {
             if (PlayerCollider.AddCube)
-            {
-                transform.Translate(0f, 1f, 0f);
-            }
-            PlayerCollider.AddCube = false;
+                AddCube();
             
             if (PlayerCollider.DestroyCube)
-            {
-                transform.Translate(0f, -1f, 0f);
-            }
-            PlayerCollider.DestroyCube = false;
-            
-            if (Cubes.OnPath && _playerPositions != null)
-            {
-                transform.position += new Vector3(0f, 0f, _mySpeed) * (_moveForce * Time.deltaTime);
+                DestroyCube();
 
-                
-                if (transform.position.x <= _playerPositions[_increment].transform.position.x + 2f &&
-                    transform.position.x >= _playerPositions[_increment].transform.position.x - 2f)
-                {
-                    if (Input.GetMouseButton(0) && (Input.mousePosition.x - _prevMousePos.x) > 0)
-                    {
-                        MoveRight();
-                    }
 
-                    if (Input.GetMouseButton(0) && (Input.mousePosition.x - _prevMousePos.x) < 0)
-                    {
-                        MoveLeft();
-                    }
-                }
-                else if (transform.position.x > _playerPositions[_increment].transform.position.x + 2f)
-                {
-                    if (Input.GetMouseButton(0) && (Input.mousePosition.x - _prevMousePos.x) < 0)
-                    {
-                        MoveLeft();
-                    }
-                }
-                else if (transform.position.x < _playerPositions[_increment].transform.position.x - 2f)
-                {
-                    if (Input.GetMouseButton(0) && (Input.mousePosition.x - _prevMousePos.x) > 0)
-                    {
-                        MoveRight();
-                    }
-                }
-                
-                _prevPlayerPos = transform.position;
-                if (Vector3.Distance(transform.position, _playerPositions[_increment+1].transform.position) <= 2 && _playerPositions.Count < _increment) 
-                    _increment++;
-            }
-            else if (Cubes.OnPath == false)
-                transform.position = _prevPlayerPos;
+        }
+
+        public void AddCube()
+        {
             
         }
-        
-        public void PlayerPositions(List<GameObject> playerPositions) => _playerPositions = playerPositions;
-        
-        private void MoveRight()
+
+        public void DestroyCube()
         {
-            Debug.Log("Moving to the right");
-            _prevMousePos = Input.mousePosition;
-            transform.Translate(0.1f, 0f, 0f);
-        }
-        
-        private void MoveLeft()
-        {
-            Debug.Log("Moving to the left");
-            _prevMousePos = Input.mousePosition;
-            transform.Translate(-0.1f, 0f, 0f);
+            
         }
         
     }

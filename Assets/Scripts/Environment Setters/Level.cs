@@ -7,7 +7,7 @@ namespace Environment_Setters
 {
     public class Level : MonoBehaviour
     {
-        public List<GameObject> wayPoints;
+        public List<Transform> wayPoints;
         private double _cubeSize;
 
         private void Start()
@@ -15,7 +15,7 @@ namespace Environment_Setters
             _cubeSize = MetaData.Instance.scriptableInstance.cubeLength;
         }
 
-        public List<GameObject> GiveWayPoints()
+        public List<Transform> GiveWayPoints()
         {
             return wayPoints;
         }
