@@ -10,6 +10,7 @@ namespace Player_Scripts
     {
         [SerializeField] private Transform player;
         [SerializeField] private GameObject cubeCollector;
+        [SerializeField] private GameObject destroyedCubeCollector;
         [SerializeField] private PlayerCollider playerCollider;
 
         private InputClass inputManager;
@@ -21,6 +22,7 @@ namespace Player_Scripts
         private Vector3 _cubePos;
         private Vector3 _prevMousePos;
         private Vector3 _prevPlayerPos;
+        private Vector3 _cubeStopPos;
         
         private int _wayPtIncrement;
         private float _mySpeed;
@@ -87,10 +89,12 @@ namespace Player_Scripts
             if (_cubes.Count > 0)
             {
                 _cubes[0].gameObject.tag = "CubeDestroyed";
+                _cubeStopPos = _cubes[0].gameObject.transform.position;
                 Debug.Log(_cubes[0].gameObject.name);
                 //stop cube
                 //var transformParent = _cubes[0].gameObject.transform;
                 cubeCollector.transform.GetChild(0).SetParent(null);
+                
                 //Destroy(_cubes[_cubes.Count - 1].gameObject);
 
                 for (int i = 0; i < _cubes.Count; i++)
@@ -102,6 +106,7 @@ namespace Player_Scripts
                 {
                     _cubes[k].transform.position = _cubePositions[k-1];
                 }
+                _cubes[0].gameObject.transform.position = _cubeStopPos;
                 _cubes.RemoveAt(0);
                 _cubePositions.Clear();
             }
