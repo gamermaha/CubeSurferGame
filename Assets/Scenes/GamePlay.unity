@@ -155,7 +155,7 @@ PrefabInstance:
     - target: {fileID: 975721903788649172, guid: 38963e71204386248a0d9d2bca1a10cd,
         type: 3}
       propertyPath: m_Name
-      value: CubeToDestroy
+      value: CubeToDestroy_1
       objectReference: {fileID: 0}
     - target: {fileID: 1563888468175343740, guid: 38963e71204386248a0d9d2bca1a10cd,
         type: 3}
@@ -260,7 +260,12 @@ PrefabInstance:
     - target: {fileID: 975721903788649172, guid: 38963e71204386248a0d9d2bca1a10cd,
         type: 3}
       propertyPath: m_Name
-      value: CubeToDestroy (6)
+      value: CubeToDestroy_8
+      objectReference: {fileID: 0}
+    - target: {fileID: 975721903788649172, guid: 38963e71204386248a0d9d2bca1a10cd,
+        type: 3}
+      propertyPath: m_TagString
+      value: CubeDestroy
       objectReference: {fileID: 0}
     - target: {fileID: 1563888468175343740, guid: 38963e71204386248a0d9d2bca1a10cd,
         type: 3}
@@ -365,7 +370,7 @@ PrefabInstance:
     - target: {fileID: 975721903788649172, guid: 38963e71204386248a0d9d2bca1a10cd,
         type: 3}
       propertyPath: m_Name
-      value: CubeToDestroy
+      value: CubeToDestroy_2
       objectReference: {fileID: 0}
     - target: {fileID: 1563888468175343740, guid: 38963e71204386248a0d9d2bca1a10cd,
         type: 3}
@@ -470,7 +475,7 @@ PrefabInstance:
     - target: {fileID: 903359285752859487, guid: 16124f6fbbf8b5142a2415fe7201b0f0,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 903359285752859487, guid: 16124f6fbbf8b5142a2415fe7201b0f0,
         type: 3}
@@ -555,7 +560,7 @@ PrefabInstance:
     - target: {fileID: 6798320138874137825, guid: 16124f6fbbf8b5142a2415fe7201b0f0,
         type: 3}
       propertyPath: m_Name
-      value: CubeToBeAdded_2
+      value: CubeToBeAdded_3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 16124f6fbbf8b5142a2415fe7201b0f0, type: 3}
@@ -581,7 +586,7 @@ PrefabInstance:
     - target: {fileID: 975721903788649172, guid: 38963e71204386248a0d9d2bca1a10cd,
         type: 3}
       propertyPath: m_Name
-      value: CubeToDestroy (1)
+      value: CubeToDestroy_4
       objectReference: {fileID: 0}
     - target: {fileID: 1563888468175343740, guid: 38963e71204386248a0d9d2bca1a10cd,
         type: 3}
@@ -817,6 +822,7 @@ Transform:
   - {fileID: 1368107540}
   - {fileID: 1010788971}
   - {fileID: 309734548}
+  - {fileID: 1963064052}
   - {fileID: 185088752}
   - {fileID: 240150941}
   - {fileID: 1084216492}
@@ -825,7 +831,6 @@ Transform:
   - {fileID: 1049798063}
   - {fileID: 40985635}
   - {fileID: 340467974}
-  - {fileID: 1963064052}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -992,7 +997,7 @@ PrefabInstance:
     - target: {fileID: 975721903788649172, guid: 38963e71204386248a0d9d2bca1a10cd,
         type: 3}
       propertyPath: m_Name
-      value: CubeToDestroy (2)
+      value: CubeToDestroy_5
       objectReference: {fileID: 0}
     - target: {fileID: 1563888468175343740, guid: 38963e71204386248a0d9d2bca1a10cd,
         type: 3}
@@ -1176,7 +1181,7 @@ PrefabInstance:
     - target: {fileID: 6798320138874137825, guid: 16124f6fbbf8b5142a2415fe7201b0f0,
         type: 3}
       propertyPath: m_Name
-      value: CubeToBeAdded_1
+      value: CubeToBeAdded_2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 16124f6fbbf8b5142a2415fe7201b0f0, type: 3}
@@ -1238,7 +1243,7 @@ PrefabInstance:
     - target: {fileID: 975721903788649172, guid: 38963e71204386248a0d9d2bca1a10cd,
         type: 3}
       propertyPath: m_Name
-      value: CubeToDestroy
+      value: CubeToDestroy_3
       objectReference: {fileID: 0}
     - target: {fileID: 1563888468175343740, guid: 38963e71204386248a0d9d2bca1a10cd,
         type: 3}
@@ -1343,7 +1348,7 @@ PrefabInstance:
     - target: {fileID: 975721903788649172, guid: 38963e71204386248a0d9d2bca1a10cd,
         type: 3}
       propertyPath: m_Name
-      value: CubeToDestroy (5)
+      value: CubeToDestroy_7
       objectReference: {fileID: 0}
     - target: {fileID: 1563888468175343740, guid: 38963e71204386248a0d9d2bca1a10cd,
         type: 3}
@@ -1547,7 +1552,7 @@ PrefabInstance:
     - target: {fileID: 975721903788649172, guid: 38963e71204386248a0d9d2bca1a10cd,
         type: 3}
       propertyPath: m_Name
-      value: CubeToDestroy (3)
+      value: CubeToDestroy_6
       objectReference: {fileID: 0}
     - target: {fileID: 1563888468175343740, guid: 38963e71204386248a0d9d2bca1a10cd,
         type: 3}
@@ -1676,7 +1681,7 @@ PrefabInstance:
     - target: {fileID: 903359285752859487, guid: 16124f6fbbf8b5142a2415fe7201b0f0,
         type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 903359285752859487, guid: 16124f6fbbf8b5142a2415fe7201b0f0,
         type: 3}
@@ -1761,7 +1766,7 @@ PrefabInstance:
     - target: {fileID: 6798320138874137825, guid: 16124f6fbbf8b5142a2415fe7201b0f0,
         type: 3}
       propertyPath: m_Name
-      value: CubeToBeAdded_1
+      value: CubeToBeAdded_4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 16124f6fbbf8b5142a2415fe7201b0f0, type: 3}

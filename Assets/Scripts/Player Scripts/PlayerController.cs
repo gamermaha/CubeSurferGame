@@ -16,6 +16,7 @@ namespace Player_Scripts
         
         private List<Transform> _playerPositions;
         private List<GameObject> _cubes = new List<GameObject>();
+        private List<Vector3> _cubePositions = new List<Vector3>();
         
         private Vector3 _cubePos;
         private Vector3 _prevMousePos;
@@ -86,11 +87,23 @@ namespace Player_Scripts
             if (_cubes.Count > 0)
             {
                 _cubes[0].gameObject.tag = "CubeDestroyed";
-                // //stop cube
-                // var transformParent = _cubes[0].gameObject.transform;
-                // cubeCollector.transform.GetChild(0).SetParent(transformParent);
-                Destroy(_cubes[_cubes.Count - 1].gameObject);
-                _cubes.RemoveAt(_cubes.Count-1);
+                Debug.Log(_cubes[0].gameObject.name);
+                //stop cube
+                //var transformParent = _cubes[0].gameObject.transform;
+                cubeCollector.transform.GetChild(0).SetParent(null);
+                //Destroy(_cubes[_cubes.Count - 1].gameObject);
+
+                for (int i = 0; i < _cubes.Count; i++)
+                { 
+                    _cubePositions.Add(_cubes[i].transform.position);
+                }
+
+                for (int k = 1; k < _cubes.Count; k++)
+                {
+                    _cubes[k].transform.position = _cubePositions[k-1];
+                }
+                _cubes.RemoveAt(0);
+                _cubePositions.Clear();
             }
         }
         
