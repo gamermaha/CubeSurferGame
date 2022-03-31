@@ -12,26 +12,26 @@ namespace Player_Scripts
         [SerializeField] private GameObject cubeCollector;
         [SerializeField] private PlayerCollider playerCollider;
 
-        
-
         private InputClass inputManager;
-        private float _mySpeed;
-        private float _moveForce;
-
         
+        private List<Transform> _playerPositions;
+        private List<GameObject> _cubes = new List<GameObject>();
+        
+        private Vector3 _cubePos;
+        private Vector3 _prevMousePos;
+        private Vector3 _prevPlayerPos;
         
         private int _wayPtIncrement;
-        
+        private float _mySpeed;
+        private float _moveForce;
         private float _xValue;
         private float _yValue;
         private float _zValue;
         private double _cubeSize;
         
-        private Vector3 _prevMousePos;
-        private Vector3 _prevPlayerPos;
+        
 
-        private List<Transform> _playerPositions;
-        private List<GameObject> _cubes = new List<GameObject>();
+       
 
         void Awake()
         {
@@ -49,27 +49,49 @@ namespace Player_Scripts
                 _mySpeed = MetaData.Instance.scriptableInstance.playerSpeed;
                 _moveForce = MetaData.Instance.scriptableInstance.playerForce;
             }
+            
             _cubeSize = MetaData.Instance.scriptableInstance.cubeLength;
-        }
-        private void Update()
-        {
-            if (PlayerCollider.AddCube)
-                AddCube();
-            
-            if (PlayerCollider.DestroyCube)
-                DestroyCube();
-
-
-        }
-
-        public void AddCube()
-        {
+            _cubePos = Vector3.up * (float)_cubeSize/4;
+            _cubes.Add(cubeCollector.transform.GetChild(0).gameObject);
             
         }
 
-        public void DestroyCube()
+        void Update()
         {
+            if (_cubes.Count == 0)
+            {
+                inputManager.StopPlayer();
+            }
+        }
+
+
+        public void AddCube(GameObject collided)
+        {
+            inputManager.MoveUp();
+            _cubes.Add(collided);
+            Debug.Log("I have encountered a cube to be added");
+            collided.transform.SetParent(cubeCollector.transform, false);
+            collided.transform.localPosition = _cubePos;
+            _cubePos += Vector3.up * (float) _cubeSize;
+            collided.gameObject.tag = "CubeAdded";
             
+        }
+
+        public void DestroyCube(GameObject collided)
+        {
+            inputManager.MoveDown();
+            _cubePos -= Vector3.up * (float) _cubeSize;
+            Debug.Log("I have encountered a cube to be destroyed");
+            
+            if (_cubes.Count > 0)
+            {
+                _cubes[0].gameObject.tag = "CubeDestroyed";
+                // //stop cube
+                // var transformParent = _cubes[0].gameObject.transform;
+                // cubeCollector.transform.GetChild(0).SetParent(transformParent);
+                Destroy(_cubes[_cubes.Count - 1].gameObject);
+                _cubes.RemoveAt(_cubes.Count-1);
+            }
         }
         
     }

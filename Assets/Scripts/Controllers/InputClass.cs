@@ -20,6 +20,8 @@ namespace Controllers
         private float _halfPathWidth;
         private float _mySpeed;
         private float _moveForce;
+        private double _cubeSize;
+        
         private bool _onEnd;
         
         
@@ -44,21 +46,13 @@ namespace Controllers
                 _moveForce = MetaData.Instance.scriptableInstance.playerForce;
             }
             _onEnd = false;
+            _cubeSize = MetaData.Instance.scriptableInstance.cubeLength;
         }
 
         void Update()
         {
             if (_onEnd == false)
             {
-                if (PlayerCollider.AddCube)
-                    player.Translate(0f, 1f, 0f);
-                PlayerCollider.AddCube = false;
-
-                if (PlayerCollider.DestroyCube)
-                    player.Translate(0f, -1f, 0f);
-                PlayerCollider.DestroyCube = false;
-
-
                 transform.position += new Vector3(0f, 0f, _mySpeed) * (_moveForce * Time.deltaTime);
 
                 if ((transform.position.x <= _playerPositions[_wayPtIncrement].position.x + _halfPathWidth) &&
@@ -70,6 +64,7 @@ namespace Controllers
                 
                 else if (transform.position.x < (_playerPositions[_wayPtIncrement].position.x - _halfPathWidth))
                     OnLeftEdge();
+                
                 _prevPlayerPos = transform.position;
                 
             }
@@ -85,8 +80,7 @@ namespace Controllers
                 if (Vector3.Distance(transform.position, _playerPositions[_wayPtIncrement].position) <=
                     _thresholdInWayPt)
                 {
-                    _onEnd = true;
-                    transform.position = _prevPlayerPos;
+                    StopPlayer();
                 }
             }
             
@@ -122,6 +116,16 @@ namespace Controllers
                 MoveRight();
             }
         }
+
+        public void MoveUp()
+        {
+            player.Translate(0f, (float) _cubeSize, 0f);
+        }
+
+        public void MoveDown()
+        {
+            player.Translate(0f, -1 * (float) _cubeSize, 0f);
+        }
         private void MoveRight()
         {
             Debug.Log("Moving to the right");
@@ -134,6 +138,14 @@ namespace Controllers
             Debug.Log("Moving to the left");
             _prevMousePos = Input.mousePosition;
             transform.Translate(-0.1f, 0f, 0f);
+        }
+        
+        
+
+        public void StopPlayer()
+        {
+            _onEnd = true;
+            transform.position = _prevPlayerPos;
         }
         public void PlayerPositions(List<Transform> playerPositions) => _playerPositions = playerPositions;
     } 

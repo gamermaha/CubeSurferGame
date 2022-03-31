@@ -58,6 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cubeCollector: {fileID: 5519792523762702571}
+  player: {fileID: 3980960793052657948}
 --- !u!114 &6385659706939899347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,8 +120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 3505585515281252868}
-  cubeCollector: {fileID: 0}
-  playerCollider: {fileID: 0}
+  cubeCollector: {fileID: 5519792523762702571}
+  playerCollider: {fileID: 3625091167448017128}
 --- !u!114 &802394250568839842
 MonoBehaviour:
   m_ObjectHideFlags: 0

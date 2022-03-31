@@ -13,6 +13,7 @@ namespace Player_Scripts
         public static bool DestroyCube;
 
        [SerializeField] private GameObject cubeCollector;
+       [SerializeField] private PlayerController player;
 
         private List<GameObject> _cubes = new List<GameObject>();
 
@@ -34,38 +35,40 @@ namespace Player_Scripts
             if (other.gameObject.CompareTag("Cube"))
             {
                 
-                _cubes.Add(other.gameObject);
-                Debug.Log("I have encountered a cube to be added");
-                
-                AddCube = true;
-                //Debug.Log(transform.position);
-                
-                other.transform.SetParent(cubeCollector.transform, false);
-                
-                other.transform.localPosition = _newPos;
-                _newPos += Vector3.up * (float) _cubeSize;
-                
-
-                other.gameObject.tag = "CubeAdded";
+                // _cubes.Add(other.gameObject);
+                // Debug.Log("I have encountered a cube to be added");
+                //
+                 //AddCube = true;
+                 player.AddCube(other.gameObject);
+                // //Debug.Log(transform.position);
+                //
+                // other.transform.SetParent(cubeCollector.transform, false);
+                //
+                // other.transform.localPosition = _newPos;
+                // _newPos += Vector3.up * (float) _cubeSize;
+                //
+                //
+                // other.gameObject.tag = "CubeAdded";
 
                 transform.localScale += new Vector3(0f, (float) _cubeSize, 0f);
                 
             }
             if (other.gameObject.CompareTag("CubeDestroy"))
             {
-                _newPos -= Vector3.up * (float) _cubeSize;
-               
-                if (_cubes.Count > 0)
-                {
-                    DestroyCube = true;
-                    
-                    Debug.Log("I have encountered a cube to be destroyed");
-                    Debug.Log(_cubes.Count);
-                    Destroy(_cubes[_cubes.Count - 1].gameObject);
-                    _cubes.RemoveAt(_cubes.Count-1);
-                }
-                else
-                    Destroy(gameObject);
+                // _newPos -= Vector3.up * (float) _cubeSize;
+                //DestroyCube = true;
+                player.DestroyCube(other.gameObject);
+                // if (_cubes.Count > 0)
+                // {
+                //     
+                //     
+                //     Debug.Log("I have encountered a cube to be destroyed");
+                //     Debug.Log(_cubes.Count);
+                //     Destroy(_cubes[_cubes.Count - 1].gameObject);
+                //     _cubes.RemoveAt(_cubes.Count-1);
+                // }
+                // else
+                //     Destroy(gameObject);
                 
                 transform.localScale -= new Vector3(0f, (float) _cubeSize, 0f);
             }
