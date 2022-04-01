@@ -18,6 +18,7 @@ namespace Player_Scripts
         private List<Transform> _playerPositions;
         private List<GameObject> _cubes = new List<GameObject>();
         private List<Vector3> _cubePositions = new List<Vector3>();
+        private Transform[] _cubeChildren;
         
         private Vector3 _cubePos;
         private Vector3 _prevMousePos;
@@ -31,6 +32,7 @@ namespace Player_Scripts
         private float _yValue;
         private float _zValue;
         private double _cubeSize;
+        //private float _obstacleNumber;
         
         
 
@@ -80,37 +82,36 @@ namespace Player_Scripts
             
         }
 
-        public void DestroyCube(GameObject collided)
+        public void DestroyCube(GameObject collided, float obstacleSize)
         {
-            inputManager.MoveDown();
-            _cubePos -= Vector3.up * (float) _cubeSize;
             Debug.Log("I have encountered a cube to be destroyed");
-            
-            if (_cubes.Count > 0)
-            {
-                _cubes[0].gameObject.tag = "CubeDestroyed";
-                _cubeStopPos = _cubes[0].gameObject.transform.position;
-                Debug.Log(_cubes[0].gameObject.name);
-                //stop cube
-                //var transformParent = _cubes[0].gameObject.transform;
-                cubeCollector.transform.GetChild(0).SetParent(null);
-                
-                //Destroy(_cubes[_cubes.Count - 1].gameObject);
-
+            int _obstacleSize = (int) obstacleSize;
+            if (_cubes.Count >= obstacleSize)
+            { 
                 for (int i = 0; i < _cubes.Count; i++)
                 { 
                     _cubePositions.Add(_cubes[i].transform.position);
                 }
-
-                for (int k = 1; k < _cubes.Count; k++)
+                for (int k = _obstacleSize; k < _cubes.Count; k++)
                 {
-                    _cubes[k].transform.position = _cubePositions[k-1];
+                    _cubes[k].transform.position = _cubePositions[k-_obstacleSize];
                 }
-                _cubes[0].gameObject.transform.position = _cubeStopPos;
-                _cubes.RemoveAt(0);
+                for (int o = 0; o < _obstacleSize; o++)
+                {
+                    _cubes[o].gameObject.tag = "CubeDestroyed";
+                    cubeCollector.transform.GetChild(0).SetParent(null); 
+                    inputManager.MoveDown(); 
+                    _cubes.RemoveAt(0);
+                    _cubePos -= Vector3.up * (float) _cubeSize;
+                }
                 _cubePositions.Clear();
+            }
+            else
+            {
+                inputManager.StopPlayer();
             }
         }
         
     }
 }
+
