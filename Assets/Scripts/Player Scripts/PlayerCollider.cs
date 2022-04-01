@@ -25,6 +25,7 @@ namespace Player_Scripts
             }
             if (other.gameObject.CompareTag("CubeDestroy"))
             {
+                Debug.Log(other.gameObject.GetComponent<CubeToDestroy>().obstacleSize);
                 player.DestroyCube(other.gameObject, other.gameObject.GetComponent<CubeToDestroy>().obstacleSize);
                 transform.localScale -= new Vector3(0f, (float) _cubeSize, 0f);
             }

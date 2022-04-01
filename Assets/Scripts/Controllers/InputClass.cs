@@ -30,7 +30,7 @@ namespace Controllers
             Debug.Log("I am awake");
             _prevMousePos = new Vector3(0f, 0f, 0f);
             _thresholdInWayPt = 0.5f;
-            _halfPathWidth = 2f;
+            _halfPathWidth = 3f;
 
         }
         private void Start()
@@ -68,7 +68,10 @@ namespace Controllers
                 _prevPlayerPos = transform.position;
                 
             }
-            
+            else
+            {
+                StopPlayer();
+            }
             if (_playerPositions.Count < _wayPtIncrement)
             {
                 if (Vector3.Distance(transform.position, _playerPositions[_wayPtIncrement+1].position) <= _thresholdInWayPt) 
@@ -117,14 +120,14 @@ namespace Controllers
             }
         }
 
-        public void MoveUp()
+        public void MoveUp(int up)
         {
-            player.Translate(0f, (float) _cubeSize, 0f);
+            player.Translate(0f, (float) _cubeSize * up, 0f);
         }
 
-        public void MoveDown()
+        public void MoveDown(int down)
         {
-            player.Translate(0f, -1 * (float) _cubeSize, 0f);
+            player.Translate(0f, -1 * (float) _cubeSize * down, 0f);
         }
         private void MoveRight()
         {
