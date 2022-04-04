@@ -10,6 +10,7 @@ namespace Managers
         public GameObject gameStartView;
         public GameObject hUDView;
         public GameObject gameEndView;
+        public GameObject gameOverView;
 
        
 
@@ -25,6 +26,12 @@ namespace Managers
         {
             gameEndView.SetActive(true);
         }
+        public void GameOver()
+        {
+            gameOverView.SetActive(true);
+        }
+
+
         
         
     }

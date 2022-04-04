@@ -58,6 +58,8 @@ namespace Managers
         {
             if (_player.endIsReached)
                 uIController.EndGame();
+            if (_player.gameIsOver)
+                uIController.GameOver();
             
             slider.value = _inputManager.lengthCoveredPercentage;
         }

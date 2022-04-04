@@ -40,6 +40,7 @@ namespace Player_Scripts
 
         private float _timeToDrop;
         public bool endIsReached;
+        public bool gameIsOver;
 
         private Animator anim;
 
@@ -105,6 +106,7 @@ namespace Player_Scripts
             }
             else
             {
+                gameIsOver = true;
                 inputManager.StopPlayer();
             }
             

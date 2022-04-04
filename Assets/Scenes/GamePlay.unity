@@ -1003,12 +1003,12 @@ PrefabInstance:
     - target: {fileID: 1775221624457560526, guid: 7e51d3fbda237484398eab2ff6067b24,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 540
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1775221624457560526, guid: 7e51d3fbda237484398eab2ff6067b24,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 960
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1775221624457560526, guid: 7e51d3fbda237484398eab2ff6067b24,
         type: 3}
@@ -1335,6 +1335,11 @@ PrefabInstance:
       propertyPath: gameEndView
       value: 
       objectReference: {fileID: 1723059057}
+    - target: {fileID: 37396263115425541, guid: 915c051cf1a27d94ea1ae246770953e7,
+        type: 3}
+      propertyPath: gameOverView
+      value: 
+      objectReference: {fileID: 645097379}
     - target: {fileID: 37396263115425541, guid: 915c051cf1a27d94ea1ae246770953e7,
         type: 3}
       propertyPath: gamePlayView
