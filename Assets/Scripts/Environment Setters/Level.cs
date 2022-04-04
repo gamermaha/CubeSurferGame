@@ -10,6 +10,9 @@ namespace Environment_Setters
         public List<Transform> wayPoints;
         private double _cubeSize;
 
+        [SerializeField]
+        public Transform StartPosition;
+
         private void Start()
         {
             _cubeSize = MetaData.Instance.scriptableInstance.cubeLength;

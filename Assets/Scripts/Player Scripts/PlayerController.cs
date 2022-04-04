@@ -9,10 +9,13 @@ namespace Player_Scripts
 {
     public class PlayerController : MonoBehaviour
     {
-        [SerializeField] private Transform player;
+        [SerializeField] private GameObject player;
         [SerializeField] private GameObject cubeCollector;
         [SerializeField] private GameObject destroyedCubeCollector;
-        [SerializeField] private PlayerCollider playerCollider;
+        //[SerializeField] private PlayerCollider playerCollider;
+
+        [SerializeField] private GamePlayUIController uiController;
+        //[SerializeField] private Animator anim;
 
         private InputClass inputManager;
         
@@ -36,6 +39,11 @@ namespace Player_Scripts
         private double _cubeSize;
 
         private float _timeToDrop;
+        public bool endIsReached;
+
+        private Animator anim;
+
+        private string upDown = "Up";
         //private float _obstacleNumber;
         
         
@@ -45,6 +53,7 @@ namespace Player_Scripts
         void Awake()
         {
             inputManager = GetComponent<InputClass>();
+            //anim = player.GetComponentInChildren<Animator>();
         }
         private void Start()
         {
@@ -74,11 +83,13 @@ namespace Player_Scripts
             collided.transform.localPosition = _cubePos;
             _cubePos += Vector3.up * (float) _cubeSize;
             collided.gameObject.tag = "CubeAdded";
+            //anim.SetBool(upDown, false);
             
         }
 
         public void DestroyCube(GameObject collided, float obstacleSize)
         {
+            
             Debug.Log("I have encountered a cube to be destroyed");
             int _obstacleSize = (int) obstacleSize;
             //_playerPosAtCol = transform.position;
@@ -120,11 +131,24 @@ namespace Player_Scripts
                 _cubes.RemoveAt(0);
             }
             _cubePositions.Clear();
-            
+            PlayerCollider.DestroyCubeCalled = false;
+            //anim.SetTrigger(upDown, false);
+        }
+        
+        private void OnTriggerEnter(Collider other)
+        {
+            Debug.Log("OnTriggerEnter " + other.gameObject.tag);
+            if (other.CompareTag("EndLevel"))
+            {
+                endIsReached = true;
+                Debug.Log("End level is reached");
+                inputManager.StopPlayer();
+                
+            }
         }
         private void OnTriggerExit(Collider other)
         {
-            if (other.CompareTag("CubeDestroy"))
+            if (other.CompareTag("CubeDestroy") && PlayerCollider.DestroyCubeCalled)
             {
                 WaitToFall(other.gameObject.GetComponent<CubeToDestroy>().obstacleSize);
             }

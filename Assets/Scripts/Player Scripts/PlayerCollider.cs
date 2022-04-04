@@ -11,6 +11,7 @@ namespace Player_Scripts
     { 
         [SerializeField] private PlayerController player;
        private double _cubeSize;
+       public static bool DestroyCubeCalled;
        private void Start()
         {
             _cubeSize = MetaData.Instance.scriptableInstance.cubeLength;
@@ -25,11 +26,15 @@ namespace Player_Scripts
             }
             if (other.gameObject.CompareTag("CubeDestroy"))
             {
-                Debug.Log(other.gameObject.GetComponent<CubeToDestroy>().obstacleSize);
+                DestroyCubeCalled = true;
+                Debug.Log("I have encountered: " + other.gameObject.GetComponent<CubeToDestroy>().obstacleSize + "cubes to destroy");
                 player.DestroyCube(other.gameObject, other.gameObject.GetComponent<CubeToDestroy>().obstacleSize);
                 transform.localScale -= new Vector3(0f, (float) _cubeSize, 0f);
             }
-
+            else if (other.gameObject.CompareTag("EndLevel"))
+            {
+                Debug.Log("@@@@@@@@@@@@@@@ End Level ");
+            }
         }
     }
 }

@@ -3,15 +3,21 @@ using System.Collections.Generic;
 using Managers;
 using Player_Scripts;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Controllers
 {
     public class InputClass : MonoBehaviour
     {
-        [SerializeField] private Transform player;
-        
+        [SerializeField] private GameObject player;
+        //[SerializeField] private GameObject gameEndButton;
+        //[SerializeField] private Animator anim;
         private Vector3 _prevMousePos;
         private Vector3 _prevPlayerPos;
+
+        private float _totalLength;
+        private float _lengthCovered;
+        public float lengthCoveredPercentage;
         
         private List<Transform> _playerPositions;
         
@@ -21,15 +27,19 @@ namespace Controllers
         private float _mySpeed;
         private float _moveForce;
         private double _cubeSize;
-        
+        private Animator _anim;
+        public static bool startMoving = false;
+
+        private string upDown = "Up"; 
         private bool _onEnd;
         
         
         void Awake()
         {
-            Debug.Log("I am awake");
+            _anim = player.GetComponentInChildren<Animator>();
+            Debug.Log(_anim.name);
             _prevMousePos = new Vector3(0f, 0f, 0f);
-            _thresholdInWayPt = 0.5f;
+            _thresholdInWayPt = 0.05f;
             _halfPathWidth = 3f;
 
         }
@@ -44,14 +54,22 @@ namespace Controllers
             {
                 _mySpeed = MetaData.Instance.scriptableInstance.playerSpeed;
                 _moveForce = MetaData.Instance.scriptableInstance.playerForce;
+                _cubeSize = MetaData.Instance.scriptableInstance.cubeLength;
             }
             _onEnd = false;
-            _cubeSize = MetaData.Instance.scriptableInstance.cubeLength;
         }
 
         void Update()
         {
-            if (_onEnd == false)
+            // Debug.Log(_onEnd);
+            if (!startMoving)
+            {
+                Debug.Log(startMoving);
+
+                return;
+            }
+
+            if (!_onEnd)
             {
                 transform.position += new Vector3(0f, 0f, _mySpeed) * (_moveForce * Time.deltaTime);
 
@@ -67,26 +85,34 @@ namespace Controllers
                 
                 _prevPlayerPos = transform.position;
                 
+                _lengthCovered = Vector3.Distance(new Vector3(0f, 0f, transform.position.z), new Vector3(0f, 0f, _playerPositions[_playerPositions.Count-1].position.z));
+                lengthCoveredPercentage =  _lengthCovered/_totalLength;
+
             }
             else
             {
                 StopPlayer();
             }
-            if (_playerPositions.Count < _wayPtIncrement)
+
+            if (_playerPositions != null)
             {
-                if (Vector3.Distance(transform.position, _playerPositions[_wayPtIncrement+1].position) <= _thresholdInWayPt) 
-                    _wayPtIncrement++;
-            }
-            
-            else
-            {
-                if (Vector3.Distance(transform.position, _playerPositions[_wayPtIncrement].position) <=
-                    _thresholdInWayPt)
+                
+                if (_playerPositions.Count < _wayPtIncrement)
                 {
-                    StopPlayer();
+                    if (Vector3.Distance(transform.position, _playerPositions[_wayPtIncrement + 1].position) <=
+                        _thresholdInWayPt)
+                        _wayPtIncrement++;
+                }
+
+                else
+                {
+                    if (Vector3.Distance(transform.position, _playerPositions[_wayPtIncrement].position) <=
+                        _thresholdInWayPt)
+                    {
+                        StopPlayer();
+                    }
                 }
             }
-            
         }
 
         
@@ -122,23 +148,25 @@ namespace Controllers
 
         public void MoveUp(int up)
         {
-            player.Translate(0f, (float) _cubeSize * up, 0f);
+            _anim.SetTrigger("jump");
+            player.transform.Translate(0f, (float) _cubeSize * up, 0f);
         }
 
         public void MoveDown(int down)
         {
-            player.Translate(0f, -1 * (float) _cubeSize * down, 0f);
+            //_anim.SetTrigger("jump");
+            player.transform.Translate(0f, -1 * (float) _cubeSize * down, 0f);
         }
         private void MoveRight()
         {
-            Debug.Log("Moving to the right");
+            // Debug.Log("Moving to the right");
             _prevMousePos = Input.mousePosition;
             transform.Translate(0.1f, 0f, 0f);
         }
         
         private void MoveLeft()
         {
-            Debug.Log("Moving to the left");
+            // Debug.Log("Moving to the left");
             _prevMousePos = Input.mousePosition;
             transform.Translate(-0.1f, 0f, 0f);
         }
@@ -148,9 +176,19 @@ namespace Controllers
         public void StopPlayer()
         {
             _onEnd = true;
+            //gameEndButton.SetActive(true);
             transform.position = _prevPlayerPos;
+            //GameplayUIController.EndGame();
         }
-        public void PlayerPositions(List<Transform> playerPositions) => _playerPositions = playerPositions;
+
+
+        public void PlayerPositions(List<Transform> playerPositions)
+        {
+            _playerPositions = playerPositions;
+            _totalLength = Vector3.Distance(_playerPositions[0].position,
+                _playerPositions[_playerPositions.Count - 1].position);
+            Debug.Log("Total Length "+_totalLength);
+        }
     } 
 }
 

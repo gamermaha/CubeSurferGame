@@ -9,6 +9,7 @@ TagManager:
   - CubeAdded
   - CubeDestroy
   - CubeDestroyed
+  - EndLevel
   layers:
   - Default
   - TransparentFX

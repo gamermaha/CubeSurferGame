@@ -4,40 +4,40 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: 4018074224661003100
-    second: Atlas_0
+    second: Blue Button
   - first:
       213: -4869357254534750094
-    second: Atlas_1
+    second: Orange Button
   - first:
       213: -6721728136321296765
-    second: Atlas_2
+    second: Settings
   - first:
       213: -7826287199498012479
-    second: Atlas_3
+    second: Slider
   - first:
       213: 6615319868462110837
-    second: Atlas_5
+    second: Plus1
   - first:
       213: -1347233719151212251
-    second: Atlas_6
+    second: arrow
   - first:
       213: 7870480730772048316
-    second: Atlas_7
+    second: Diamond
   - first:
       213: -5599750456436461424
-    second: Atlas_9
+    second: Hand
   - first:
       213: -7450669156800766785
-    second: Atlas_10
+    second: Ornge
   - first:
       213: -4272707242783423304
     second: Atlas_11
   - first:
       213: 1726203059708922746
-    second: Atlas_12
+    second: Checkbox
   - first:
       213: 3628468241054914511
-    second: Atlas_13
+    second: Diamond 2
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -159,7 +159,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Atlas_0
+      name: Blue Button
       rect:
         serializedVersion: 2
         x: 14
@@ -167,7 +167,7 @@ TextureImporter:
         width: 99
         height: 97
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -180,7 +180,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas_1
+      name: Orange Button
       rect:
         serializedVersion: 2
         x: 122
@@ -188,7 +188,7 @@ TextureImporter:
         width: 255
         height: 104
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -201,15 +201,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas_2
+      name: Settings
       rect:
         serializedVersion: 2
         x: 384
-        y: 390
+        y: 391
         width: 111
         height: 107
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -222,7 +222,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas_3
+      name: Slider
       rect:
         serializedVersion: 2
         x: 9
@@ -230,7 +230,7 @@ TextureImporter:
         width: 259
         height: 97
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -243,15 +243,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas_5
+      name: Plus1
       rect:
         serializedVersion: 2
         x: 274
-        y: 285
+        y: 286
         width: 110
         height: 89
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -264,7 +264,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas_6
+      name: arrow
       rect:
         serializedVersion: 2
         x: 400
@@ -272,7 +272,7 @@ TextureImporter:
         width: 33
         height: 96
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -285,15 +285,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas_7
+      name: Diamond
       rect:
         serializedVersion: 2
         x: 438
-        y: 267
+        y: 268
         width: 96
         height: 114
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -306,7 +306,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas_9
+      name: Hand
       rect:
         serializedVersion: 2
         x: 6
@@ -314,7 +314,7 @@ TextureImporter:
         width: 216
         height: 253
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -327,7 +327,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas_10
+      name: Ornge
       rect:
         serializedVersion: 2
         x: 224
@@ -335,7 +335,7 @@ TextureImporter:
         width: 100
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -356,7 +356,7 @@ TextureImporter:
         width: 196
         height: 99
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -369,15 +369,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas_12
+      name: Checkbox
       rect:
         serializedVersion: 2
-        x: 226
-        y: 70
+        x: 227
+        y: 69
         width: 91
         height: 92
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -390,7 +390,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas_13
+      name: Diamond 2
       rect:
         serializedVersion: 2
         x: 327
@@ -398,7 +398,7 @@ TextureImporter:
         width: 79
         height: 104
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

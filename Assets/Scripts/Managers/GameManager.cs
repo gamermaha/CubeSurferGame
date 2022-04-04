@@ -5,6 +5,7 @@ using Player_Scripts;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 namespace Managers
 {
@@ -17,7 +18,11 @@ namespace Managers
         [SerializeField] private PlayerController player;
         [SerializeField] private Path path;
         [SerializeField] private Level _level01;
+        [SerializeField] private GameplayUIController uIController;
+        [SerializeField] private Slider slider;
 
+
+        private InputClass _inputManager;
         private Level _levelTBD;
         private Path _path;
         private PlayerController _player;
@@ -48,7 +53,14 @@ namespace Managers
             _pathLength = MetaData.Instance.scriptableInstance.pathLength;
             Init();
         }
-      
+
+        private void Update()
+        {
+            if (_player.endIsReached)
+                uIController.EndGame();
+            
+            slider.value = _inputManager.lengthCoveredPercentage;
+        }
 
         private void PlayerSetup()
         {
@@ -66,11 +78,15 @@ namespace Managers
         {
             //// Dynamic WayPoint/Path Implementation
             //_path = Instantiate(path, new Vector3(0, 0, 0), Quaternion.identity);
-            PlayerSetup();
-            _player = Instantiate(player,new Vector3(_playerXValue, _playerYValue, _playerZValue), Quaternion.identity);
-            _player.GetComponent<InputClass>().PlayerPositions(_level01.GiveWayPoints());
+            //PlayerSetup();
+            _player = Instantiate(player);
+            //, LevelDecider().StartPosition.position, Quaternion.identity);
+            _inputManager = _player.GetComponent<InputClass>();
+            _inputManager.PlayerPositions(_level01.GiveWayPoints());
+            _player.transform.position = LevelDecider().StartPosition.position;
             //Debug.Log(_player.transform.position);
             
+
         }
 
         private Level LevelDecider()
