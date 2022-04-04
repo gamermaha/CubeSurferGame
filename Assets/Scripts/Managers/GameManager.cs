@@ -52,6 +52,7 @@ namespace Managers
         {
             _pathLength = MetaData.Instance.scriptableInstance.pathLength;
             Init();
+            slider.value = 0;
         }
 
         private void Update()

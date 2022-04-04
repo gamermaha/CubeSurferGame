@@ -84,9 +84,16 @@ namespace Controllers
                     OnLeftEdge();
                 
                 _prevPlayerPos = transform.position;
-                
-                _lengthCovered = Vector3.Distance(new Vector3(0f, 0f, transform.position.z), new Vector3(0f, 0f, _playerPositions[_playerPositions.Count-1].position.z));
+
+                if (transform.position.z > _playerPositions[0].position.z)
+                    _lengthCovered = 0;
+                else
+                {
+                    _lengthCovered = Vector3.Distance(new Vector3(0f, 0f, transform.position.z), new Vector3(0f, 0f, _playerPositions[_playerPositions.Count-1].position.z));
+                }
                 lengthCoveredPercentage =  _lengthCovered/_totalLength;
+
+                
 
             }
             else
