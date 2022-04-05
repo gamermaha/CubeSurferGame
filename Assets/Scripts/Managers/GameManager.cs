@@ -63,6 +63,7 @@ namespace Managers
                 uIController.GameOver();
             
             slider.value = _inputManager.lengthCoveredPercentage;
+            Debug.Log(slider.value);
         }
 
         private void PlayerSetup()

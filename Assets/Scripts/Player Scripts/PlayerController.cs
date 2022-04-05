@@ -9,15 +9,15 @@ namespace Player_Scripts
 {
     public class PlayerController : MonoBehaviour
     {
-        [SerializeField] private GameObject player;
+        //[SerializeField] private GameObject player;
         [SerializeField] private GameObject cubeCollector;
-        [SerializeField] private GameObject destroyedCubeCollector;
+        //[SerializeField] private GameObject destroyedCubeCollector;
         //[SerializeField] private PlayerCollider playerCollider;
 
         [SerializeField] private GamePlayUIController uiController;
         //[SerializeField] private Animator anim;
 
-        private InputClass inputManager;
+        private InputClass _inputManager;
         
         private List<Transform> _playerPositions;
         private List<GameObject> _cubes = new List<GameObject>();
@@ -42,9 +42,9 @@ namespace Player_Scripts
         public bool endIsReached;
         public bool gameIsOver;
 
-        private Animator anim;
+        //private Animator _anim;
 
-        private string upDown = "Up";
+        //private string upDown = "Up";
         //private float _obstacleNumber;
         
         
@@ -53,7 +53,7 @@ namespace Player_Scripts
 
         void Awake()
         {
-            inputManager = GetComponent<InputClass>();
+            _inputManager = GetComponent<InputClass>();
             //anim = player.GetComponentInChildren<Animator>();
         }
         private void Start()
@@ -67,9 +67,10 @@ namespace Player_Scripts
             {
                 _mySpeed = MetaData.Instance.scriptableInstance.playerSpeed;
                 _moveForce = MetaData.Instance.scriptableInstance.playerForce;
+                _cubeSize = MetaData.Instance.scriptableInstance.cubeLength;
             }
             
-            _cubeSize = MetaData.Instance.scriptableInstance.cubeLength;
+            
             _cubePos = Vector3.up * (float)_cubeSize/4;
             _cubes.Add(cubeCollector.transform.GetChild(0).gameObject);
             _cubes[0].gameObject.tag = "Cube";
@@ -77,7 +78,7 @@ namespace Player_Scripts
         }
         public void AddCube(GameObject collided)
         {
-            inputManager.MoveUp(1);
+            _inputManager.MoveUp(1);
             _cubes.Add(collided);
             Debug.Log("I have encountered a cube to be added");
             collided.transform.SetParent(cubeCollector.transform, false);
@@ -107,7 +108,7 @@ namespace Player_Scripts
             else
             {
                 gameIsOver = true;
-                inputManager.StopPlayer();
+                _inputManager.StopPlayer();
             }
             
         }
@@ -116,7 +117,7 @@ namespace Player_Scripts
         {
             int _obstacleSize = (int) obstacleSize;
             
-            inputManager.MoveDown(_obstacleSize);
+            _inputManager.MoveDown(_obstacleSize);
             
             for (int i = 0; i < _cubes.Count; i++)
             { 
@@ -124,7 +125,6 @@ namespace Player_Scripts
             }
             for (int k = _obstacleSize; k < _cubes.Count; k++)
             {
-                //Debug.Log($"Old Pos: {_cubes[k].transform.position} New {_cubePositions[k-_obstacleSize].y}");
                 var pos = _cubes[k].transform.position;
                 _cubes[k].transform.position = new Vector3(pos.x, _cubePositions[k-_obstacleSize].y, pos.z);
             }
@@ -134,7 +134,7 @@ namespace Player_Scripts
             }
             _cubePositions.Clear();
             PlayerCollider.DestroyCubeCalled = false;
-            //anim.SetTrigger(upDown, false);
+            
         }
         
         private void OnTriggerEnter(Collider other)
@@ -144,7 +144,7 @@ namespace Player_Scripts
             {
                 endIsReached = true;
                 Debug.Log("End level is reached");
-                inputManager.StopPlayer();
+                _inputManager.StopPlayer();
                 
             }
         }

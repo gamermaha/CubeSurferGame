@@ -1,7 +1,5 @@
 ﻿using Controllers;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 namespace Managers
 {
@@ -11,11 +9,7 @@ namespace Managers
         public GameObject hUDView;
         public GameObject gameEndView;
         public GameObject gameOverView;
-
-       
-
-        //private int _playerProgress = 0;
-
+        
         public void DisableSlider()
         {
             gameStartView.SetActive(false);

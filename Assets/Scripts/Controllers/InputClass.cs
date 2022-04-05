@@ -64,8 +64,7 @@ namespace Controllers
             // Debug.Log(_onEnd);
             if (!startMoving)
             {
-                Debug.Log(startMoving);
-
+                Debug.Log("Value of start moving is "+startMoving);
                 return;
             }
 
@@ -85,11 +84,11 @@ namespace Controllers
                 
                 _prevPlayerPos = transform.position;
 
-                if (transform.position.z > _playerPositions[0].position.z)
-                    _lengthCovered = 0;
+                if (Vector3.Distance(new Vector3(0f, 0f, transform.position.z), new Vector3(0f, 0f, _playerPositions[_playerPositions.Count-1].position.z)) > 0)
+                    _lengthCovered = Vector3.Distance(new Vector3(0f, 0f, transform.position.z), new Vector3(0f, 0f, _playerPositions[_playerPositions.Count-1].position.z));
                 else
                 {
-                    _lengthCovered = Vector3.Distance(new Vector3(0f, 0f, transform.position.z), new Vector3(0f, 0f, _playerPositions[_playerPositions.Count-1].position.z));
+                    _lengthCovered = _totalLength;
                 }
                 lengthCoveredPercentage =  _lengthCovered/_totalLength;
 
