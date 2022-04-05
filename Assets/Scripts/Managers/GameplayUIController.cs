@@ -1,5 +1,6 @@
 ﻿using Controllers;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Managers
 {
@@ -25,8 +26,14 @@ namespace Managers
             gameOverView.SetActive(true);
         }
 
+        public void RestartGame()
+        {
+            SceneManager.LoadScene("GamePlay");
+            gameStartView.SetActive(true);
+        }
 
-        
-        
+
+
+
     }
 }

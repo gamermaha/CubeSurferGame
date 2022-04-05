@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.PlayerLoop;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace Managers
 {
@@ -34,6 +35,10 @@ namespace Managers
         
         private int x = 1;
 
+        private void OnEnable()
+        {
+            SceneManager.sceneLoaded += OnLevelFinishLoading;
+        }
         private void Awake()
         {
             if (Instance == null)
@@ -51,7 +56,7 @@ namespace Managers
         void Start()
         {
             _pathLength = MetaData.Instance.scriptableInstance.pathLength;
-            Init();
+            //Init();
             slider.value = 0;
         }
 
@@ -63,7 +68,19 @@ namespace Managers
                 uIController.GameOver();
             
             slider.value = _inputManager.lengthCoveredPercentage;
-            Debug.Log(slider.value);
+            //Debug.Log(slider.value);
+        }
+        private void OnDisable()
+        {
+            SceneManager.sceneLoaded -= OnLevelFinishLoading;
+        }
+
+        private void OnLevelFinishLoading(Scene scene, LoadSceneMode mode)
+        {
+            if (scene.name == "GamePlay")
+            {
+                Init();
+            }
         }
 
         private void PlayerSetup()
@@ -84,8 +101,9 @@ namespace Managers
             //_path = Instantiate(path, new Vector3(0, 0, 0), Quaternion.identity);
             //PlayerSetup();
             _player = Instantiate(player);
-            //, LevelDecider().StartPosition.position, Quaternion.identity);
+            //LevelDecider().StartPosition.position, Quaternion.identity);
             _inputManager = _player.GetComponent<InputClass>();
+            
             _inputManager.PlayerPositions(_level01.GiveWayPoints());
             _player.transform.position = LevelDecider().StartPosition.position;
             //Debug.Log(_player.transform.position);

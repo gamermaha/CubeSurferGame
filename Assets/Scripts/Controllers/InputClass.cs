@@ -32,12 +32,13 @@ namespace Controllers
 
         private string upDown = "Up"; 
         private bool _onEnd;
-        
+
+        private InputClass Instance;
         
         void Awake()
         {
             _anim = player.GetComponentInChildren<Animator>();
-            Debug.Log(_anim.name);
+            //Debug.Log(_anim.name);
             _prevMousePos = new Vector3(0f, 0f, 0f);
             _thresholdInWayPt = 0.05f;
             _halfPathWidth = 3f;
@@ -64,22 +65,26 @@ namespace Controllers
             // Debug.Log(_onEnd);
             if (!startMoving)
             {
-                Debug.Log("Value of start moving is "+startMoving);
+                //Debug.Log("Value of start moving is "+startMoving);
                 return;
             }
+
+            if (transform == null || _playerPositions == null)
+                return;
+            
 
             if (!_onEnd)
             {
                 transform.position += new Vector3(0f, 0f, _mySpeed) * (_moveForce * Time.deltaTime);
 
-                if ((transform.position.x <= _playerPositions[_wayPtIncrement].position.x + _halfPathWidth) &&
-                    (transform.position.x >= _playerPositions[_wayPtIncrement].position.x - _halfPathWidth))
+                if ((this.transform.position.x <= _playerPositions[_wayPtIncrement].position.x + _halfPathWidth - _cubeSize/2) &&
+                    (this.transform.position.x >= _playerPositions[_wayPtIncrement].position.x - _halfPathWidth + _cubeSize/2))
                     OnCenter();
                 
-                else if (transform.position.x > (_playerPositions[_wayPtIncrement].position.x + _halfPathWidth))
+                else if (this.transform.position.x > (_playerPositions[_wayPtIncrement].position.x + _halfPathWidth - _cubeSize/2))
                     OnRightEdge();
                 
-                else if (transform.position.x < (_playerPositions[_wayPtIncrement].position.x - _halfPathWidth))
+                else if (this.transform.position.x < (_playerPositions[_wayPtIncrement].position.x - _halfPathWidth + _cubeSize/2))
                     OnLeftEdge();
                 
                 _prevPlayerPos = transform.position;
@@ -190,6 +195,7 @@ namespace Controllers
 
         public void PlayerPositions(List<Transform> playerPositions)
         {
+            Debug.Log("i am in playerpositions func");
             _playerPositions = playerPositions;
             _totalLength = Vector3.Distance(_playerPositions[0].position,
                 _playerPositions[_playerPositions.Count - 1].position);

@@ -9,6 +9,7 @@ namespace Player_Scripts
 {
     public class PlayerController : MonoBehaviour
     {
+        public PlayerController Instance;
         //[SerializeField] private GameObject player;
         [SerializeField] private GameObject cubeCollector;
         //[SerializeField] private GameObject destroyedCubeCollector;
@@ -47,12 +48,9 @@ namespace Player_Scripts
         //private string upDown = "Up";
         //private float _obstacleNumber;
         
-        
-
-       
-
         void Awake()
         {
+            
             _inputManager = GetComponent<InputClass>();
             //anim = player.GetComponentInChildren<Animator>();
         }
@@ -139,7 +137,7 @@ namespace Player_Scripts
         
         private void OnTriggerEnter(Collider other)
         {
-            Debug.Log("OnTriggerEnter " + other.gameObject.tag);
+            //Debug.Log("OnTriggerEnter " + other.gameObject.tag);
             if (other.CompareTag("EndLevel"))
             {
                 endIsReached = true;
