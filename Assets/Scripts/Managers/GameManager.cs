@@ -82,7 +82,7 @@ namespace Managers
 
         private void OnLevelFinishLoading(Scene scene, LoadSceneMode mode)
         {
-            if (scene.name == "Level 02")
+            if (scene.name == "Level 03")
             {
                 Init();
             }
