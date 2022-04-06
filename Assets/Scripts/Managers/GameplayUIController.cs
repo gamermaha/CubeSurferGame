@@ -28,8 +28,14 @@ namespace Managers
 
         public void RestartGame()
         {
-            SceneManager.LoadScene("GamePlay");
+            InputClass.startMoving = false;
+            gameOverView.SetActive(false);
+            gameEndView.SetActive(false);
             gameStartView.SetActive(true);
+            SceneManager.LoadScene("Level 02");
+            
+            
+            
         }
 
 

@@ -18,7 +18,7 @@ namespace Managers
         [Header(" GameObjects Imported")]
         [SerializeField] private PlayerController player;
         [SerializeField] private Path path;
-        [SerializeField] private Level _level01;
+        [SerializeField] private Level level01;
         [SerializeField] private GameplayUIController uIController;
         [SerializeField] private Slider slider;
 
@@ -35,29 +35,34 @@ namespace Managers
         
         private int x = 1;
 
-        private void OnEnable()
-        {
-            SceneManager.sceneLoaded += OnLevelFinishLoading;
-        }
+       
         private void Awake()
         {
             if (Instance == null)
             {
                 Instance = this;
-                DontDestroyOnLoad(gameObject);
+                //DontDestroyOnLoad(gameObject);
+                //DontDestroyOnLoad(uIController);
+                //DontDestroyOnLoad(level01);
+                
+                
             }
             else
             {
                 Destroy(gameObject);
             }
-        }
-        
+            slider.value = 0;
 
+        }
+        private void OnEnable()
+        {
+            SceneManager.sceneLoaded += OnLevelFinishLoading;
+        }
         void Start()
         {
             _pathLength = MetaData.Instance.scriptableInstance.pathLength;
             //Init();
-            slider.value = 0;
+            
         }
 
         private void Update()
@@ -77,7 +82,7 @@ namespace Managers
 
         private void OnLevelFinishLoading(Scene scene, LoadSceneMode mode)
         {
-            if (scene.name == "GamePlay")
+            if (scene.name == "Level 02")
             {
                 Init();
             }
@@ -104,7 +109,7 @@ namespace Managers
             //LevelDecider().StartPosition.position, Quaternion.identity);
             _inputManager = _player.GetComponent<InputClass>();
             
-            _inputManager.PlayerPositions(_level01.GiveWayPoints());
+            _inputManager.PlayerPositions(level01.GiveWayPoints());
             _player.transform.position = LevelDecider().StartPosition.position;
             //Debug.Log(_player.transform.position);
             
@@ -113,7 +118,7 @@ namespace Managers
 
         private Level LevelDecider()
         {
-            _levelTBD = _level01;
+            _levelTBD = level01;
             return _levelTBD;
         }
     }

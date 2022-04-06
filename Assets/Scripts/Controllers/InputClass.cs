@@ -42,7 +42,6 @@ namespace Controllers
             _prevMousePos = new Vector3(0f, 0f, 0f);
             _thresholdInWayPt = 0.05f;
             _halfPathWidth = 3f;
-
         }
         private void Start()
         {
@@ -58,6 +57,8 @@ namespace Controllers
                 _cubeSize = MetaData.Instance.scriptableInstance.cubeLength;
             }
             _onEnd = false;
+            _lengthCovered = 0;
+            lengthCoveredPercentage = 0;
         }
 
         void Update()

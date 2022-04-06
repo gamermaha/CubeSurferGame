@@ -1,6 +1,8 @@
 ﻿
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using Controllers;
 using Managers;
 using UnityEngine;
@@ -9,7 +11,7 @@ namespace Player_Scripts
 {
     public class PlayerController : MonoBehaviour
     {
-        public PlayerController Instance;
+        //public PlayerController Instance;
         //[SerializeField] private GameObject player;
         [SerializeField] private GameObject cubeCollector;
         //[SerializeField] private GameObject destroyedCubeCollector;
@@ -21,9 +23,10 @@ namespace Player_Scripts
         private InputClass _inputManager;
         
         private List<Transform> _playerPositions;
-        private List<GameObject> _cubes = new List<GameObject>();
-        private List<Vector3> _cubePositions = new List<Vector3>();
+        private List<GameObject> _cubes;
+        private List<Vector3> _cubePositions;
         private Transform[] _cubeChildren;
+        private CubeToDestroy[] cubeToDestroyScripts;
         
         private Vector3 _cubePos;
         private Vector3 _prevMousePos;
@@ -50,8 +53,9 @@ namespace Player_Scripts
         
         void Awake()
         {
-            
             _inputManager = GetComponent<InputClass>();
+            _cubes = new List<GameObject>();
+            _cubePositions = new List<Vector3>();
             //anim = player.GetComponentInChildren<Animator>();
         }
         private void Start()
@@ -74,6 +78,12 @@ namespace Player_Scripts
             _cubes[0].gameObject.tag = "Cube";
 
         }
+
+        private void Update()
+        {
+            //Debug.Log("Cubes count is: " + _cubes.Count);
+        }
+
         public void AddCube(GameObject collided)
         {
             _inputManager.MoveUp(1);
@@ -99,6 +109,7 @@ namespace Player_Scripts
                 for (int o = 0; o < _obstacleSize; o++)
                 {
                     _cubes[o].gameObject.tag = "CubeDestroyed";
+                    Debug.Log(cubeCollector.transform.GetChild(0).name);
                     cubeCollector.transform.GetChild(0).SetParent(null);
                     _cubePos -= Vector3.up * (float) _cubeSize;
                 } 
@@ -120,6 +131,7 @@ namespace Player_Scripts
             for (int i = 0; i < _cubes.Count; i++)
             { 
                 _cubePositions.Add(_cubes[i].transform.position);
+                Debug.Log(_cubePositions[i]);
             }
             for (int k = _obstacleSize; k < _cubes.Count; k++)
             {
@@ -150,7 +162,8 @@ namespace Player_Scripts
         {
             if (other.CompareTag("CubeDestroy") && PlayerCollider.DestroyCubeCalled)
             {
-                WaitToFall(other.gameObject.GetComponent<CubeToDestroy>().obstacleSize);
+                cubeToDestroyScripts = other.gameObject.GetComponentsInChildren<CubeToDestroy>();
+                WaitToFall(cubeToDestroyScripts[0].obstacleSize);
             }
         }
         
