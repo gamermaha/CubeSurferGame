@@ -76,8 +76,8 @@ namespace Controllers
 
             if (!_onEnd)
             {
-                //the following line works for z < 0, baqi aage jaa kar it starts going backwards. 
-                transform.position += new Vector3(_playerPositions[_wayPtIncrement].position.x, 0f, -1 * _playerPositions[_wayPtIncrement].position.z) * (_moveForce * _mySpeed * Time.deltaTime);
+                //the following line works for z < 0, baqi aage jaa kar it starts going backwards. Perhaps use abs of z value.
+                transform.position += new Vector3(_playerPositions[_wayPtIncrement].position.x, 0f, Math.Abs(_playerPositions[_wayPtIncrement].position.z)) * (0.1f);
 
                 if ((this.transform.position.x <= _playerPositions[_wayPtIncrement].position.x + _halfPathWidth - _cubeSize/2) &&
                     (this.transform.position.x >= _playerPositions[_wayPtIncrement].position.x - _halfPathWidth + _cubeSize/2))
@@ -110,7 +110,7 @@ namespace Controllers
             if (_playerPositions != null)
             {
                 
-                if (_wayPtIncrement < _playerPositions.Count  )
+                if (_wayPtIncrement < _playerPositions.Count)
                 {
                     if (Vector3.Distance(transform.position, _playerPositions[_wayPtIncrement + 1].position) <=
                         _thresholdInWayPt)
