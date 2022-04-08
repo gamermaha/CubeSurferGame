@@ -160,8 +160,10 @@ namespace Player_Scripts
         }
         private void OnTriggerExit(Collider other)
         {
+            Debug.Log("destroy called" + PlayerCollider.DestroyCubeCalled);
             if (other.CompareTag("CubeDestroy") && PlayerCollider.DestroyCubeCalled)
             {
+                Debug.Log("i am in trigger exit");
                 cubeToDestroyScripts = other.gameObject.GetComponentsInChildren<CubeToDestroy>();
                 WaitToFall(cubeToDestroyScripts[0].obstacleSize);
             }

@@ -29,6 +29,10 @@ namespace Controllers
         private double _cubeSize;
         private Animator _anim;
         public static bool startMoving = false;
+        private Vector3 _rotation;
+        private float _movementX;
+        private float _movementY;
+        private float _movementZ;
 
         private string upDown = "Up"; 
         private bool _onEnd;
@@ -40,7 +44,7 @@ namespace Controllers
             _anim = player.GetComponentInChildren<Animator>();
             //Debug.Log(_anim.name);
             _prevMousePos = new Vector3(0f, 0f, 0f);
-            _thresholdInWayPt = 3f;
+            _thresholdInWayPt = 0.5f;
             _halfPathWidth = 3f;
         }
         private void Start()
@@ -75,67 +79,83 @@ namespace Controllers
             
 
             if (!_onEnd)
-            {
-                //the following line works for z < 0, baqi aage jaa kar it starts going backwards. Perhaps use abs of z value.
-                transform.position += new Vector3(_playerPositions[_wayPtIncrement].position.x, 0f, Math.Abs(_playerPositions[_wayPtIncrement].position.z)) * (0.1f);
+            {  
+                float distance = Vector3.Distance(_playerPositions[_wayPtIncrement].position, transform.position);
+                transform.position =
+                    Vector3.MoveTowards(transform.position, _playerPositions[_wayPtIncrement].position, _mySpeed * Time.deltaTime);
 
-                if ((this.transform.position.x <= _playerPositions[_wayPtIncrement].position.x + _halfPathWidth - _cubeSize/2) &&
-                    (this.transform.position.x >= _playerPositions[_wayPtIncrement].position.x - _halfPathWidth + _cubeSize/2))
-                    OnCenter();
+                var rotation = Quaternion.LookRotation(_playerPositions[_wayPtIncrement].position - transform.position);
+                transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 5f);
+
                 
-                else if (this.transform.position.x > (_playerPositions[_wayPtIncrement].position.x + _halfPathWidth - _cubeSize/2))
-                    OnRightEdge();
+                if (_playerPositions != null)
+                {
+                    if (distance <= _thresholdInWayPt)
+                        _wayPtIncrement++;
+
+                    if (_wayPtIncrement >= _playerPositions.Count)
+                        StopPlayer();
+                }
                 
-                else if (this.transform.position.x < (_playerPositions[_wayPtIncrement].position.x - _halfPathWidth + _cubeSize/2))
-                    OnLeftEdge();
+                OnCenter();
+                
+                // if ((this.transform.GetChild(0).localPosition.x <= _playerPositions[_wayPtIncrement].position.x + _halfPathWidth - _cubeSize/2) &&
+                //     (this.transform.position.x >= _playerPositions[_wayPtIncrement].position.x - _halfPathWidth + _cubeSize/2))
+                //     OnCenter();
+                //
+                // else if (this.transform.GetChild(0).localPosition.x > (_playerPositions[_wayPtIncrement].position.x + _halfPathWidth - _cubeSize/2))
+                //     OnRightEdge();
+                //
+                // else if (this.transform.GetChild(0).localPosition.x < (_playerPositions[_wayPtIncrement].position.x - _halfPathWidth + _cubeSize/2))
+                //     OnLeftEdge();
                 
                 _prevPlayerPos = transform.position;
-
-                if (Vector3.Distance(new Vector3(0f, 0f, transform.position.z), new Vector3(0f, 0f, _playerPositions[_playerPositions.Count-1].position.z)) > 0)
-                    _lengthCovered = Vector3.Distance(new Vector3(0f, 0f, transform.position.z), new Vector3(0f, 0f, _playerPositions[_playerPositions.Count-1].position.z));
+                
+                
+                // confirm jannati
+                if (Vector3.Distance(transform.position, _playerPositions[_playerPositions.Count-1].position) > 0)
+                    _lengthCovered = Vector3.Distance(transform.position, _playerPositions[_playerPositions.Count-1].position);
                 else
                 {
                     _lengthCovered = _totalLength;
                 }
                 lengthCoveredPercentage =  _lengthCovered/_totalLength;
-
-                
-
+                // confirm jannati
             }
             else
             {
                 StopPlayer();
             }
 
-            if (_playerPositions != null)
-            {
-                
-                if (_wayPtIncrement < _playerPositions.Count)
-                {
-                    if (Vector3.Distance(transform.position, _playerPositions[_wayPtIncrement + 1].position) <=
-                        _thresholdInWayPt)
-                    {
-                        _wayPtIncrement++;
-                        var yRot = _playerPositions[_wayPtIncrement].eulerAngles.y; 
-                        Debug.Log(yRot);
-                        transform.Rotate(transform.eulerAngles.x, yRot, transform.eulerAngles.z);
-                        
-                    }
-                }
-
-                else
-                {
-                    if (Vector3.Distance(transform.position, _playerPositions[_wayPtIncrement].position) <=
-                        _thresholdInWayPt)
-                    {
-                        StopPlayer();
-                    }
-                }
-            }
+            // if (_playerPositions != null)
+            // {
+            //     
+            //     if (_wayPtIncrement < _playerPositions.Count)
+            //     {
+            //         if (Vector3.Distance(transform.position, _playerPositions[_wayPtIncrement + 1].position) <=
+            //             _thresholdInWayPt)
+            //         {
+            //             _wayPtIncrement++;
+            //         }
+            //     }
+            //
+            //     else
+            //     {
+            //         if (Vector3.Distance(transform.position, _playerPositions[_wayPtIncrement].position) <=
+            //             _thresholdInWayPt)
+            //         {
+            //             StopPlayer();
+            //         }
+            //     }
+            // }
         }
 
         
         //// Helper Functions
+        
+        
+        
+        
         public void OnCenter()
         {
             if (Input.GetMouseButton(0) && (Input.mousePosition.x - _prevMousePos.x) > 0)
@@ -164,6 +184,7 @@ namespace Controllers
                 MoveRight();
             }
         }
+        
 
         public void MoveUp(int up)
         {
@@ -173,6 +194,7 @@ namespace Controllers
 
         public void MoveDown(int down)
         {
+            Debug.Log("I am in down function.");
             //_anim.SetTrigger("jump");
             player.transform.Translate(0f, -1 * (float) _cubeSize * down, 0f);
         }
@@ -180,14 +202,17 @@ namespace Controllers
         {
             // Debug.Log("Moving to the right");
             _prevMousePos = Input.mousePosition;
-            transform.Translate(0.1f, 0f, 0f);
+            //transform.GetChild(0).Translate(0.1f, 0f, 0f);
+            var childLocalPos = transform.GetChild(0).localPosition;
+            transform.GetChild(0).localPosition = new Vector3(Mathf.Clamp(transform.GetChild(0).localPosition.x + 0.1f,-3, 3), 0f, 0f);
         }
         
         private void MoveLeft()
         {
             // Debug.Log("Moving to the left");
             _prevMousePos = Input.mousePosition;
-            transform.Translate(-0.1f, 0f, 0f);
+            //transform.GetChild(0).Translate(-0.1f, 0f, 0f);
+            transform.GetChild(0).localPosition = new Vector3(Mathf.Clamp(transform.GetChild(0).localPosition.x - 0.1f, -3, 3), 0f, 0f);
         }
         
         
@@ -203,11 +228,11 @@ namespace Controllers
 
         public void PlayerPositions(List<Transform> playerPositions)
         {
-            Debug.Log("i am in playerpositions func");
+            
             _playerPositions = playerPositions;
             _totalLength = Vector3.Distance(_playerPositions[0].position,
                 _playerPositions[_playerPositions.Count - 1].position);
-            Debug.Log("Total Length "+_totalLength);
+            //Debug.Log("Total Length "+_totalLength);
         }
     } 
 }

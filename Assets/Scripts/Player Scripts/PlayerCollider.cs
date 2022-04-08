@@ -21,7 +21,7 @@ namespace Player_Scripts
 
         private void OnTriggerEnter(Collider other)
         {
-            Debug.Log("@@@@@@@@@@@@@@@ End Level " + other.gameObject.name + ", " + other.gameObject.tag);
+            //Debug.Log("@@@@@@@@@@@@@@@ End Level " + other.gameObject.name + ", " + other.gameObject.tag);
             if (other.gameObject.CompareTag("Cube"))
             {
                 Debug.Log("I have encountered addition");
@@ -31,6 +31,7 @@ namespace Player_Scripts
             if (other.gameObject.CompareTag("CubeDestroy"))
             {
                 DestroyCubeCalled = true;
+                Debug.Log("I am in Cube Destroy " + DestroyCubeCalled);
                 //Debug.Log("I have encountered: " + other.gameObject.GetComponentsInChildren<CubeToDestroy>(). + "cubes to destroy");
                 cubeToDestroyScripts = other.gameObject.GetComponentsInChildren<CubeToDestroy>();
                 //Debug.Log(cubeToDestroyScripts[0].obstacleSize);
