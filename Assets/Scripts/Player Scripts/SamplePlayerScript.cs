@@ -10,7 +10,7 @@ namespace Player_Scripts
         
         [SerializeField] private List<Transform> wayPoints;
         
-        private float _mySpeed = 0.1f;
+        private float _mySpeed = 0.5f;
         private float _moveForce = 10f;
         private int _x = 1;
         private int _wayPtIncrement = 0;
@@ -23,52 +23,54 @@ namespace Player_Scripts
 
         void Update()
         {
+            
             StartCoroutine(PlayerMovement());
         }
 
         IEnumerator PlayerMovement()
         {
-             
-            while (_wayPtIncrement + 1 < wayPoints.Count)
+            while (_wayPtIncrement +1 < wayPoints.Count)
             {
-                if (Math.Abs(wayPoints[_wayPtIncrement].position.x - wayPoints[_wayPtIncrement + 1].position.x) != 0)
+                if (Math.Abs(transform.position.x - wayPoints[_wayPtIncrement + 1].position.x) != 0f)
                 {
                     Debug.Log("I am in x change");
                     _movementX = wayPoints[_wayPtIncrement + 1].position.x;
                     _movementY = transform.position.y;
                     _movementZ = transform.position.z;
                 }
-                else if (Math.Abs(wayPoints[_wayPtIncrement].position.z - wayPoints[_wayPtIncrement + 1].position.z) != 0)
+                else if (Math.Abs(transform.position.z - wayPoints[_wayPtIncrement + 1].position.z) != 0f)
                 {
                     Debug.Log("I am in z change");
                     _movementX = transform.position.x;
                     _movementY = transform.position.y;
                     _movementZ = wayPoints[_wayPtIncrement + 1].position.z;
                 }
-                else if (Math.Abs(wayPoints[_wayPtIncrement].position.x - wayPoints[_wayPtIncrement + 1].position.x) !=
-                         0 && Math.Abs(
-                             wayPoints[_wayPtIncrement].position.z - wayPoints[_wayPtIncrement + 1].position.z) != 0)
+                else if (Math.Abs(transform.position.z - wayPoints[_wayPtIncrement + 1].position.z) != 0f && Math.Abs(transform.position.x - wayPoints[_wayPtIncrement + 1].position.x) != 0f)                                                          
                 {
                     Debug.Log("I am in both change");
                     _movementX = wayPoints[_wayPtIncrement + 1].position.x;
-                    _movementY = transform.position.y;
+                    _movementY = transform.position.y;  
                     _movementZ = wayPoints[_wayPtIncrement + 1].position.z;
                 }
                 
-                transform.position = new Vector3(_movementX, _movementY, _movementZ);
-                yield return new WaitForSeconds(1);
-
-                if (Vector3.Distance(transform.position, wayPoints[_wayPtIncrement + 1].position) <= _thresholdInWayPt)
+                transform.position = new Vector3(_movementX, _movementY, _movementZ); 
+                
+                yield return new WaitForSeconds(1f);
+                if (_wayPtIncrement+1 < wayPoints.Count) 
                 {
-                    Debug.Log("I am in rot");
+                    if (Vector3.Distance(transform.position, wayPoints[_wayPtIncrement + 1].position) <= _thresholdInWayPt)
+                    {
                     
-                    _rotation = new Vector3(transform.eulerAngles.x, wayPoints[_wayPtIncrement + 1].eulerAngles.y, transform.eulerAngles.z);
+                        _rotation = new Vector3(transform.eulerAngles.x, wayPoints[_wayPtIncrement + 1].eulerAngles.y, transform.eulerAngles.z);
  
-                    transform.rotation = Quaternion.Euler(_rotation);
+                        transform.rotation = Quaternion.Euler(_rotation);
+                        _wayPtIncrement++;
+                    }
+                    
                 }
-                _wayPtIncrement++;
                 
             }
+            // transform.position += new Vector3(_movementX, _movementY, _movementZ) * (_moveForce * _mySpeed * Time.deltaTime);
         }
         
     }
