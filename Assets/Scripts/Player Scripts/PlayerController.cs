@@ -17,7 +17,7 @@ namespace Player_Scripts
         //[SerializeField] private GameObject destroyedCubeCollector;
         //[SerializeField] private PlayerCollider playerCollider;
 
-        [SerializeField] private GamePlayUIController uiController;
+        //[SerializeField] private GamePlayUIController uiController;
         //[SerializeField] private Animator anim;
 
         private InputClass _inputManager;
@@ -147,26 +147,44 @@ namespace Player_Scripts
             
         }
         
-        private void OnTriggerEnter(Collider other)
+        // private void OnTriggerEnter(Collider other)
+        // {
+        //     //Debug.Log("OnTriggerEnter " + other.gameObject.tag);
+        //     if (other.CompareTag("EndLevel"))
+        //     {
+        //         endIsReached = true;
+        //         Debug.Log("End level is reached");
+        //         _inputManager.StopPlayer();
+        //         
+        //     }
+        // }
+        // private void OnTriggerExit(Collider other)
+        // {
+        //     Debug.Log("destroy called" + PlayerCollider.DestroyCubeCalled);
+        //     if (other.CompareTag("CubeDestroy") && PlayerCollider.DestroyCubeCalled)
+        //     {
+        //         Debug.Log("i am in trigger exit");
+        //         cubeToDestroyScripts = other.gameObject.GetComponentsInChildren<CubeToDestroy>();
+        //         WaitToFall(cubeToDestroyScripts[0].obstacleSize);
+        //     }
+        // }
+
+        public void PullTrigger(Collider other)
         {
-            //Debug.Log("OnTriggerEnter " + other.gameObject.tag);
-            if (other.CompareTag("EndLevel"))
-            {
-                endIsReached = true;
-                Debug.Log("End level is reached");
-                _inputManager.StopPlayer();
-                
-            }
-        }
-        private void OnTriggerExit(Collider other)
-        {
-            Debug.Log("destroy called" + PlayerCollider.DestroyCubeCalled);
+            //Debug.Log("destroy called" + PlayerCollider.DestroyCubeCalled);
             if (other.CompareTag("CubeDestroy") && PlayerCollider.DestroyCubeCalled)
             {
                 Debug.Log("i am in trigger exit");
                 cubeToDestroyScripts = other.gameObject.GetComponentsInChildren<CubeToDestroy>();
                 WaitToFall(cubeToDestroyScripts[0].obstacleSize);
             }
+            if (other.CompareTag("EndLevel"))
+            {
+                endIsReached = true;
+                Debug.Log("End level is reached");
+                _inputManager.StopPlayer();
+            }
+            
         }
         
     }

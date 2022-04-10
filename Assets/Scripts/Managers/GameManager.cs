@@ -41,18 +41,12 @@ namespace Managers
             if (Instance == null)
             {
                 Instance = this;
-                //DontDestroyOnLoad(gameObject);
-                //DontDestroyOnLoad(uIController);
-                //DontDestroyOnLoad(level01);
-                
-                
             }
             else
             {
                 Destroy(gameObject);
             }
             slider.value = 0;
-
         }
         private void OnEnable()
         {
@@ -61,8 +55,7 @@ namespace Managers
         void Start()
         {
             _pathLength = MetaData.Instance.scriptableInstance.pathLength;
-            //Init();
-            
+            slider.value = 0;
         }
 
         private void Update()

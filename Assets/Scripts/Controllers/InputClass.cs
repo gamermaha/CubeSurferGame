@@ -36,6 +36,7 @@ namespace Controllers
 
         private string upDown = "Up"; 
         private bool _onEnd;
+        private bool _wayPtFinished;
 
         private InputClass Instance;
         
@@ -78,7 +79,7 @@ namespace Controllers
                 return;
             
 
-            if (!_onEnd)
+            if (!_wayPtFinished)
             {  
                 float distance = Vector3.Distance(_playerPositions[_wayPtIncrement].position, transform.position);
                 transform.position =
@@ -94,7 +95,12 @@ namespace Controllers
                         _wayPtIncrement++;
 
                     if (_wayPtIncrement >= _playerPositions.Count)
-                        StopPlayer();
+                    {
+                        //StopPlayer();
+                        //transform.position += new Vector3(0f, 0f, 1f);
+                        _wayPtFinished = true;
+                    }
+                        
                 }
                 
                 OnCenter();
@@ -109,7 +115,7 @@ namespace Controllers
                 // else if (this.transform.GetChild(0).localPosition.x < (_playerPositions[_wayPtIncrement].position.x - _halfPathWidth + _cubeSize/2))
                 //     OnLeftEdge();
                 
-                _prevPlayerPos = transform.position;
+                //_prevPlayerPos = transform.position;
                 
                 
                 // confirm jannati
@@ -124,7 +130,7 @@ namespace Controllers
             }
             else
             {
-                StopPlayer();
+                transform.Translate(0f, 0f, 0.5f);
             }
 
             // if (_playerPositions != null)
@@ -221,7 +227,8 @@ namespace Controllers
         {
             _onEnd = true;
             //gameEndButton.SetActive(true);
-            transform.position = _prevPlayerPos;
+            transform.position += new Vector3(0f, 0f, 0f);
+            startMoving = false;
             //GameplayUIController.EndGame();
         }
 

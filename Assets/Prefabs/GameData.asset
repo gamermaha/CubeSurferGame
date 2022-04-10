@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 930e63339ffcee74aaaaaac8895952a2, type: 3}
   m_Name: GameData
   m_EditorClassIdentifier: 
-  playerSpeed: 5
+  playerSpeed: 2
   playerForce: 5
   pathLength: 20
   distanceInWeightPoints: 2

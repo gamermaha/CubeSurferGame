@@ -32,7 +32,7 @@ namespace Managers
             gameOverView.SetActive(false);
             gameEndView.SetActive(false);
             gameStartView.SetActive(true);
-            SceneManager.LoadScene("Level 02");
+            SceneManager.LoadScene("Level 03");
             
             
             
