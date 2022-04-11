@@ -13,7 +13,8 @@ namespace Managers
         public float pathLength;
         public float distanceInWeightPoints;
 
-        [Header("Level 01 Dynamics")] 
+        [Header("Level Dynamics")] 
+        public int noOflevels;
         public double cubeLength;
 
     }

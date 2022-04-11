@@ -43,8 +43,7 @@ namespace Player_Scripts
         private double _cubeSize;
 
         private float _timeToDrop;
-        public bool endIsReached;
-        public bool gameIsOver;
+        
 
         //private Animator _anim;
 
@@ -116,7 +115,7 @@ namespace Player_Scripts
             }
             else
             {
-                gameIsOver = true;
+                GameManager.Instance.GameOverCall();
                 _inputManager.StopPlayer();
             }
             
@@ -176,11 +175,16 @@ namespace Player_Scripts
             {
                 Debug.Log("i am in trigger exit");
                 cubeToDestroyScripts = other.gameObject.GetComponentsInChildren<CubeToDestroy>();
-                WaitToFall(cubeToDestroyScripts[0].obstacleSize);
+                if (!_inputManager.wayPtFinished)
+                {
+                    WaitToFall(cubeToDestroyScripts[0].obstacleSize);
+                }
             }
             if (other.CompareTag("EndLevel"))
             {
-                endIsReached = true;
+                DestroyCube(other.gameObject, 1f);
+                //_inputManager.MoveUp(1);
+                GameManager.Instance.EndGameCall();
                 Debug.Log("End level is reached");
                 _inputManager.StopPlayer();
             }

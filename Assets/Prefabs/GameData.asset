@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 930e63339ffcee74aaaaaac8895952a2, type: 3}
   m_Name: GameData
   m_EditorClassIdentifier: 
-  playerSpeed: 2
+  playerSpeed: 5
   playerForce: 5
   pathLength: 20
   distanceInWeightPoints: 2
+  noOflevels: 3
   cubeLength: 1

@@ -36,7 +36,7 @@ namespace Controllers
 
         private string upDown = "Up"; 
         private bool _onEnd;
-        private bool _wayPtFinished;
+        public bool wayPtFinished;
 
         private InputClass Instance;
         
@@ -79,7 +79,7 @@ namespace Controllers
                 return;
             
 
-            if (!_wayPtFinished)
+            if (!wayPtFinished)
             {  
                 float distance = Vector3.Distance(_playerPositions[_wayPtIncrement].position, transform.position);
                 transform.position =
@@ -98,7 +98,7 @@ namespace Controllers
                     {
                         //StopPlayer();
                         //transform.position += new Vector3(0f, 0f, 1f);
-                        _wayPtFinished = true;
+                        wayPtFinished = true;
                     }
                         
                 }
@@ -128,9 +128,10 @@ namespace Controllers
                 lengthCoveredPercentage =  _lengthCovered/_totalLength;
                 // confirm jannati
             }
-            else
+            else if (wayPtFinished && _onEnd == false)
             {
-                transform.Translate(0f, 0f, 0.5f);
+                transform.Translate(0f, 0f, 0.025f);
+                Debug.Log("No more way points");
             }
 
             // if (_playerPositions != null)

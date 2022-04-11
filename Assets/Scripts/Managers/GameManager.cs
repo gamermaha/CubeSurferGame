@@ -14,6 +14,7 @@ namespace Managers
     {
         
         public static GameManager Instance;
+        public int levelNumber;
         
         [Header(" GameObjects Imported")]
         [SerializeField] private PlayerController player;
@@ -33,7 +34,8 @@ namespace Managers
         private float _playerYValue;
         private float _playerZValue;
         
-        private int x = 1;
+        
+        private int _totalLevels;
 
        
         private void Awake()
@@ -41,12 +43,12 @@ namespace Managers
             if (Instance == null)
             {
                 Instance = this;
+                DontDestroyOnLoad(this);
             }
             else
             {
                 Destroy(gameObject);
             }
-            slider.value = 0;
         }
         private void OnEnable()
         {
@@ -54,18 +56,24 @@ namespace Managers
         }
         void Start()
         {
+            Debug.Log($"");
             _pathLength = MetaData.Instance.scriptableInstance.pathLength;
-            slider.value = 0;
+            _totalLevels = MetaData.Instance.scriptableInstance.noOflevels;
+            uIController = FindObjectOfType<GameplayUIController>();
+            levelNumber = 1;
+            SceneManager.LoadScene("Level 01");
+            //slider.value = 0;
+            
         }
 
         private void Update()
         {
-            if (_player.endIsReached)
-                uIController.EndGame();
-            if (_player.gameIsOver)
-                uIController.GameOver();
+            // if (_player.endIsReached)
+            //     uIController.EndGame();
+            // if (_player.gameIsOver)
+            //     uIController.GameOver();
             
-            slider.value = _inputManager.lengthCoveredPercentage;
+            //slider.value = _inputManager.lengthCoveredPercentage;
             //Debug.Log(slider.value);
         }
         private void OnDisable()
@@ -75,24 +83,28 @@ namespace Managers
 
         private void OnLevelFinishLoading(Scene scene, LoadSceneMode mode)
         {
-            if (scene.name == "Level 03")
+            Debug.Log(scene.name);
+            Debug.Log("Level 0" + levelNumber);
+            
+            if (scene.name == "Level 0" + levelNumber)
             {
                 Init();
             }
+            
         }
 
-        private void PlayerSetup()
-        {
-            //// Dynamic WayPoint/Path Implementation
-            //_playerXValue = _path.transform.position.x - _pathLength/2 + player.transform.localScale.x;
-            //_playerYValue = _path.transform.position.y + player.transform.localScale.y;
-            //_playerZValue = _path.transform.position.z + player.transform.localScale.z;
-            
-            _playerXValue = LevelDecider().transform.position.x;
-            _playerYValue = LevelDecider().transform.position.y + LevelDecider().transform.localScale.y/2 + player.transform.localScale.y/2 + 1.25f;
-            _playerZValue = LevelDecider().transform.position.z - 19f + player.transform.localScale.z/2;
-            //Debug.Log(_playerYValue);
-        }
+        // private void PlayerSetup()
+        // {
+        //     //// Dynamic WayPoint/Path Implementation
+        //     //_playerXValue = _path.transform.position.x - _pathLength/2 + player.transform.localScale.x;
+        //     //_playerYValue = _path.transform.position.y + player.transform.localScale.y;
+        //     //_playerZValue = _path.transform.position.z + player.transform.localScale.z;
+        //     
+        //     _playerXValue = LevelDecider().transform.position.x;
+        //     _playerYValue = LevelDecider().transform.position.y + LevelDecider().transform.localScale.y/2 + player.transform.localScale.y/2 + 1.25f;
+        //     _playerZValue = LevelDecider().transform.position.z - 19f + player.transform.localScale.z/2;
+        //     //Debug.Log(_playerYValue);
+        // }
         private void Init()
         {
             //// Dynamic WayPoint/Path Implementation
@@ -101,9 +113,9 @@ namespace Managers
             _player = Instantiate(player);
             //LevelDecider().StartPosition.position, Quaternion.identity);
             _inputManager = _player.GetComponent<InputClass>();
-            
-            _inputManager.PlayerPositions(level01.GiveWayPoints());
-            _player.transform.position = LevelDecider().StartPosition.position;
+            _levelTBD = LevelDecider();
+            _inputManager.PlayerPositions(_levelTBD.GiveWayPoints());
+            _player.transform.position = _levelTBD.StartPosition.position;
             //Debug.Log(_player.transform.position);
             
 
@@ -111,8 +123,22 @@ namespace Managers
 
         private Level LevelDecider()
         {
-            _levelTBD = level01;
-            return _levelTBD;
+            return FindObjectOfType<Level>();
+        }
+
+        public void GameOverCall()
+        {
+            uIController.GameOver(); 
+        }
+
+        public void EndGameCall()
+        {
+            uIController.EndGame();
+        }
+
+        public void LoadNewLevel()
+        {
+            SceneManager.LoadScene("Level 0" + levelNumber); 
         }
     }
     
