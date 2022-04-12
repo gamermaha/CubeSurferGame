@@ -23,7 +23,6 @@ namespace Player_Scripts
         {
             if (other.gameObject.CompareTag("Cube"))
             {
-                Debug.Log("I have encountered addition");
                 player.AddCube(other.gameObject);
                 transform.localScale += new Vector3(0f, (float) _cubeSize, 0f);
             }

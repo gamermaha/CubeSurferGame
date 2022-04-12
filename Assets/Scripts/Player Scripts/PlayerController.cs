@@ -11,15 +11,9 @@ namespace Player_Scripts
 {
     public class PlayerController : MonoBehaviour
     {
-        //public PlayerController Instance;
-        //[SerializeField] private GameObject player;
+        
         [SerializeField] private GameObject cubeCollector;
-        //[SerializeField] private GameObject destroyedCubeCollector;
-        //[SerializeField] private PlayerCollider playerCollider;
-
-        //[SerializeField] private GamePlayUIController uiController;
-        //[SerializeField] private Animator anim;
-
+        
         private InputClass _inputManager;
         
         private List<Transform> _playerPositions;
@@ -35,8 +29,6 @@ namespace Player_Scripts
         private Vector3 _playerPosAtCol;
         
         private int _wayPtIncrement;
-        private float _mySpeed;
-        private float _moveForce;
         private float _xValue;
         private float _yValue;
         private float _zValue;
@@ -44,65 +36,38 @@ namespace Player_Scripts
 
         private float _timeToDrop;
         
-
-        //private Animator _anim;
-
-        //private string upDown = "Up";
-        //private float _obstacleNumber;
-        
         void Awake()
         {
             _inputManager = GetComponent<InputClass>();
             _cubes = new List<GameObject>();
             _cubePositions = new List<Vector3>();
-            //anim = player.GetComponentInChildren<Animator>();
         }
         private void Start()
         {
-            if (MetaData.Instance == null)
+            if (MetaData.Instance != null)
             {
-                _mySpeed = 0;
-                _moveForce = 0;
-            }
-            else
-            {
-                _mySpeed = MetaData.Instance.scriptableInstance.playerSpeed;
-                _moveForce = MetaData.Instance.scriptableInstance.playerForce;
                 _cubeSize = MetaData.Instance.scriptableInstance.cubeLength;
             }
-            
-            
             _cubePos = Vector3.up * (float)_cubeSize/4;
             _cubes.Add(cubeCollector.transform.GetChild(0).gameObject);
             _cubes[0].gameObject.tag = "Cube";
 
         }
-
-        private void Update()
-        {
-            //Debug.Log("Cubes count is: " + _cubes.Count);
-        }
-
+        
         public void AddCube(GameObject collided)
         {
             _inputManager.MoveUp(1);
             _cubes.Add(collided);
-            Debug.Log("I have encountered a cube to be added");
             collided.transform.SetParent(cubeCollector.transform, false);
             collided.transform.localPosition = _cubePos;
             _cubePos += Vector3.up * (float) _cubeSize;
             collided.gameObject.tag = "CubeAdded";
-            //anim.SetBool(upDown, false);
-            
         }
 
         public void DestroyCube(GameObject collided, float obstacleSize)
-        {
-            
-            Debug.Log("I have encountered a cube to be destroyed");
+        { 
             int _obstacleSize = (int) obstacleSize;
-            //_playerPosAtCol = transform.position;
-            
+
             if (_cubes.Count > obstacleSize)
             {
                 for (int o = 0; o < _obstacleSize; o++)
@@ -120,7 +85,6 @@ namespace Player_Scripts
             }
             
         }
-
         private void WaitToFall(float obstacleSize)
         {
             int _obstacleSize = (int) obstacleSize;
@@ -146,31 +110,8 @@ namespace Player_Scripts
             
         }
         
-        // private void OnTriggerEnter(Collider other)
-        // {
-        //     //Debug.Log("OnTriggerEnter " + other.gameObject.tag);
-        //     if (other.CompareTag("EndLevel"))
-        //     {
-        //         endIsReached = true;
-        //         Debug.Log("End level is reached");
-        //         _inputManager.StopPlayer();
-        //         
-        //     }
-        // }
-        // private void OnTriggerExit(Collider other)
-        // {
-        //     Debug.Log("destroy called" + PlayerCollider.DestroyCubeCalled);
-        //     if (other.CompareTag("CubeDestroy") && PlayerCollider.DestroyCubeCalled)
-        //     {
-        //         Debug.Log("i am in trigger exit");
-        //         cubeToDestroyScripts = other.gameObject.GetComponentsInChildren<CubeToDestroy>();
-        //         WaitToFall(cubeToDestroyScripts[0].obstacleSize);
-        //     }
-        // }
-
         public void PullTrigger(Collider other)
         {
-            //Debug.Log("destroy called" + PlayerCollider.DestroyCubeCalled);
             if (other.CompareTag("CubeDestroy") && PlayerCollider.DestroyCubeCalled)
             {
                 Debug.Log("i am in trigger exit");
