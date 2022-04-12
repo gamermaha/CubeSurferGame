@@ -58,7 +58,7 @@ namespace Managers
             gameEndView.SetActive(false);
             gameStartView.SetActive(true);
             loadSameLevel = true;
-            GameManager.Instance.LoadNewLevel();
+            GameManager.Instance.LoadNewLevel("Level 0" + GameManager.Instance.levelNumber);
 
         }
 
@@ -71,13 +71,22 @@ namespace Managers
                 InputClass.startMoving = false;
                 gameEndView.SetActive(false);
                 gameStartView.SetActive(true);
-                GameManager.Instance.LoadNewLevel();
+                GameManager.Instance.LoadNewLevel("Level 0" + GameManager.Instance.levelNumber);
                 //loadNextLevel = true;
                 //SceneManager.LoadScene("Level 0" + levelNumber);
             }
             else
             {
                 GameCompleted();
+            }
+        }
+
+        public void LoadGame()
+        {
+            if (PlayerPrefs.HasKey("LevelSaved"))
+            {
+                string levelToLoad = PlayerPrefs.GetString("LevelSaved");
+                GameManager.Instance.LoadNewLevel(levelToLoad);
             }
         }
 

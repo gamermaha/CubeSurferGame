@@ -61,7 +61,7 @@ namespace Managers
             _totalLevels = MetaData.Instance.scriptableInstance.noOflevels;
             uIController = FindObjectOfType<GameplayUIController>();
             levelNumber = 1;
-            SceneManager.LoadScene("Level 01");
+            LoadNewLevel("Level 01");
             //slider.value = 0;
             
         }
@@ -136,9 +136,12 @@ namespace Managers
             uIController.EndGame();
         }
 
-        public void LoadNewLevel()
+        public void LoadNewLevel(string levelName)
         {
-            SceneManager.LoadScene("Level 0" + levelNumber); 
+            SceneManager.LoadScene(levelName); 
+            string activeScene = SceneManager.GetActiveScene().name;
+            PlayerPrefs.SetString("LevelSaved", activeScene);
+            Debug.Log(activeScene);
         }
     }
     
