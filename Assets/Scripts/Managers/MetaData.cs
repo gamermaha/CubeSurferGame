@@ -12,7 +12,6 @@ namespace Managers
             if (Instance == null)
             {
                 Instance = this;
-                Debug.Log("I was null but now my value is: "+ Instance);
                 DontDestroyOnLoad(this);
             }
             else 

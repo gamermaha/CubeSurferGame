@@ -13,10 +13,8 @@ namespace Managers
         public GameObject gameEndView;
         public GameObject gameOverView;
         public GameObject gameCompletedView;
-        //public int levelNumber = 1;
+
         private int _totalLevels;
-        public bool loadNextLevel;
-        public bool loadSameLevel;
         private GameplayUIController Instance;
 
         private void Awake()
@@ -57,7 +55,6 @@ namespace Managers
             gameOverView.SetActive(false);
             gameEndView.SetActive(false);
             gameStartView.SetActive(true);
-            loadSameLevel = true;
             GameManager.Instance.LoadNewLevel("Level 0" + GameManager.Instance.levelNumber);
 
         }
@@ -66,21 +63,17 @@ namespace Managers
         {
             if (GameManager.Instance.levelNumber < _totalLevels)
             {
-                //levelNumber++;
                 GameManager.Instance.levelNumber++;
                 InputClass.startMoving = false;
                 gameEndView.SetActive(false);
                 gameStartView.SetActive(true);
                 GameManager.Instance.LoadNewLevel("Level 0" + GameManager.Instance.levelNumber);
-                //loadNextLevel = true;
-                //SceneManager.LoadScene("Level 0" + levelNumber);
             }
             else
             {
                 GameCompleted();
             }
         }
-
         public void LoadGame()
         {
             if (PlayerPrefs.HasKey("LevelSaved"))
