@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Net.Mime;
 using Controllers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 namespace Managers
 {
@@ -13,9 +15,11 @@ namespace Managers
         public GameObject gameEndView;
         public GameObject gameOverView;
         public GameObject gameCompletedView;
+        public Text diamondCountDisplay; 
+        private int _diamondCount; 
 
         private int _totalLevels;
-        private GameplayUIController Instance;
+        public static GameplayUIController Instance;
 
         private void Awake()
         {
@@ -88,6 +92,13 @@ namespace Managers
             gameCompletedView.SetActive(true);
             gameEndView.SetActive(false);
             
+        }
+
+        public void DiamondCountIncrement()
+        {
+            Debug.Log("I am in diamond display");
+            _diamondCount++;
+            diamondCountDisplay.text = "" + _diamondCount;
         }
 
 

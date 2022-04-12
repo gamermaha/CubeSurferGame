@@ -33,7 +33,11 @@ namespace Player_Scripts
                 player.DestroyCube(other.gameObject, cubeToDestroyScripts[0].obstacleSize);
                 transform.localScale -= new Vector3(0f, (float) _cubeSize, 0f);
             }
-            
+
+            if (other.gameObject.CompareTag("Diamond"))
+            {
+                player.AddDiamond(other.gameObject);
+            }
         }
     }
 }

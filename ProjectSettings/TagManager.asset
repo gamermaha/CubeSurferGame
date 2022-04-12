@@ -10,6 +10,8 @@ TagManager:
   - CubeDestroy
   - CubeDestroyed
   - EndLevel
+  - Diamond
+  - DiamondAdded
   layers:
   - Default
   - TransparentFX

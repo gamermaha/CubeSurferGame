@@ -53,7 +53,14 @@ namespace Player_Scripts
             _cubes[0].gameObject.tag = "Cube";
 
         }
-        
+
+        public void AddDiamond(GameObject collided)
+        {
+            collided.transform.SetParent(cubeCollector.transform, false);
+            collided.gameObject.tag = "DiamondAdded";
+            collided.SetActive(false);
+            GameplayUIController.Instance.DiamondCountIncrement();
+        }
         public void AddCube(GameObject collided)
         {
             _inputManager.MoveUp(1);
@@ -85,6 +92,25 @@ namespace Player_Scripts
             }
             
         }
+        public void PullTrigger(Collider other)
+        {
+            if (other.CompareTag("CubeDestroy") && PlayerCollider.DestroyCubeCalled)
+            {
+                cubeToDestroyScripts = other.gameObject.GetComponentsInChildren<CubeToDestroy>();
+                if (!_inputManager.wayPtFinished)
+                {
+                    WaitToFall(cubeToDestroyScripts[0].obstacleSize);
+                }
+            }
+            if (other.CompareTag("EndLevel"))
+            {
+                DestroyCube(other.gameObject, 1f);
+                GameManager.Instance.EndGameCall();
+                Debug.Log("End level is reached");
+                _inputManager.StopPlayer();
+            }
+            
+        }
         private void WaitToFall(float obstacleSize)
         {
             int _obstacleSize = (int) obstacleSize;
@@ -107,28 +133,6 @@ namespace Player_Scripts
             }
             _cubePositions.Clear();
             PlayerCollider.DestroyCubeCalled = false;
-            
-        }
-        
-        public void PullTrigger(Collider other)
-        {
-            if (other.CompareTag("CubeDestroy") && PlayerCollider.DestroyCubeCalled)
-            {
-                Debug.Log("i am in trigger exit");
-                cubeToDestroyScripts = other.gameObject.GetComponentsInChildren<CubeToDestroy>();
-                if (!_inputManager.wayPtFinished)
-                {
-                    WaitToFall(cubeToDestroyScripts[0].obstacleSize);
-                }
-            }
-            if (other.CompareTag("EndLevel"))
-            {
-                DestroyCube(other.gameObject, 1f);
-                //_inputManager.MoveUp(1);
-                GameManager.Instance.EndGameCall();
-                Debug.Log("End level is reached");
-                _inputManager.StopPlayer();
-            }
             
         }
         
