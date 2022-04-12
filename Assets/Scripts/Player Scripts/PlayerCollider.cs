@@ -26,15 +26,14 @@ namespace Player_Scripts
                 player.AddCube(other.gameObject);
                 transform.localScale += new Vector3(0f, (float) _cubeSize, 0f);
             }
-            if (other.gameObject.CompareTag("CubeDestroy"))
+            else if (other.gameObject.CompareTag("CubeDestroy"))
             {
                 DestroyCubeCalled = true;
                 cubeToDestroyScripts = other.gameObject.GetComponentsInChildren<CubeToDestroy>();
                 player.DestroyCube(other.gameObject, cubeToDestroyScripts[0].obstacleSize);
                 transform.localScale -= new Vector3(0f, (float) _cubeSize, 0f);
             }
-
-            if (other.gameObject.CompareTag("Diamond"))
+            else if (other.gameObject.CompareTag("Diamond"))
             {
                 player.AddDiamond(other.gameObject);
             }

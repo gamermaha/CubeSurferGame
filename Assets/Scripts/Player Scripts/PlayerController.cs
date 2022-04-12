@@ -1,11 +1,14 @@
 ﻿
 
-using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Controllers;
+using DG.Tweening;
 using Managers;
 using UnityEngine;
+using Random = UnityEngine.Random;
+
 
 namespace Player_Scripts
 {
@@ -13,6 +16,13 @@ namespace Player_Scripts
     {
         
         [SerializeField] private GameObject cubeCollector;
+        [SerializeField] private GameObject diamondCollector;
+        [SerializeField] private GameObject animatedDiamond;
+        [SerializeField] private Vector3 targetPositionForDiamond;
+
+        [SerializeField] [Range(0.5f, 0.9f)] private float minAnimDuration;
+        [SerializeField] [Range(0.9f, 2f)] private float maxAnimDuration;
+        
         
         private InputClass _inputManager;
         
@@ -27,6 +37,7 @@ namespace Player_Scripts
         private Vector3 _prevPlayerPos;
         private Vector3 _cubeStopPos;
         private Vector3 _playerPosAtCol;
+        
         
         private int _wayPtIncrement;
         private float _xValue;
@@ -56,19 +67,29 @@ namespace Player_Scripts
 
         public void AddDiamond(GameObject collided)
         {
-            collided.transform.SetParent(cubeCollector.transform, false);
+            PrepareDiamonds();
             collided.gameObject.tag = "DiamondAdded";
-            collided.SetActive(false);
-            GameplayUIController.Instance.DiamondCountIncrement();
+
+            float duration = Random.Range(minAnimDuration, maxAnimDuration);
+            collided.transform.DOMove(new Vector3(transform.position.x + 4f, transform.position.y+ 14f, transform.position.z - 2f), duration)
+                .SetEase(Ease.InOutBack).OnComplete(() =>
+                {
+                    collided.SetActive(false);
+                    GameplayUIController.Instance.DiamondCountIncrement();
+                });
+            
+            
+            
         }
         public void AddCube(GameObject collided)
         {
+            collided.gameObject.tag = "CubeAdded";
             _inputManager.MoveUp(1);
             _cubes.Add(collided);
             collided.transform.SetParent(cubeCollector.transform, false);
             collided.transform.localPosition = _cubePos;
             _cubePos += Vector3.up * (float) _cubeSize;
-            collided.gameObject.tag = "CubeAdded";
+            
         }
 
         public void DestroyCube(GameObject collided, float obstacleSize)
@@ -134,6 +155,14 @@ namespace Player_Scripts
             _cubePositions.Clear();
             PlayerCollider.DestroyCubeCalled = false;
             
+        }
+
+        private void PrepareDiamonds()
+        {
+            GameObject diamond;
+            diamond = Instantiate(animatedDiamond);
+            diamond.transform.SetParent(diamondCollector.transform, false);
+            diamond.SetActive(false);
         }
         
     }

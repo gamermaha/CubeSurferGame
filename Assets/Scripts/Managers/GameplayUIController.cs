@@ -11,13 +11,13 @@ namespace Managers
     public class GameplayUIController : MonoBehaviour
     {
         public GameObject gameStartView;
+        public GameObject gameRestartView;
         public GameObject hUDView;
         public GameObject gameEndView;
         public GameObject gameOverView;
         public GameObject gameCompletedView;
         public Text diamondCountDisplay; 
-        private int _diamondCount; 
-
+        private int _diamondCount;
         private int _totalLevels;
         public static GameplayUIController Instance;
 
@@ -38,9 +38,26 @@ namespace Managers
             _totalLevels = MetaData.Instance.scriptableInstance.noOflevels;
         }
 
+        public void NewGame()
+        {
+            GameManager.Instance.levelNumber = 1;
+            GameManager.Instance.LoadNewLevel("Level 01");
+            DisableSlider();
+            
+        }
+        public void LoadGame()
+        {
+            if (PlayerPrefs.HasKey("LevelSaved"))
+            {
+                string levelToLoad = PlayerPrefs.GetString("LevelSaved");
+                if (levelToLoad != "Level 03" || levelToLoad != "SplashScreen") 
+                    GameManager.Instance.LoadNewLevel(levelToLoad);
+            }
+        }
         public void DisableSlider()
         {
             gameStartView.SetActive(false);
+            gameRestartView.SetActive(false);
             hUDView.SetActive(true);
             InputClass.startMoving = true;
         }
@@ -58,7 +75,7 @@ namespace Managers
             InputClass.startMoving = false;
             gameOverView.SetActive(false);
             gameEndView.SetActive(false);
-            gameStartView.SetActive(true);
+            gameRestartView.SetActive(true);
             GameManager.Instance.LoadNewLevel("Level 0" + GameManager.Instance.levelNumber);
 
         }
@@ -70,7 +87,7 @@ namespace Managers
                 GameManager.Instance.levelNumber++;
                 InputClass.startMoving = false;
                 gameEndView.SetActive(false);
-                gameStartView.SetActive(true);
+                gameRestartView.SetActive(true);
                 GameManager.Instance.LoadNewLevel("Level 0" + GameManager.Instance.levelNumber);
             }
             else
@@ -78,14 +95,8 @@ namespace Managers
                 GameCompleted();
             }
         }
-        public void LoadGame()
-        {
-            if (PlayerPrefs.HasKey("LevelSaved"))
-            {
-                string levelToLoad = PlayerPrefs.GetString("LevelSaved");
-                GameManager.Instance.LoadNewLevel(levelToLoad);
-            }
-        }
+        
+        
 
         private void GameCompleted()
         {
