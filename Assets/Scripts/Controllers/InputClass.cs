@@ -90,13 +90,10 @@ namespace Controllers
                 OnCenter();
                 
                 // confirm jannati
-                if (Vector3.Distance(transform.position, _playerPositions[_playerPositions.Count-1].position) > 0)
-                    _lengthCovered = Vector3.Distance(transform.position, _playerPositions[_playerPositions.Count-1].position);
-                else
-                {
-                    _lengthCovered = _totalLength;
-                }
+                _lengthCovered = Vector3.Distance(transform.position, _playerPositions[0].position);
                 lengthCoveredPercentage =  _lengthCovered/_totalLength;
+                Debug.Log(lengthCoveredPercentage);
+                GameplayUIController.Instance.SliderUpdate(lengthCoveredPercentage);
                 // confirm jannati
             }
             else if (wayPtFinished && _onEnd == false)
@@ -164,6 +161,7 @@ namespace Controllers
                     _totalLength += Vector3.Distance(_playerPositions[i].position,
                     _playerPositions[i + 1].position);
             }
+            Debug.Log(_totalLength);
         }
     } 
 }

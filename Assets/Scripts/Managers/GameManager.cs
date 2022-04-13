@@ -53,6 +53,7 @@ namespace Managers
             uIController = FindObjectOfType<GameplayUIController>();
             SceneManager.LoadScene("Level 01");
             levelNumber = 1;
+           
         }
 
         private void Update()

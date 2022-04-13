@@ -71,7 +71,7 @@ namespace Player_Scripts
             collided.gameObject.tag = "DiamondAdded";
 
             float duration = Random.Range(minAnimDuration, maxAnimDuration);
-            collided.transform.DOMove(new Vector3(transform.position.x + 4f, transform.position.y+ 14f, transform.position.z - 2f), duration)
+            collided.transform.DOMove(new Vector3(transform.position.x + 4f, transform.position.y+ 20f, transform.position.z), duration)
                 .SetEase(Ease.InOutBack).OnComplete(() =>
                 {
                     collided.SetActive(false);

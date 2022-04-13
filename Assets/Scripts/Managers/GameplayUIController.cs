@@ -10,7 +10,10 @@ namespace Managers
 {
     public class GameplayUIController : MonoBehaviour
     {
+        public static GameplayUIController Instance;
+        //public float sliderValue;
         public GameObject gameStartView;
+        public Slider mySlider;
         public GameObject gameRestartView;
         public GameObject hUDView;
         public GameObject gameEndView;
@@ -19,7 +22,7 @@ namespace Managers
         public Text diamondCountDisplay; 
         private int _diamondCount;
         private int _totalLevels;
-        public static GameplayUIController Instance;
+        
 
         private void Awake()
         {
@@ -36,6 +39,7 @@ namespace Managers
         private void Start()
         {
             _totalLevels = MetaData.Instance.scriptableInstance.noOflevels;
+            mySlider.value = 0;
         }
 
         public void NewGame()
@@ -49,9 +53,15 @@ namespace Managers
         {
             if (PlayerPrefs.HasKey("LevelSaved"))
             {
+                //GameManager.Instance.levelNumber = 1;
                 string levelToLoad = PlayerPrefs.GetString("LevelSaved");
-                if (levelToLoad != "Level 05" || levelToLoad != "SplashScreen") 
+                string levelno = levelToLoad.Substring(levelToLoad.Length - 1);
+                
+                if (levelToLoad != "Level 05" || levelToLoad != "SplashScreen")
+                {
                     GameManager.Instance.LoadNewLevel(levelToLoad);
+                    GameManager.Instance.levelNumber = Int32.Parse(levelno);
+                }
             }
         }
         public void DisableSlider()
@@ -112,6 +122,10 @@ namespace Managers
             diamondCountDisplay.text = "" + _diamondCount;
         }
 
+        public void SliderUpdate(float sliderValue)
+        {
+            mySlider.value = sliderValue;
+        }
 
 
 
