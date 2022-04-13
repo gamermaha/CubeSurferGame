@@ -50,7 +50,7 @@ namespace Managers
             if (PlayerPrefs.HasKey("LevelSaved"))
             {
                 string levelToLoad = PlayerPrefs.GetString("LevelSaved");
-                if (levelToLoad != "Level 03" || levelToLoad != "SplashScreen") 
+                if (levelToLoad != "Level 04" || levelToLoad != "SplashScreen") 
                     GameManager.Instance.LoadNewLevel(levelToLoad);
             }
         }

@@ -16,5 +16,5 @@ MonoBehaviour:
   playerForce: 5
   pathLength: 20
   distanceInWeightPoints: 2
-  noOflevels: 3
+  noOflevels: 4
   cubeLength: 1
