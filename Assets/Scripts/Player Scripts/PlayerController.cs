@@ -25,7 +25,7 @@ namespace Player_Scripts
         
         
         private InputClass _inputManager;
-        
+        private Canvas _myCanvas;
         private List<Transform> _playerPositions;
         private List<GameObject> _cubes;
         private List<Vector3> _cubePositions;
@@ -62,6 +62,7 @@ namespace Player_Scripts
             _cubePos = Vector3.up * (float)_cubeSize/4;
             _cubes.Add(cubeCollector.transform.GetChild(0).gameObject);
             _cubes[0].gameObject.tag = "Cube";
+            //_myCanvas = FindObjectOfType<Canvas>();
 
         }
 
@@ -71,7 +72,9 @@ namespace Player_Scripts
             collided.gameObject.tag = "DiamondAdded";
 
             float duration = Random.Range(minAnimDuration, maxAnimDuration);
-            collided.transform.DOMove(new Vector3(transform.position.x + 4f, transform.position.y+ 20f, transform.position.z), duration)
+            //Vector3 viewportPoint = Camera.main.WorldToViewportPoint(transform.position);
+            //collided.transform.DOMove(_myCanvas.transform.position, duration)
+            collided.transform.DOMove(new Vector3(transform.localPosition.x + 5f, transform.localPosition.y + 20f, transform.localPosition.z), duration)
                 .SetEase(Ease.InOutBack).OnComplete(() =>
                 {
                     collided.SetActive(false);
