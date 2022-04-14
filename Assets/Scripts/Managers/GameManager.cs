@@ -26,6 +26,7 @@ namespace Managers
         private Level _levelTBD;
         private Path _path;
         private PlayerController _player;
+        private int _diamondCount;
         
         private float _playerXValue;
         private float _playerYValue;
@@ -102,6 +103,12 @@ namespace Managers
             string activeScene = SceneManager.GetActiveScene().name;
             PlayerPrefs.SetString("LevelSaved", activeScene);
             Debug.Log(activeScene);
+        }
+
+        public void DiamondCountUpdate()
+        {
+            _diamondCount++;
+            uIController.DiamondCountIncrement(_diamondCount);
         }
     }
     

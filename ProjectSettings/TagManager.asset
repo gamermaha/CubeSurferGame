@@ -12,6 +12,7 @@ TagManager:
   - EndLevel
   - Diamond
   - DiamondAdded
+  - EndLadder
   layers:
   - Default
   - TransparentFX

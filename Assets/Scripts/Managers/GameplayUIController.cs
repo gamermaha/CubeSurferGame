@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using DG.Tweening;
+using Random = UnityEngine.Random;
 
 namespace Managers
 {
@@ -19,8 +21,14 @@ namespace Managers
         public GameObject gameEndView;
         public GameObject gameOverView;
         public GameObject gameCompletedView;
-        public Text diamondCountDisplay; 
-        private int _diamondCount;
+        public Text diamondCountDisplay;
+        public GameObject diamondSprite;
+        public GameObject hUDDiamondImage;
+        
+        [SerializeField] [Range(0.5f, 0.9f)] private float minAnimDuration;
+        [SerializeField] [Range(0.9f, 2f)] private float maxAnimDuration;
+        
+        
         private int _totalLevels;
         
 
@@ -115,16 +123,31 @@ namespace Managers
             
         }
 
-        public void DiamondCountIncrement()
+        public void DiamondCountIncrement(int diamondCount)
         {
-            Debug.Log("I am in diamond display");
-            _diamondCount++;
-            diamondCountDisplay.text = "" + _diamondCount;
+            diamondCountDisplay.text = "" + diamondCount;
         }
 
         public void SliderUpdate(float sliderValue)
         {
             mySlider.value = sliderValue;
+        }
+
+        public void DiamondAnimation(Vector3 instantiatePos, Camera cam)
+        {
+            GameObject diamond = Instantiate(diamondSprite);
+            diamond.transform.SetParent(transform);
+            diamond.transform.position = cam.WorldToScreenPoint(instantiatePos);
+
+            float duration = Random.Range(minAnimDuration, maxAnimDuration);
+            // Vector3 targetPos = cam.ScreenToWorldPoint(hUDDiamondImagePos.transform.position);
+            // Debug.Log(targetPos);
+            diamond.transform.DOMove(hUDDiamondImage.transform.position, duration)
+                .SetEase(Ease.InOutBack).OnComplete(() =>
+                {
+                    Destroy(diamond);
+                });
+
         }
 
 

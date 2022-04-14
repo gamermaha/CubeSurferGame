@@ -441,6 +441,12 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 247230162}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &327631604 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1966517607, guid: 915c051cf1a27d94ea1ae246770953e7,
+    type: 3}
+  m_PrefabInstance: {fileID: 877367088}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &376771480 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4798139860000151057, guid: 915c051cf1a27d94ea1ae246770953e7,
@@ -1147,6 +1153,12 @@ PrefabInstance:
       objectReference: {fileID: 877367091}
     - target: {fileID: 37396263115425541, guid: 915c051cf1a27d94ea1ae246770953e7,
         type: 3}
+      propertyPath: diamondSprite
+      value: 
+      objectReference: {fileID: 5145693980990650559, guid: ad5f6429feb0fcd4db8c7402e4499dcd,
+        type: 3}
+    - target: {fileID: 37396263115425541, guid: 915c051cf1a27d94ea1ae246770953e7,
+        type: 3}
       propertyPath: gameStartView
       value: 
       objectReference: {fileID: 1372239756}
@@ -1157,9 +1169,29 @@ PrefabInstance:
       objectReference: {fileID: 376771480}
     - target: {fileID: 37396263115425541, guid: 915c051cf1a27d94ea1ae246770953e7,
         type: 3}
+      propertyPath: hUDDiamondImage
+      value: 
+      objectReference: {fileID: 327631604}
+    - target: {fileID: 37396263115425541, guid: 915c051cf1a27d94ea1ae246770953e7,
+        type: 3}
+      propertyPath: maxAnimDuration
+      value: 1.758
+      objectReference: {fileID: 0}
+    - target: {fileID: 37396263115425541, guid: 915c051cf1a27d94ea1ae246770953e7,
+        type: 3}
+      propertyPath: minAnimDuration
+      value: 0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 37396263115425541, guid: 915c051cf1a27d94ea1ae246770953e7,
+        type: 3}
       propertyPath: gameCompletedView
       value: 
       objectReference: {fileID: 1207113638}
+    - target: {fileID: 37396263115425541, guid: 915c051cf1a27d94ea1ae246770953e7,
+        type: 3}
+      propertyPath: hUDDiamondImagePos
+      value: 
+      objectReference: {fileID: 877367092}
     - target: {fileID: 37396263115425541, guid: 915c051cf1a27d94ea1ae246770953e7,
         type: 3}
       propertyPath: diamondCountDisplay
@@ -1207,6 +1239,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &877367092 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1966517608, guid: 915c051cf1a27d94ea1ae246770953e7,
+    type: 3}
+  m_PrefabInstance: {fileID: 877367088}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &972661735
 GameObject:
   m_ObjectHideFlags: 0

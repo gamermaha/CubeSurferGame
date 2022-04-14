@@ -92,13 +92,13 @@ namespace Controllers
                 // confirm jannati
                 _lengthCovered = Vector3.Distance(transform.position, _playerPositions[0].position);
                 lengthCoveredPercentage =  _lengthCovered/_totalLength;
-                Debug.Log(lengthCoveredPercentage);
+                //Debug.Log(lengthCoveredPercentage);
                 GameplayUIController.Instance.SliderUpdate(lengthCoveredPercentage);
                 // confirm jannati
             }
             else if (wayPtFinished && _onEnd == false)
             {
-                transform.Translate(0f, 0f, 0.025f);
+                transform.Translate(0f, 0f, _mySpeed * Time.deltaTime);
                 Debug.Log("No more way points");
             }
 

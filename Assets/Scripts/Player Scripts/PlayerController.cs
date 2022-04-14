@@ -37,7 +37,7 @@ namespace Player_Scripts
         private Vector3 _prevPlayerPos;
         private Vector3 _cubeStopPos;
         private Vector3 _playerPosAtCol;
-        
+        private Camera _cam;
         
         private int _wayPtIncrement;
         private float _xValue;
@@ -50,8 +50,10 @@ namespace Player_Scripts
         void Awake()
         {
             _inputManager = GetComponent<InputClass>();
+            _cam = GetComponentInChildren<Camera>();
             _cubes = new List<GameObject>();
             _cubePositions = new List<Vector3>();
+            
         }
         private void Start()
         {
@@ -69,19 +71,14 @@ namespace Player_Scripts
         public void AddDiamond(GameObject collided)
         {
             PrepareDiamonds();
+            collided.transform.SetParent(diamondCollector.transform, false);
             collided.gameObject.tag = "DiamondAdded";
-
-            float duration = Random.Range(minAnimDuration, maxAnimDuration);
-            //Vector3 viewportPoint = Camera.main.WorldToViewportPoint(transform.position);
-            //collided.transform.DOMove(_myCanvas.transform.position, duration)
-            collided.transform.DOMove(new Vector3(transform.localPosition.x + 5f, transform.localPosition.y + 20f, transform.localPosition.z), duration)
-                .SetEase(Ease.InOutBack).OnComplete(() =>
-                {
-                    collided.SetActive(false);
-                    GameplayUIController.Instance.DiamondCountIncrement();
-                });
             
+            GameManager.Instance.DiamondCountUpdate();
             
+            Vector3 screenPos = collided.transform.position;
+            GameplayUIController.Instance.DiamondAnimation(screenPos, _cam);
+            collided.SetActive(false);
             
         }
         public void AddCube(GameObject collided)
@@ -104,7 +101,7 @@ namespace Player_Scripts
                 for (int o = 0; o < _obstacleSize; o++)
                 {
                     _cubes[o].gameObject.tag = "CubeDestroyed";
-                    Debug.Log(cubeCollector.transform.GetChild(0).name);
+                    //Debug.Log(cubeCollector.transform.GetChild(0).name);
                     cubeCollector.transform.GetChild(0).SetParent(null);
                     _cubePos -= Vector3.up * (float) _cubeSize;
                 } 
@@ -128,9 +125,8 @@ namespace Player_Scripts
             }
             if (other.CompareTag("EndLevel"))
             {
-                DestroyCube(other.gameObject, 1f);
                 GameManager.Instance.EndGameCall();
-                Debug.Log("End level is reached");
+                //Debug.Log("End level is reached");
                 _inputManager.StopPlayer();
             }
             
@@ -144,7 +140,7 @@ namespace Player_Scripts
             for (int i = 0; i < _cubes.Count; i++)
             { 
                 _cubePositions.Add(_cubes[i].transform.position);
-                Debug.Log(_cubePositions[i]);
+                //Debug.Log(_cubePositions[i]);
             }
             for (int k = _obstacleSize; k < _cubes.Count; k++)
             {
@@ -159,13 +155,25 @@ namespace Player_Scripts
             PlayerCollider.DestroyCubeCalled = false;
             
         }
-
         private void PrepareDiamonds()
         {
             GameObject diamond;
             diamond = Instantiate(animatedDiamond);
-            diamond.transform.SetParent(diamondCollector.transform, false);
+            
             diamond.SetActive(false);
+        }
+
+        public void EndLadder(GameObject collided)
+        {
+            DestroyCube(collided,1);
+            _cubes.RemoveAt(0);
+            //_inputManager.MoveUp(1);
+        }
+
+        public void EndLevel(GameObject endlevel)
+        {
+            DestroyCube(endlevel.gameObject, 1f);
+            _cubes.RemoveAt(0);
         }
         
     }

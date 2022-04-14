@@ -37,6 +37,14 @@ namespace Player_Scripts
             {
                 player.AddDiamond(other.gameObject);
             }
+            else if (other.gameObject.CompareTag("EndLadder"))
+            {
+                player.EndLadder(other.gameObject);
+            }
+            else if (other.gameObject.CompareTag("EndLevel"))
+            {
+                player.EndLevel(other.gameObject);
+            }
         }
     }
 }
