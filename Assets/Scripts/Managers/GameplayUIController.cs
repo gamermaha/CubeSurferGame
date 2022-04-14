@@ -23,11 +23,7 @@ namespace Managers
         public GameObject gameCompletedView;
         public Text diamondCountDisplay;
         public GameObject diamondSprite;
-        public GameObject hUDDiamondImage;
-        
-        [SerializeField] [Range(0.5f, 0.9f)] private float minAnimDuration;
-        [SerializeField] [Range(0.9f, 2f)] private float maxAnimDuration;
-        
+        public Image  hUDDiamondImage;
         
         private int _totalLevels;
         
@@ -138,12 +134,11 @@ namespace Managers
             GameObject diamond = Instantiate(diamondSprite);
             diamond.transform.SetParent(transform);
             diamond.transform.position = cam.WorldToScreenPoint(instantiatePos);
-
-            float duration = Random.Range(minAnimDuration, maxAnimDuration);
+            
             // Vector3 targetPos = cam.ScreenToWorldPoint(hUDDiamondImagePos.transform.position);
             // Debug.Log(targetPos);
-            diamond.transform.DOMove(hUDDiamondImage.transform.position, duration)
-                .SetEase(Ease.InOutBack).OnComplete(() =>
+            diamond.transform.DOMove(hUDDiamondImage.transform.position, 0.35f)
+                .SetEase(Ease.Unset).OnComplete(() =>
                 {
                     Destroy(diamond);
                 });

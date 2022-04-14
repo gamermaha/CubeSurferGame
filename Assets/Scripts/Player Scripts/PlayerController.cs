@@ -120,7 +120,30 @@ namespace Player_Scripts
                 cubeToDestroyScripts = other.gameObject.GetComponentsInChildren<CubeToDestroy>();
                 if (!_inputManager.wayPtFinished)
                 {
-                    WaitToFall(cubeToDestroyScripts[0].obstacleSize);
+                    Vector3 playerLocalPos = transform.GetChild(0).localPosition;
+                    Debug.Log(transform.GetChild(0).localPosition);
+                
+                    if (cubeToDestroyScripts.Length == 3)
+                    {
+                        if (playerLocalPos.x >= -3f && playerLocalPos.x < -1f)
+                        {
+                            WaitToFall(cubeToDestroyScripts[0].obstacleSize);
+                        }
+                        else if (playerLocalPos.x >= -1f && playerLocalPos.x <= 1f)
+                        {
+                            WaitToFall(cubeToDestroyScripts[1].obstacleSize);
+                        }
+                        else if (playerLocalPos.x > 1f && playerLocalPos.x <= 3f)
+                        {
+                            WaitToFall(cubeToDestroyScripts[2].obstacleSize);
+                        }
+                     
+                    }
+                    else
+                    {
+                        WaitToFall(cubeToDestroyScripts[0].obstacleSize);
+                    }
+                    
                 }
             }
             if (other.CompareTag("EndLevel"))

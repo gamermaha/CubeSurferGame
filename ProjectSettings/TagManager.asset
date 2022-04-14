@@ -13,6 +13,7 @@ TagManager:
   - Diamond
   - DiamondAdded
   - EndLadder
+  - Magnet
   layers:
   - Default
   - TransparentFX
