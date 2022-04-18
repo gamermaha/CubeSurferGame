@@ -52,8 +52,8 @@ namespace Managers
         {
             
             uIController = FindObjectOfType<GameplayUIController>();
-            SceneManager.LoadScene("Level 05");
-            levelNumber = 5;
+            SceneManager.LoadScene("Level 01");
+            levelNumber = 1;
            
         }
         

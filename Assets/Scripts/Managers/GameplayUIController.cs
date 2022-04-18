@@ -45,8 +45,8 @@ namespace Managers
 
         public void NewGame()
         {
-            GameManager.Instance.levelNumber = 5;
-            GameManager.Instance.LoadNewLevel("Level 05");
+            GameManager.Instance.levelNumber = 1;
+            GameManager.Instance.LoadNewLevel("Level 01");
             DisableSlider();
             
         }
