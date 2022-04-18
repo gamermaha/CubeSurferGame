@@ -9,16 +9,15 @@ using UnityEngine.Serialization;
 namespace Player_Scripts
 {
     public class PlayerCollider : MonoBehaviour
-    { 
-        [SerializeField] private GameObject playerForMagnet;
-        [SerializeField] private Magnet magnetCollider;
+    {
         public static bool DestroyCubeCalled;
         public CubeToDestroy[] cubeToDestroyScripts;
         
-        
+        [SerializeField] private Magnet magnetCollider;
         [SerializeField] private PlayerController player;
-       private double _cubeSize;
-       private float _destroyMagnetTime;
+        
+        private double _cubeSize; 
+        private float _destroyMagnetTime;
       
        
        private void Start()

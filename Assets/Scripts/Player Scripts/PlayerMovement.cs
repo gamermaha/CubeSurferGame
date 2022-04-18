@@ -3,9 +3,9 @@ using Managers;
 using UnityEngine;
 
 
-namespace Controllers
+namespace Player_Scripts
 {
-    public class InputClass : MonoBehaviour
+    public class PlayerMovement : MonoBehaviour
     {
         public bool wayPtFinished;
         
@@ -89,16 +89,18 @@ namespace Controllers
                 
                 OnCenter();
                 
-                // confirm jannati
-                _lengthCovered = Vector3.Distance(transform.position, _startPos.position);
-                lengthCoveredPercentage =  _lengthCovered/_totalLength;
-                GameplayUIController.Instance.SliderUpdate(lengthCoveredPercentage);
-                // confirm jannati
+               
             }
             else if (wayPtFinished && _onEnd == false)
             {
                 transform.Translate(0f, 0f, _mySpeed * Time.deltaTime);
             }
+            
+            // confirm jannati
+            _lengthCovered = Vector3.Distance(transform.position, _startPos.position);
+            lengthCoveredPercentage =  _lengthCovered/_totalLength;
+            GameplayUIController.Instance.SliderUpdate(lengthCoveredPercentage);
+            // confirm jannati
 
            
         }

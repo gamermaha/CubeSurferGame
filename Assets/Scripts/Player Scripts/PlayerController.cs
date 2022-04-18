@@ -16,7 +16,7 @@ namespace Player_Scripts
         [SerializeField] private GameObject diamondCollector;
         [SerializeField] private GameObject playerCollider;
         
-        private InputClass _inputManager;
+        private PlayerMovement _playerManager;
         private Canvas _myCanvas;
         private List<Transform> _playerPositions;
         private List<GameObject> _cubes;
@@ -42,7 +42,7 @@ namespace Player_Scripts
         
         void Awake()
         {
-            _inputManager = GetComponent<InputClass>();
+            _playerManager = GetComponent<PlayerMovement>();
             _cam = GetComponentInChildren<Camera>();
             _cubes = new List<GameObject>();
             _cubePositions = new List<Vector3>();
@@ -92,7 +92,7 @@ namespace Player_Scripts
         public void AddCube(GameObject collided)
         {
             collided.gameObject.tag = "CubeAdded";
-            _inputManager.MoveUp(1);
+            _playerManager.MoveUp(1);
             _cubes.Add(collided);
             collided.transform.SetParent(cubeCollector.transform, false);
             collided.transform.localPosition = _cubePos;
@@ -117,7 +117,7 @@ namespace Player_Scripts
             else
             {
                 GameManager.Instance.GameOverCall();
-                _inputManager.StopPlayer();
+                _playerManager.StopPlayer();
             }
             playerCollider.transform.localScale -= new Vector3(0f, (float) _cubeSize, 0f);
         }
@@ -126,7 +126,7 @@ namespace Player_Scripts
             if (other.CompareTag("CubeDestroy") && PlayerCollider.DestroyCubeCalled)
             {
                 cubeToDestroyScripts = other.gameObject.GetComponentsInChildren<CubeToDestroy>();
-                if (!_inputManager.wayPtFinished)
+                if (!_playerManager.wayPtFinished)
                 {
                     Vector3 playerLocalPos = transform.GetChild(0).localPosition;
                     Debug.Log(transform.GetChild(0).localPosition);
@@ -160,7 +160,7 @@ namespace Player_Scripts
             if (other.CompareTag("EndLevel"))
             {
                 GameManager.Instance.EndGameCall();
-                _inputManager.StopPlayer();
+                _playerManager.StopPlayer();
             }
             
         }
@@ -168,7 +168,7 @@ namespace Player_Scripts
         {
             int _obstacleSize = (int) obstacleSize;
             
-            _inputManager.MoveDown(_obstacleSize);
+            _playerManager.MoveDown(_obstacleSize);
             
             for (int i = 0; i < _cubes.Count; i++)
             { 
@@ -220,13 +220,18 @@ namespace Player_Scripts
             
             _cubePositions.Clear();
             _cubePos -= Vector3.up * (float) _cubeSize;
-            _inputManager.MoveDown(1);
+            _playerManager.MoveDown(1);
 
             if (_cubes.Count <= 0)
             {
                 GameManager.Instance.GameOverCall();
-                _inputManager.StopPlayer();
+                _playerManager.StopPlayer();
             }
+        }
+
+        public void Magnet()
+        {
+            
         }
 
         public void DiamondMultiAnimation()

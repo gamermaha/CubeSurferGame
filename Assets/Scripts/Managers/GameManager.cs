@@ -22,7 +22,7 @@ namespace Managers
         [SerializeField] private Slider slider;
 
 
-        private InputClass _inputManager;
+        private PlayerMovement _inputManager;
         private Level _levelTBD;
         private Path _path;
         private PlayerController _player;
@@ -72,7 +72,7 @@ namespace Managers
         private void Init()
         {
             _player = Instantiate(player);
-            _inputManager = _player.GetComponent<InputClass>();
+            _inputManager = _player.GetComponent<PlayerMovement>();
             _levelTBD = LevelDecider();
             _inputManager.PlayerPositions(_levelTBD.GiveWayPoints());
             _player.transform.position = _levelTBD.StartPosition.position;

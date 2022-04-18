@@ -3,6 +3,7 @@ using Controllers;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using Player_Scripts;
 
 namespace Managers
 {
@@ -68,7 +69,7 @@ namespace Managers
             gameStartView.SetActive(false);
             gameRestartView.SetActive(false);
             hUDView.SetActive(true);
-            InputClass.startMoving = true;
+            PlayerMovement.startMoving = true;
         }
         public void EndGame()
         {
@@ -81,7 +82,7 @@ namespace Managers
 
         public void RestartGame()
         {
-            InputClass.startMoving = false;
+            PlayerMovement.startMoving = false;
             gameOverView.SetActive(false);
             gameEndView.SetActive(false);
             gameRestartView.SetActive(true);
@@ -94,7 +95,7 @@ namespace Managers
             if (GameManager.Instance.levelNumber < _totalLevels)
             {
                 GameManager.Instance.levelNumber++;
-                InputClass.startMoving = false;
+                PlayerMovement.startMoving = false;
                 gameEndView.SetActive(false);
                 gameRestartView.SetActive(true);
                 GameManager.Instance.LoadNewLevel("Level 0" + GameManager.Instance.levelNumber);
