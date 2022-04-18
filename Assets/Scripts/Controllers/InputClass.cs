@@ -18,6 +18,7 @@ namespace Controllers
         public float lengthCoveredPercentage;
         
         private List<Transform> _playerPositions;
+        private Transform _startPos;
         
         private int _wayPtIncrement;
         private float _thresholdInWayPt;
@@ -90,7 +91,7 @@ namespace Controllers
                 OnCenter();
                 
                 // confirm jannati
-                _lengthCovered = Vector3.Distance(transform.position, _playerPositions[0].position);
+                _lengthCovered = Vector3.Distance(transform.position, _startPos.position);
                 lengthCoveredPercentage =  _lengthCovered/_totalLength;
                 //Debug.Log(lengthCoveredPercentage);
                 GameplayUIController.Instance.SliderUpdate(lengthCoveredPercentage);
@@ -132,13 +133,13 @@ namespace Controllers
         private void MoveRight()
         {
             _prevMousePos = Input.mousePosition;
-            transform.GetChild(0).localPosition = new Vector3(Mathf.Clamp(transform.GetChild(0).localPosition.x + 0.1f,-3, 3), 0f, 0f);
+            transform.GetChild(0).localPosition = new Vector3(Mathf.Clamp(transform.GetChild(0).localPosition.x + 0.1f,-2.5f, 2.5f), 0f, 0f);
         }
         
         private void MoveLeft()
         {
             _prevMousePos = Input.mousePosition;
-            transform.GetChild(0).localPosition = new Vector3(Mathf.Clamp(transform.GetChild(0).localPosition.x - 0.1f, -3, 3), 0f, 0f);
+            transform.GetChild(0).localPosition = new Vector3(Mathf.Clamp(transform.GetChild(0).localPosition.x - 0.1f, -2.5f, 2.5f), 0f, 0f);
         }
         
         
@@ -155,6 +156,7 @@ namespace Controllers
         {
             
             _playerPositions = playerPositions;
+            
             for (int i = 0; i < _playerPositions.Count; i++)
             {
                 if (i < _playerPositions.Count-1)
@@ -162,6 +164,11 @@ namespace Controllers
                     _playerPositions[i + 1].position);
             }
             Debug.Log(_totalLength);
+        }
+
+        public void SetStartPos(Transform startPos)
+        {
+            _startPos = startPos;
         }
     } 
 }

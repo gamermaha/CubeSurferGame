@@ -52,8 +52,8 @@ namespace Managers
         {
             
             uIController = FindObjectOfType<GameplayUIController>();
-            SceneManager.LoadScene("Level 01");
-            levelNumber = 1;
+            SceneManager.LoadScene("Level 05");
+            levelNumber = 5;
            
         }
 
@@ -82,6 +82,8 @@ namespace Managers
             _levelTBD = LevelDecider();
             _inputManager.PlayerPositions(_levelTBD.GiveWayPoints());
             _player.transform.position = _levelTBD.StartPosition.position;
+            _inputManager.SetStartPos(_levelTBD.StartPosition);
+            
         }
 
         private Level LevelDecider()

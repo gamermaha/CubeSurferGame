@@ -13,7 +13,6 @@ namespace Managers
     public class GameplayUIController : MonoBehaviour
     {
         public static GameplayUIController Instance;
-        //public float sliderValue;
         public GameObject gameStartView;
         public Slider mySlider;
         public GameObject gameRestartView;
@@ -23,7 +22,9 @@ namespace Managers
         public GameObject gameCompletedView;
         public Text diamondCountDisplay;
         public GameObject diamondSprite;
+        public Text times2;
         public Image  hUDDiamondImage;
+        public Text magnetEnabled;
         
         private int _totalLevels;
         
@@ -44,6 +45,7 @@ namespace Managers
         {
             _totalLevels = MetaData.Instance.scriptableInstance.noOflevels;
             mySlider.value = 0;
+            magnetEnabled.text = "";
         }
 
         public void NewGame()
@@ -134,9 +136,6 @@ namespace Managers
             GameObject diamond = Instantiate(diamondSprite);
             diamond.transform.SetParent(transform);
             diamond.transform.position = cam.WorldToScreenPoint(instantiatePos);
-            
-            // Vector3 targetPos = cam.ScreenToWorldPoint(hUDDiamondImagePos.transform.position);
-            // Debug.Log(targetPos);
             diamond.transform.DOMove(hUDDiamondImage.transform.position, 0.35f)
                 .SetEase(Ease.Unset).OnComplete(() =>
                 {
@@ -145,7 +144,10 @@ namespace Managers
 
         }
 
-
-
+        public void DiamondAnimationTimesTwo()
+        {
+            times2.transform.position = hUDDiamondImage.transform.position;
+            times2.text = "X2";
+        }
     }
 }

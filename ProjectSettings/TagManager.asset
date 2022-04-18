@@ -14,6 +14,9 @@ TagManager:
   - DiamondAdded
   - EndLadder
   - Magnet
+  - WaterObstacle
+  - MagnetGrabbed
+  - DiamondMultiplier
   layers:
   - Default
   - TransparentFX

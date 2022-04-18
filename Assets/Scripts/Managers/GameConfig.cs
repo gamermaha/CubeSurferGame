@@ -16,6 +16,7 @@ namespace Managers
         [Header("Level Dynamics")] 
         public int noOflevels;
         public double cubeLength;
+        public float destroyMagnetTime;
 
     }
 }
