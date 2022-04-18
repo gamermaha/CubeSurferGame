@@ -19,3 +19,4 @@ MonoBehaviour:
   noOflevels: 5
   cubeLength: 1
   destroyMagnetTime: 10
+  diamondTimer: 10

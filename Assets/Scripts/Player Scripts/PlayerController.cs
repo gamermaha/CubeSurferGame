@@ -37,6 +37,7 @@ namespace Player_Scripts
         private float _zValue;
         private double _cubeSize;
         private int _loopDiamond;
+        private float _timeForDiamondTimes2;
 
         private float _timeToDrop;
         
@@ -53,6 +54,7 @@ namespace Player_Scripts
             if (MetaData.Instance != null)
             {
                 _cubeSize = MetaData.Instance.scriptableInstance.cubeLength;
+                _timeForDiamondTimes2 = MetaData.Instance.scriptableInstance.diamondTimer;
             }
             _cubePos = Vector3.up * (float)_cubeSize/4;
             _cubes.Add(cubeCollector.transform.GetChild(0).gameObject);
@@ -64,6 +66,16 @@ namespace Player_Scripts
             if (magnetSprite != null)
             {
                 magnetSprite.transform.localPosition = new Vector3(cubeCollector.transform.GetChild(0).position.x, cubeCollector.transform.GetChild(0).position.y + 2f, cubeCollector.transform.GetChild(0).position.z);
+            }
+
+            if (diamondMulti)
+            {
+                _timeForDiamondTimes2 -= Time.deltaTime;
+                if (_timeForDiamondTimes2 <= 0)
+                {
+                    diamondMulti = false;
+                    DiamondMultiAnimation("");
+                }
             }
         }
 
@@ -234,9 +246,9 @@ namespace Player_Scripts
             
         }
 
-        public void DiamondMultiAnimation()
+        public void DiamondMultiAnimation(string display)
         {
-            GameplayUIController.Instance.DiamondAnimationTimesTwo();
+            GameplayUIController.Instance.DiamondAnimationTimesTwo(display);
         }
         
         

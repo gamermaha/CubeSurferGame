@@ -45,8 +45,8 @@ namespace Managers
 
         public void NewGame()
         {
-            GameManager.Instance.levelNumber = 1;
-            GameManager.Instance.LoadNewLevel("Level 01");
+            GameManager.Instance.levelNumber = 5;
+            GameManager.Instance.LoadNewLevel("Level 05");
             DisableSlider();
             
         }
@@ -138,10 +138,10 @@ namespace Managers
 
         }
 
-        public void DiamondAnimationTimesTwo()
+        public void DiamondAnimationTimesTwo(string display)
         {
             times2.transform.position = hUDDiamondImage.transform.position;
-            times2.text = "X2";
+            times2.text = display;
         }
     }
 }

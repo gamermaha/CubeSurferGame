@@ -94,7 +94,7 @@ namespace Player_Scripts
             else if (other.gameObject.CompareTag("DiamondMultiplier"))
             {
                 player.diamondMulti = true;
-                player.DiamondMultiAnimation();
+                player.DiamondMultiAnimation("X2");
                 Destroy(other.gameObject);
             }
         }

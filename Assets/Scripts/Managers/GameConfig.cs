@@ -17,6 +17,7 @@ namespace Managers
         public int noOflevels;
         public double cubeLength;
         public float destroyMagnetTime;
+        public float diamondTimer;
 
     }
 }
