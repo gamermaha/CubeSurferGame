@@ -40,32 +40,30 @@ namespace Player_Scripts
                 cubeToDestroyScripts = other.gameObject.GetComponentsInChildren<CubeToDestroy>();
                 
                 Vector3 playerLocalPos = player.transform.GetChild(0).localPosition;
-                //Debug.Log(player.transform.GetChild(0).localPosition);
                 transform.localScale -= new Vector3(0f, (float) _cubeSize, 0f);
+
+                int increment = 0;
                  if (cubeToDestroyScripts.Length == 3)
                  {
                      if (playerLocalPos.x >= -3f && playerLocalPos.x < -1f)
                      {
-                         Debug.Log("Obstacle size is " + cubeToDestroyScripts[0].obstacleSize);
-                         player.DestroyCube(other.gameObject, cubeToDestroyScripts[0].obstacleSize);
-                         
+                         increment = 0;
                      }
                      else if (playerLocalPos.x >= -1f && playerLocalPos.x <= 1f)
                      {
-                         Debug.Log("Obstacle size is " + cubeToDestroyScripts[1].obstacleSize);
-                         player.DestroyCube(other.gameObject, cubeToDestroyScripts[1].obstacleSize);
+                         increment = 1;
                      }
                      else if (playerLocalPos.x > 1f && playerLocalPos.x <= 3f)
                      {
-                         Debug.Log("Obstacle size is " + cubeToDestroyScripts[2].obstacleSize);
-                         player.DestroyCube(other.gameObject, cubeToDestroyScripts[2].obstacleSize);
+                         increment = 2;
                      }
                      
                  }
                  else
                  {
-                     player.DestroyCube(other.gameObject, cubeToDestroyScripts[0].obstacleSize);
+                     increment = 0;
                  }
+                 player.DestroyCube(other.gameObject, cubeToDestroyScripts[increment].obstacleSize);
                  
             }
             else if (other.gameObject.CompareTag("Diamond"))
@@ -90,12 +88,6 @@ namespace Player_Scripts
                 Magnet magnetCol = Instantiate(magnetCollider);
                 magnetCol.transform.SetParent(player.transform.GetChild(0));
                 player.magnetSprite = other.gameObject;
-                //player.MagnetAnimationCall();
-                //player.magnetEnabled = true;
-                //Debug.Log("MagnetEnabled is set to true");
-                //other.transform.position = playerForMagnet.transform.position;
-                //player.MagnetAnimationCall(other.gameObject.transform.position);
-                
                 
                 Destroy(magnetCol, _destroyMagnetTime);
                 Destroy(other.gameObject, _destroyMagnetTime);
@@ -103,7 +95,7 @@ namespace Player_Scripts
             else if (other.gameObject.CompareTag("DiamondMultiplier"))
             {
                 player.diamondMulti = true;
-                player.DiamondMultiAnimation(other.gameObject.transform.position);
+                player.DiamondMultiAnimation();
                 Destroy(other.gameObject);
             }
         }

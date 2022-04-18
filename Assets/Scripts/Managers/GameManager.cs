@@ -52,21 +52,15 @@ namespace Managers
         {
             
             uIController = FindObjectOfType<GameplayUIController>();
-            SceneManager.LoadScene("Level 05");
-            levelNumber = 5;
+            SceneManager.LoadScene("Level 01");
+            levelNumber = 1;
            
         }
-
-        private void Update()
-        {
-            //slider.value = _inputManager.lengthCoveredPercentage;
-            //Debug.Log(slider.value);
-        }
+        
         private void OnDisable()
         {
             SceneManager.sceneLoaded -= OnLevelFinishLoading;
         }
-
         private void OnLevelFinishLoading(Scene scene, LoadSceneMode mode)
         {
             if (scene.name == "Level 0" + levelNumber)
@@ -106,7 +100,6 @@ namespace Managers
             PlayerPrefs.SetString("LevelSaved", activeScene);
             Debug.Log(activeScene);
         }
-
         public void DiamondCountUpdate()
         {
             _diamondCount++;

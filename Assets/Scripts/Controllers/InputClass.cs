@@ -36,7 +36,6 @@ namespace Controllers
         void Awake()
         {
             _anim = player.GetComponentInChildren<Animator>();
-            //Debug.Log(_anim.name);
             _prevMousePos = new Vector3(0f, 0f, 0f);
             _thresholdInWayPt = 0.5f;
             _halfPathWidth = 3f;
@@ -93,14 +92,12 @@ namespace Controllers
                 // confirm jannati
                 _lengthCovered = Vector3.Distance(transform.position, _startPos.position);
                 lengthCoveredPercentage =  _lengthCovered/_totalLength;
-                //Debug.Log(lengthCoveredPercentage);
                 GameplayUIController.Instance.SliderUpdate(lengthCoveredPercentage);
                 // confirm jannati
             }
             else if (wayPtFinished && _onEnd == false)
             {
                 transform.Translate(0f, 0f, _mySpeed * Time.deltaTime);
-                Debug.Log("No more way points");
             }
 
            

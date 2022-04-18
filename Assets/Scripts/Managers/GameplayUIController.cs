@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Net.Mime;
 using Controllers;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 using DG.Tweening;
-using Random = UnityEngine.Random;
 
 namespace Managers
 {
@@ -23,9 +19,8 @@ namespace Managers
         public Text diamondCountDisplay;
         public GameObject diamondSprite;
         public Text times2;
-        public Image  hUDDiamondImage;
-        public Text magnetEnabled;
-        
+        public Image hUDDiamondImage;
+
         private int _totalLevels;
         
 
@@ -45,7 +40,6 @@ namespace Managers
         {
             _totalLevels = MetaData.Instance.scriptableInstance.noOflevels;
             mySlider.value = 0;
-            magnetEnabled.text = "";
         }
 
         public void NewGame()
@@ -59,7 +53,6 @@ namespace Managers
         {
             if (PlayerPrefs.HasKey("LevelSaved"))
             {
-                //GameManager.Instance.levelNumber = 1;
                 string levelToLoad = PlayerPrefs.GetString("LevelSaved");
                 string levelno = levelToLoad.Substring(levelToLoad.Length - 1);
                 

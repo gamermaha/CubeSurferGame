@@ -1,14 +1,8 @@
 ﻿
-
-
 using System.Collections.Generic;
-
 using Controllers;
-
 using Managers;
 using UnityEngine;
-
-
 
 namespace Player_Scripts
 {
@@ -16,20 +10,11 @@ namespace Player_Scripts
     {
 
         public bool diamondMulti = false;
-        public bool magnetEnabled = false;
         public GameObject magnetSprite;
+        
         [SerializeField] private GameObject cubeCollector;
         [SerializeField] private GameObject diamondCollector;
-        [SerializeField] private GameObject animatedDiamond;
-        [SerializeField] private Vector3 targetPositionForDiamond;
         [SerializeField] private GameObject playerCollider;
-        [SerializeField] private Magnet magnet; 
-        
-
-        [SerializeField] [Range(0.5f, 0.9f)] private float minAnimDuration;
-        [SerializeField] [Range(0.9f, 2f)] private float maxAnimDuration;
-        
-        
         
         private InputClass _inputManager;
         private Canvas _myCanvas;
@@ -72,17 +57,13 @@ namespace Player_Scripts
             _cubePos = Vector3.up * (float)_cubeSize/4;
             _cubes.Add(cubeCollector.transform.GetChild(0).gameObject);
             _cubes[0].gameObject.tag = "Cube";
-            //_myCanvas = FindObjectOfType<Canvas>();
-
         }
 
         private void Update()
         {
             if (magnetSprite != null)
             {
-                Debug.Log("Cube[0] animation pos is " + cubeCollector.transform.GetChild(0).position);
                 magnetSprite.transform.localPosition = new Vector3(cubeCollector.transform.GetChild(0).position.x, cubeCollector.transform.GetChild(0).position.y + 2f, cubeCollector.transform.GetChild(0).position.z);
-                Debug.Log("Magnet animation pos is " + magnetSprite.transform.position);
             }
         }
 
@@ -129,7 +110,6 @@ namespace Player_Scripts
                 for (int o = 0; o < _obstacleSize; o++)
                 {
                     _cubes[o].gameObject.tag = "CubeDestroyed";
-                    //Debug.Log(cubeCollector.transform.GetChild(0).name);
                     cubeCollector.transform.GetChild(0).SetParent(null);
                     _cubePos -= Vector3.up * (float) _cubeSize;
                 } 
@@ -150,34 +130,36 @@ namespace Player_Scripts
                 {
                     Vector3 playerLocalPos = transform.GetChild(0).localPosition;
                     Debug.Log(transform.GetChild(0).localPosition);
-                
+                    int increment = 0;
                     if (cubeToDestroyScripts.Length == 3)
                     {
                         if (playerLocalPos.x >= -3f && playerLocalPos.x < -1f)
                         {
-                            WaitToFall(cubeToDestroyScripts[0].obstacleSize);
+                            increment = 0;
+                            
                         }
                         else if (playerLocalPos.x >= -1f && playerLocalPos.x <= 1f)
                         {
-                            WaitToFall(cubeToDestroyScripts[1].obstacleSize);
+                            increment = 1;
+                            
                         }
                         else if (playerLocalPos.x > 1f && playerLocalPos.x <= 3f)
                         {
-                            WaitToFall(cubeToDestroyScripts[2].obstacleSize);
+                            increment = 2;
                         }
                      
                     }
                     else
                     {
-                        WaitToFall(cubeToDestroyScripts[0].obstacleSize);
+                        increment = 0;
                     }
+                    WaitToFall(cubeToDestroyScripts[increment].obstacleSize);
                     
                 }
             }
             if (other.CompareTag("EndLevel"))
             {
                 GameManager.Instance.EndGameCall();
-                //Debug.Log("End level is reached");
                 _inputManager.StopPlayer();
             }
             
@@ -191,7 +173,6 @@ namespace Player_Scripts
             for (int i = 0; i < _cubes.Count; i++)
             { 
                 _cubePositions.Add(_cubes[i].transform.position);
-                //Debug.Log(_cubePositions[i]);
             }
             for (int k = _obstacleSize; k < _cubes.Count; k++)
             {
@@ -212,7 +193,7 @@ namespace Player_Scripts
             DestroyCube(collided,1);
             playerCollider.transform.localScale -= new Vector3(0f, (float) _cubeSize, 0f);
             _cubes.RemoveAt(0);
-            //_inputManager.MoveUp(1);
+            
         }
 
         public void EndLevel(GameObject endlevel)
@@ -223,8 +204,7 @@ namespace Player_Scripts
         }
 
         public void WaterObstacle()
-        { Debug.Log("Cube count is "+ _cubes.Count);
-            Debug.Log("Water Obstacle encountered");
+        { 
             for (int i = 0; i < _cubes.Count; i++)
             { 
                 _cubePositions.Add(_cubes[i].transform.position);
@@ -241,7 +221,6 @@ namespace Player_Scripts
             _cubePositions.Clear();
             _cubePos -= Vector3.up * (float) _cubeSize;
             _inputManager.MoveDown(1);
-            Debug.Log("Cube count is "+ _cubes.Count);
 
             if (_cubes.Count <= 0)
             {
@@ -250,7 +229,7 @@ namespace Player_Scripts
             }
         }
 
-        public void DiamondMultiAnimation(Vector3 diamondMultiPos)
+        public void DiamondMultiAnimation()
         {
             GameplayUIController.Instance.DiamondAnimationTimesTwo();
         }
