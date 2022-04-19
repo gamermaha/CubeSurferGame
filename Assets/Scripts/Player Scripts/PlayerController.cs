@@ -89,17 +89,14 @@ namespace Player_Scripts
             {
                 _loopDiamond = 2;
             }
-            collided.transform.SetParent(diamondCollector.transform, false);
-            collided.gameObject.tag = "DiamondAdded";
-
-            for (int i = 1; i <= _loopDiamond; i++)
-            {
-                AudioManager.Instance.PlaySounds("diamond collected");
-                GameManager.Instance.DiamondCountUpdate();
-                Vector3 screenPos = collided.transform.position;
-                GameplayUIController.Instance.DiamondAnimation(screenPos, _cam);
-            }
-            collided.SetActive(false);
+            
+            AudioManager.Instance.PlaySounds("diamond collected");
+            GameManager.Instance.DiamondCountUpdate(_loopDiamond);
+            
+            Vector3 screenPos = collided.transform.position;
+            GameplayUIController.Instance.DiamondAnimation(screenPos, _cam);
+            
+            Destroy(collided.gameObject);
             
         }
         public void AddCube(GameObject collided)
@@ -246,12 +243,6 @@ namespace Player_Scripts
                 _playerManager.StopPlayer();
             }
         }
-
-        public void Magnet()
-        {
-            
-        }
-
         public void DiamondMultiAnimation(string display)
         {
             GameplayUIController.Instance.DiamondAnimationTimesTwo(display);

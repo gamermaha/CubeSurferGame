@@ -102,11 +102,10 @@ namespace Managers
             PlayerPrefs.SetString("LevelSaved", activeScene);
             Debug.Log(activeScene);
         }
-        public void DiamondCountUpdate()
+        public void DiamondCountUpdate(int addDiamonds)
         {
-            _diamondCount++;
+            _diamondCount += addDiamonds;
             uIController.DiamondCountIncrement(_diamondCount);
         }
     }
-    
 }
