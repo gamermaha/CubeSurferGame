@@ -94,6 +94,7 @@ namespace Player_Scripts
 
             for (int i = 1; i <= _loopDiamond; i++)
             {
+                AudioManager.Instance.PlaySounds("diamond collected");
                 GameManager.Instance.DiamondCountUpdate();
                 Vector3 screenPos = collided.transform.position;
                 GameplayUIController.Instance.DiamondAnimation(screenPos, _cam);
@@ -103,6 +104,7 @@ namespace Player_Scripts
         }
         public void AddCube(GameObject collided)
         {
+            AudioManager.Instance.PlaySounds("cube collected");
             collided.gameObject.tag = "CubeAdded";
             _playerManager.MoveUp(1);
             _cubes.Add(collided);
@@ -121,6 +123,7 @@ namespace Player_Scripts
             {
                 for (int o = 0; o < _obstacleSize; o++)
                 {
+                    AudioManager.Instance.PlaySounds("cube destroyed");
                     _cubes[o].gameObject.tag = "CubeDestroyed";
                     cubeCollector.transform.GetChild(0).SetParent(null);
                     _cubePos -= Vector3.up * (float) _cubeSize;
@@ -171,6 +174,7 @@ namespace Player_Scripts
             }
             if (other.CompareTag("EndLevel"))
             {
+                AudioManager.Instance.PlaySounds("end level");
                 GameManager.Instance.EndGameCall();
                 _playerManager.StopPlayer();
             }
@@ -202,6 +206,7 @@ namespace Player_Scripts
 
         public void EndLadder(GameObject collided)
         {
+            
             DestroyCube(collided,1);
             playerCollider.transform.localScale -= new Vector3(0f, (float) _cubeSize, 0f);
             _cubes.RemoveAt(0);
@@ -221,6 +226,7 @@ namespace Player_Scripts
             { 
                 _cubePositions.Add(_cubes[i].transform.position);
             }
+            AudioManager.Instance.PlaySounds("cube destroyed");
             Destroy(_cubes[0]);
             playerCollider.transform.localScale -= new Vector3(0f, (float) _cubeSize, 0f);
             for (int k = 1; k < _cubes.Count; k++)

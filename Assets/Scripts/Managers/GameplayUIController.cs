@@ -1,5 +1,5 @@
 ﻿using System;
-using Controllers;
+
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
@@ -45,6 +45,7 @@ namespace Managers
 
         public void NewGame()
         {
+            AudioManager.Instance.PlaySounds("game is started");
             GameManager.Instance.levelNumber = 1;
             GameManager.Instance.LoadNewLevel("Level 01");
             DisableSlider();
@@ -52,6 +53,7 @@ namespace Managers
         }
         public void LoadGame()
         {
+            AudioManager.Instance.PlaySounds("game is started");
             if (PlayerPrefs.HasKey("LevelSaved"))
             {
                 string levelToLoad = PlayerPrefs.GetString("LevelSaved");
@@ -77,6 +79,7 @@ namespace Managers
         }
         public void GameOver()
         {
+            
             gameOverView.SetActive(true);
         }
 
@@ -110,6 +113,7 @@ namespace Managers
 
         private void GameCompleted()
         {
+            
             gameCompletedView.SetActive(true);
             gameEndView.SetActive(false);
             

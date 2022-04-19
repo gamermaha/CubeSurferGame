@@ -83,6 +83,7 @@ namespace Player_Scripts
             }
             else if (other.gameObject.CompareTag("Magnet"))
             {
+                AudioManager.Instance.PlaySounds("magnet collected");
                 other.tag = "MagnetGrabbed";
                 Magnet magnetCol = Instantiate(magnetCollider);
                 magnetCol.transform.SetParent(player.transform.GetChild(0));
@@ -93,6 +94,7 @@ namespace Player_Scripts
             }
             else if (other.gameObject.CompareTag("DiamondMultiplier"))
             {
+                AudioManager.Instance.PlaySounds("diamond multiplier");
                 player.diamondMulti = true;
                 player.DiamondMultiAnimation("X2");
                 Destroy(other.gameObject);

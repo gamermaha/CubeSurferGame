@@ -87,10 +87,12 @@ namespace Managers
 
         public void GameOverCall()
         {
+            AudioManager.Instance.PlaySounds("game over");
             uIController.GameOver(); 
         }
         public void EndGameCall()
         {
+            AudioManager.Instance.PlaySounds("game completed");
             uIController.EndGame();
         }
         public void LoadNewLevel(string levelName)

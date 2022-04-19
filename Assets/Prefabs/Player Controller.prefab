@@ -1,5 +1,13 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!81 &869572107945830006
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2717712795441052722}
+  m_Enabled: 1
 --- !u!114 &6385659706939899347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,18 +67,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   diamondMulti: 0
-  magnetEnabled: 0
   magnetSprite: {fileID: 7147334416721441751, guid: 91c94641a147a6a4d9456607a29c5381,
     type: 3}
   cubeCollector: {fileID: 5519792523762702571}
   diamondCollector: {fileID: 4614334520012249354}
-  animatedDiamond: {fileID: 5500942156049246994, guid: ca17c5d5627b1204ea16381e2acab98f,
-    type: 3}
-  targetPositionForDiamond: {x: 3, y: 5, z: 0}
   playerCollider: {fileID: 454772356134611058}
-  magnet: {fileID: 0}
-  minAnimDuration: 0.572
-  maxAnimDuration: 1.636
 --- !u!114 &802394250568839842
 MonoBehaviour:
   m_ObjectHideFlags: 0
