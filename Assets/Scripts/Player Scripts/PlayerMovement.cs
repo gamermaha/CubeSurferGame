@@ -99,31 +99,34 @@ namespace Player_Scripts
                 }
                 
                 OnCenter();
+                if (_wayPtIncrement == 0)
+                    _lengthCovered = Vector3.Distance(transform.position, _startPos.position); 
+            
+                else if (_wayPtIncrement >= 1)
+                {
+                    _lengthCovered = Vector3.Distance(transform.position, _playerPositions[_wayPtIncrement - 1].position);
+                    if (_wayPtIncrement >= 2)
+                        _lengthCovered += _coveredDistanceInWayPoints;
+                }
                 
                
             }
             else if (wayPtFinished && _onEnd == false)
             {
-                _lengthCovered = Vector3.Distance(transform.position, _playerPositions[_wayPtIncrement - 1].position);
-                _lengthCovered += _coveredDistanceInWayPoints;
+                _lengthCovered = _totalLength;
                 transform.Translate(0f, 0f, _mySpeed * Time.deltaTime);
             }
             
             // confirm jannati
-            if (_wayPtIncrement == 0)
-                _lengthCovered = Vector3.Distance(transform.position, _startPos.position); 
-            
-            else if (_wayPtIncrement >= 1)
-            {
-                _lengthCovered = Vector3.Distance(transform.position, _playerPositions[_wayPtIncrement - 1].position);
-                if (_wayPtIncrement >= 2)
-                    _lengthCovered += _coveredDistanceInWayPoints;
-            }
+           
             lengthCoveredPercentage =  _lengthCovered/_totalLength;
             GameplayUIController.Instance.SliderUpdate(lengthCoveredPercentage);
             // confirm jannati
+            
+            
+            _prevPlayerPos = transform.position;
 
-           
+
         }
 
         
