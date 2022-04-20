@@ -65,7 +65,8 @@ namespace Player_Scripts
         {
             if (magnetSprite != null)
             {
-                magnetSprite.transform.localPosition = new Vector3(_cubes[0].transform.position.x, _cubes[0].transform.position.y + 6f, _cubes[0].transform.position.z);
+                if (_cubes.Count > 0) 
+                    magnetSprite.transform.localPosition = new Vector3(_cubes[0].transform.position.x, _cubes[0].transform.position.y + 6f, _cubes[0].transform.position.z);
             }
 
             if (diamondMulti)
