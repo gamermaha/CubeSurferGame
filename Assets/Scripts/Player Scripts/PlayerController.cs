@@ -90,7 +90,7 @@ namespace Player_Scripts
             {
                 _loopDiamond = 2;
             }
-            AudioManager.Instance.PlaySounds("diamond collected");
+            AudioManager.Instance.PlaySounds(AudioManager.DIAMONDCOLLECTEDSOUND);
             GameManager.Instance.DiamondCountUpdate(_loopDiamond);
             Vector3 screenPos = collided.transform.position;
             GameplayUIController.Instance.DiamondAnimation(screenPos, _cam);
@@ -99,7 +99,7 @@ namespace Player_Scripts
         }
         public void AddCube(GameObject collided)
         {
-            AudioManager.Instance.PlaySounds("cube collected");
+            AudioManager.Instance.PlaySounds(AudioManager.CUBECOLLECTEDSOUND);
             collided.gameObject.tag = "CubeAdded";
             _playerManager.MoveUp(1);
             _cubes.Add(collided);
@@ -118,7 +118,7 @@ namespace Player_Scripts
             {
                 for (int o = 0; o < _obstacleSize; o++)
                 {
-                    AudioManager.Instance.PlaySounds("cube destroyed");
+                    AudioManager.Instance.PlaySounds(AudioManager.DESTROYCUBESOUND);
                     _cubes[o].gameObject.tag = "CubeDestroyed";
                     cubeCollector.transform.GetChild(0).SetParent(null);
                     _cubePos -= Vector3.up * (float) _cubeSize;
@@ -221,7 +221,7 @@ namespace Player_Scripts
                 _cubePositions.Add(_cubes[i].transform.position);
             }
             Destroy(_cubes[0]);
-            AudioManager.Instance.PlaySounds("cube destroyed");
+            AudioManager.Instance.PlaySounds(AudioManager.DESTROYCUBESOUND);
             playerCollider.transform.localScale -= new Vector3(0f, (float) _cubeSize, 0f);
             for (int k = 1; k < _cubes.Count; k++)
             {

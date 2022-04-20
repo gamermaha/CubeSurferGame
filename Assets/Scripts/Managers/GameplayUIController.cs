@@ -45,7 +45,7 @@ namespace Managers
 
         public void NewGame()
         {
-            AudioManager.Instance.PlaySounds("game is started");
+            AudioManager.Instance.PlaySounds(AudioManager.GAMESTARTSOUND);
             GameManager.Instance.levelNumber = 1;
             GameManager.Instance.LoadNewLevel("Level 01");
             DisableSlider();
@@ -53,7 +53,7 @@ namespace Managers
         }
         public void LoadGame()
         {
-            AudioManager.Instance.PlaySounds("game is started");
+            AudioManager.Instance.PlaySounds(AudioManager.GAMESTARTSOUND);
             if (PlayerPrefs.HasKey("LevelSaved"))
             {
                 string levelToLoad = PlayerPrefs.GetString("LevelSaved");
