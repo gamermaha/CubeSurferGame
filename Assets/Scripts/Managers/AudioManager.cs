@@ -4,6 +4,17 @@ namespace Managers
 {
     public class AudioManager : MonoBehaviour
     {
+        public static string CUBECOLLECTEDSOUND = "cube_collected";
+        public static string DIAMONDCOLLECTEDSOUND = "diamond_collected";
+        public static string MAGNETCOLLECTEDSOUND = "magnet_collected";
+        public static string DIAMONDMULTIPLIERSOUND = "diamond_multiplier";
+        public static string DESTROYCUBESOUND = "cube_destroyed";
+        public static string GAMEOVERSOUND = "game_over";
+        public static string ENDLEVELSOUND = "end_level";
+        public static string GAMESTARTSOUND = "game_is_started";
+        public static string GAMECOMPLETEDSOUND = "game_completed";
+        
+        
         [SerializeField] private AudioSource cubeCollectSound;
         [SerializeField] private AudioSource diamondCollectSound;
         [SerializeField] private AudioSource magnetCollectSound;
@@ -14,6 +25,8 @@ namespace Managers
         [SerializeField] private AudioSource endLevel;
         [SerializeField] private AudioSource gameStart;
         [SerializeField] private AudioSource gameCompleted;
+        
+        
 
 
         public static AudioManager Instance;
@@ -31,31 +44,31 @@ namespace Managers
 
         public void PlaySounds(string action)
         {
-            if (action == "cube collected")
+            if (action == CUBECOLLECTEDSOUND)
                 cubeCollectSound.Play();
             
-            else if (action == "diamond collected")
+            else if (action == DIAMONDCOLLECTEDSOUND)
                 diamondCollectSound.Play();
             
-            else if (action == "magnet collected") 
+            else if (action == MAGNETCOLLECTEDSOUND) 
                 magnetCollectSound.Play();
             
-            else if (action == "diamond multiplier")
+            else if (action == DIAMONDMULTIPLIERSOUND)
                 diamondMultiplierSound.Play();
             
-            else if (action == "cube destroyed")
+            else if (action == DESTROYCUBESOUND)
                 destroyCubeSound.Play();
             
-            else if (action == "game over")
+            else if (action == GAMEOVERSOUND)
                 gameOver.Play();
             
-            else if (action == "end level")
+            else if (action == ENDLEVELSOUND)
                 endLevel.Play();
             
-            else if (action == "game is started")
+            else if (action == GAMESTARTSOUND)
                 gameStart.Play();
             
-            else if (action == "game completed")
+            else if (action == GAMECOMPLETEDSOUND)
                 gameCompleted.Play();
         }
         
