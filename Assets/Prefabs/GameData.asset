@@ -13,10 +13,9 @@ MonoBehaviour:
   m_Name: GameData
   m_EditorClassIdentifier: 
   playerSpeed: 10
-  playerForce: 5
   pathLength: 20
   distanceInWeightPoints: 2
   noOflevels: 5
   cubeLength: 1
   destroyMagnetTime: 10
-  diamondTimer: 25
+  diamondTimer: 6

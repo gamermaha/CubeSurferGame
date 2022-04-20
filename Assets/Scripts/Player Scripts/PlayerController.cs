@@ -65,7 +65,7 @@ namespace Player_Scripts
         {
             if (magnetSprite != null)
             {
-                magnetSprite.transform.localPosition = new Vector3(cubeCollector.transform.GetChild(0).position.x, cubeCollector.transform.GetChild(0).position.y + 2f, cubeCollector.transform.GetChild(0).position.z);
+                magnetSprite.transform.localPosition = new Vector3(cubeCollector.transform.GetChild(0).position.x, cubeCollector.transform.GetChild(0).position.y + 6f, cubeCollector.transform.GetChild(0).position.z);
             }
 
             if (diamondMulti)
@@ -89,15 +89,12 @@ namespace Player_Scripts
             {
                 _loopDiamond = 2;
             }
-            
             AudioManager.Instance.PlaySounds("diamond collected");
             GameManager.Instance.DiamondCountUpdate(_loopDiamond);
-            
             Vector3 screenPos = collided.transform.position;
             GameplayUIController.Instance.DiamondAnimation(screenPos, _cam);
-            
-            Destroy(collided.gameObject);
-            
+            Destroy(collided);
+
         }
         public void AddCube(GameObject collided)
         {
@@ -171,7 +168,7 @@ namespace Player_Scripts
             }
             if (other.CompareTag("EndLevel"))
             {
-                AudioManager.Instance.PlaySounds("end level");
+                //AudioManager.Instance.PlaySounds("end level");
                 GameManager.Instance.EndGameCall();
                 _playerManager.StopPlayer();
             }
@@ -203,7 +200,6 @@ namespace Player_Scripts
 
         public void EndLadder(GameObject collided)
         {
-            
             DestroyCube(collided,1);
             playerCollider.transform.localScale -= new Vector3(0f, (float) _cubeSize, 0f);
             _cubes.RemoveAt(0);
@@ -223,8 +219,8 @@ namespace Player_Scripts
             { 
                 _cubePositions.Add(_cubes[i].transform.position);
             }
-            AudioManager.Instance.PlaySounds("cube destroyed");
             Destroy(_cubes[0]);
+            AudioManager.Instance.PlaySounds("cube destroyed");
             playerCollider.transform.localScale -= new Vector3(0f, (float) _cubeSize, 0f);
             for (int k = 1; k < _cubes.Count; k++)
             {
@@ -243,6 +239,12 @@ namespace Player_Scripts
                 _playerManager.StopPlayer();
             }
         }
+
+        public void Magnet()
+        {
+            
+        }
+
         public void DiamondMultiAnimation(string display)
         {
             GameplayUIController.Instance.DiamondAnimationTimesTwo(display);

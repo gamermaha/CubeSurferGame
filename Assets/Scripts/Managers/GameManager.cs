@@ -74,9 +74,11 @@ namespace Managers
             _player = Instantiate(player);
             _inputManager = _player.GetComponent<PlayerMovement>();
             _levelTBD = LevelDecider();
-            _inputManager.PlayerPositions(_levelTBD.GiveWayPoints());
-            _player.transform.position = _levelTBD.StartPosition.position;
             _inputManager.SetStartPos(_levelTBD.StartPosition);
+            _player.transform.position = _levelTBD.StartPosition.position;
+            _inputManager.PlayerPositions(_levelTBD.GiveWayPoints());
+            
+            
             
         }
 

@@ -7,7 +7,6 @@ namespace Managers
     {
         [Header("Player Dynamics")] 
         public float playerSpeed;
-        public float playerForce;
 
         [Header("Environment Dynamics")] 
         public float pathLength;

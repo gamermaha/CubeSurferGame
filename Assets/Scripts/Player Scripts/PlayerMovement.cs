@@ -145,16 +145,22 @@ namespace Player_Scripts
 
         public void StopPlayer()
         {
+            Debug.Log("Total length covered: " + _lengthCovered);
             _onEnd = true;
             transform.position += new Vector3(0f, 0f, 0f);
             startMoving = false;
         }
 
-
+        public void SetStartPos(Transform startPos)
+        {
+            _startPos = startPos;
+        }
         public void PlayerPositions(List<Transform> playerPositions)
         {
             
             _playerPositions = playerPositions;
+            _totalLength = Vector3.Distance(_startPos.position,
+                _playerPositions[0].position);
             
             for (int i = 0; i < _playerPositions.Count; i++)
             {
@@ -162,13 +168,10 @@ namespace Player_Scripts
                     _totalLength += Vector3.Distance(_playerPositions[i].position,
                     _playerPositions[i + 1].position);
             }
-            Debug.Log(_totalLength);
+            Debug.Log("Path length = " + _totalLength);
         }
 
-        public void SetStartPos(Transform startPos)
-        {
-            _startPos = startPos;
-        }
+        
     } 
 }
 
