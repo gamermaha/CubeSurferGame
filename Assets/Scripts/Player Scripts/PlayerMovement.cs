@@ -15,6 +15,7 @@ namespace Player_Scripts
 
         private float _totalLength;
         private float _lengthCovered;
+        private float _coveredDistanceInWayPoints;
         public float lengthCoveredPercentage;
         
         private List<Transform> _playerPositions;
@@ -39,6 +40,7 @@ namespace Player_Scripts
             _prevMousePos = new Vector3(0f, 0f, 0f);
             _thresholdInWayPt = 0.5f;
             _halfPathWidth = 3f;
+            _coveredDistanceInWayPoints = 0;
         }
         private void Start()
         {
@@ -54,6 +56,7 @@ namespace Player_Scripts
             _onEnd = false;
             _lengthCovered = 0;
             lengthCoveredPercentage = 0;
+            _coveredDistanceInWayPoints = 0;
         }
 
         void Update()
@@ -77,11 +80,19 @@ namespace Player_Scripts
                 
                 if (_playerPositions != null)
                 {
-                    if (distance <= _thresholdInWayPt)
+                    if (distance <= _thresholdInWayPt )
+                    {
+                        if ( _wayPtIncrement >= 2 && _wayPtIncrement < (_playerPositions.Count - 1)) 
+                        {
+                            _coveredDistanceInWayPoints += Vector3.Distance(_playerPositions[_wayPtIncrement - 1].position,
+                            _playerPositions[_wayPtIncrement-2].position);
+                            
+                        }
                         _wayPtIncrement++;
-
+                    }
                     if (_wayPtIncrement >= _playerPositions.Count)
                     { 
+                        
                         wayPtFinished = true;
                     }
                         
@@ -93,11 +104,21 @@ namespace Player_Scripts
             }
             else if (wayPtFinished && _onEnd == false)
             {
+                _lengthCovered = Vector3.Distance(transform.position, _playerPositions[_wayPtIncrement - 1].position);
+                _lengthCovered += _coveredDistanceInWayPoints;
                 transform.Translate(0f, 0f, _mySpeed * Time.deltaTime);
             }
             
             // confirm jannati
-            _lengthCovered = Vector3.Distance(transform.position, _startPos.position);
+            if (_wayPtIncrement == 0)
+                _lengthCovered = Vector3.Distance(transform.position, _startPos.position); 
+            
+            else if (_wayPtIncrement >= 1)
+            {
+                _lengthCovered = Vector3.Distance(transform.position, _playerPositions[_wayPtIncrement - 1].position);
+                if (_wayPtIncrement >= 2)
+                    _lengthCovered += _coveredDistanceInWayPoints;
+            }
             lengthCoveredPercentage =  _lengthCovered/_totalLength;
             GameplayUIController.Instance.SliderUpdate(lengthCoveredPercentage);
             // confirm jannati
@@ -154,6 +175,7 @@ namespace Player_Scripts
         public void SetStartPos(Transform startPos)
         {
             _startPos = startPos;
+            _coveredDistanceInWayPoints = 0;
         }
         public void PlayerPositions(List<Transform> playerPositions)
         {
@@ -161,7 +183,7 @@ namespace Player_Scripts
             _playerPositions = playerPositions;
             _totalLength = Vector3.Distance(_startPos.position,
                 _playerPositions[0].position);
-            
+
             for (int i = 0; i < _playerPositions.Count; i++)
             {
                 if (i < _playerPositions.Count-1)
