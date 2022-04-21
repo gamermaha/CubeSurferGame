@@ -5,21 +5,11 @@ namespace Player_Scripts
 {
     public class PlayerCollider : MonoBehaviour
     {
-        public static bool DESTROYCUBECALLED;
         public CubeToDestroy[] cubeToDestroyScripts;
         
         [SerializeField] private Magnet magnetCollider;
         [SerializeField] private PlayerController player;
         
-        private double _cubeSize; 
-        private float _destroyMagnetTime;
-        
-        private void Start()
-        {
-            _cubeSize = MetaData.Instance.scriptableInstance.cubeLength;
-            _destroyMagnetTime = MetaData.Instance.scriptableInstance.destroyMagnetTime;
-        }
-
         private void OnTriggerEnter(Collider other)
         {
             string collidedTag = other.gameObject.tag;
@@ -31,7 +21,6 @@ namespace Player_Scripts
                     break;
                 case "CubeDestroy":
                 {
-                    DESTROYCUBECALLED = true;
                     cubeToDestroyScripts = other.gameObject.GetComponentsInChildren<CubeToDestroy>(); 
                     Vector3 playerLocalPos = player.transform.GetChild(0).localPosition;
                     int increment = 0;
@@ -48,8 +37,7 @@ namespace Player_Scripts
                     else 
                         increment = 0;
                         
-                    player.DestroyCube(other.gameObject, cubeToDestroyScripts[increment].obstacleSize);
-                    transform.localScale -= new Vector3(0f, (float) _cubeSize, 0f);
+                    player.DestroyCube(other.gameObject, cubeToDestroyScripts[increment].obstacleSize, increment);
                 }
                     break;
                 case "Diamond":
@@ -59,7 +47,7 @@ namespace Player_Scripts
                     player.EndLadder(other.gameObject);
                     break;
                 case "EndLevel":
-                    player.EndLevel(other.gameObject);
+                    player.EndLadder(other.gameObject);
                     break;
                 case "WaterObstacle":
                     player.WaterObstacle();

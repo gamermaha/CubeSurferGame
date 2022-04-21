@@ -87,8 +87,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wayPtFinished: 0
-  player: {fileID: 8500255146268522815}
   lengthCoveredPercentage: 0
+  playerCapsule: {fileID: 8500255146268522815}
 --- !u!1 &4614334520012249354
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,7 +225,7 @@ GameObject:
   - component: {fileID: 6706538622313572285}
   - component: {fileID: 5475914088574668014}
   m_Layer: 0
-  m_Name: Player
+  m_Name: PlayerCapsule
   m_TagString: Player
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0

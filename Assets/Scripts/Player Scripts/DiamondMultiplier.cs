@@ -17,7 +17,7 @@ namespace Player_Scripts
         {
             if (other.gameObject.CompareTag("Diamond"))
             {
-                ;
+                
                 
                 
             }

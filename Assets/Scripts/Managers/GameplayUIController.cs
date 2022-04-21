@@ -1,9 +1,8 @@
-﻿using System;
-
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using Player_Scripts;
+using UnityEngine.Serialization;
 
 namespace Managers
 {
@@ -12,11 +11,11 @@ namespace Managers
         public static GameplayUIController Instance;
         public GameObject gameStartView;
         public GameObject gameRestartView;
-        public GameObject diamondSprite;
         public GameObject hUDView;
-        public GameObject gameEndView;
+        public GameObject endLevelView;
         public GameObject gameOverView;
         public GameObject gameCompletedView;
+        public GameObject diamondSprite;
         public Text diamondCountDisplay;
         public Text times2;
         public Image hUDDiamondImage;
@@ -34,66 +33,58 @@ namespace Managers
                 Destroy(gameObject);
             }
         }
-        private void Start() => mySlider.value = 0;
-        
-        public void NewGame()
+
+        private void Start()
         {
-            GameManager.Instance.LoadFirstLevel();
-            DisableSlider();
-            
+            mySlider.value = 0;
+            gameRestartView.SetActive(false);
         }
-        public void LoadGame()
+
+        public void PlayGameButton()
         {
             GameManager.Instance.LoadCurrentLevel();
+            DisableSlider();
         }
+
         public void DisableSlider()
         {
             gameStartView.SetActive(false);
             gameRestartView.SetActive(false);
             hUDView.SetActive(true);
-            PlayerMovement.startMoving = true;
+            GameManager.Instance.PlayerCanMoveNow();
         }
-        public void EndGame()
+        
+        public void RestartOnGameOverButton()
         {
-            gameEndView.SetActive(true);
-        }
-        public void GameOver()
-        {
-            
-            gameOverView.SetActive(true);
-        }
-
-        public void RestartGame()
-        {
-            PlayerMovement.startMoving = false;
+            GameManager.Instance.PlayerMustStopNow();
             gameOverView.SetActive(false);
-            gameEndView.SetActive(false);
+            endLevelView.SetActive(false);
             gameRestartView.SetActive(true);
             GameManager.Instance.LoadCurrentLevel();
-
         }
-
-        public void EndLevel()
+        
+        public void EndLevelButton()
         {
             GameManager.Instance.LoadNextLevel();
-            gameEndView.SetActive(false);
+            endLevelView.SetActive(false);
             gameRestartView.SetActive(true);
         }
         
-        
-
-        public void GameCompleted()
+        public void GameCompletedView()
         {
-            
             gameCompletedView.SetActive(true);
-            gameEndView.SetActive(false);
-            
+            endLevelView.SetActive(false);
+            gameRestartView.SetActive(false);
         }
+        
+        public void EndLevelView() => endLevelView.SetActive(true);
+        
+        public void GameOverView() => gameOverView.SetActive(true);
 
         public void UpdateDiamondCount(int diamondCount) => diamondCountDisplay.text = "" + diamondCount;
 
         public void SliderUpdate(float sliderValue) => mySlider.value = sliderValue;
-
+        
         public void DiamondAnimation(Vector3 instantiatePos, Camera cam)
         {
             GameObject diamond = Instantiate(diamondSprite);
@@ -104,7 +95,6 @@ namespace Managers
                 {
                     Destroy(diamond);
                 });
-
         }
 
         public void DiamondAnimationTimesTwo(string display)

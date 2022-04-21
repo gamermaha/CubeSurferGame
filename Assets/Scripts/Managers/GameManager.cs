@@ -49,11 +49,9 @@ namespace Managers
             SceneManager.sceneLoaded -= OnLevelFinishLoading;
         }
         
-        public void LoadFirstLevel()
-        {
-            _levelNumber = 1;
-            LoadLevel(1);
-        }
+        public void PlayerCanMoveNow() => PlayerMovement.StartMoving = true;
+
+        public void PlayerMustStopNow() => PlayerMovement.StartMoving = false;
         
         public void LoadNextLevel()
         {
@@ -71,13 +69,13 @@ namespace Managers
         public void GameOver()
         {
             AudioManager.Instance.PlaySounds(AudioManager.GAMEOVERSOUND);
-            GameplayUIController.Instance.GameOver(); 
+            GameplayUIController.Instance.GameOverView(); 
         }
         
         public void LevelCompleted()
         {
             AudioManager.Instance.PlaySounds(AudioManager.GAMECOMPLETEDSOUND);
-            GameplayUIController.Instance.EndGame();
+            GameplayUIController.Instance.EndLevelView();
         }
         
         public void AddDiamonds(int diamonds)
@@ -99,7 +97,6 @@ namespace Managers
             _playerMovement.SetStartPos(_currentLevel.StartPosition);
             _playerController.transform.position = _currentLevel.StartPosition.position;
             _playerMovement.PlayerPositions(_currentLevel.GiveWayPoints());
-            //PlayerMovement.startMoving = true;
         }
 
         private Level GetCurrentLevel()
@@ -118,7 +115,7 @@ namespace Managers
             }
             else if (levelID > _totalLevels)
             {
-                GameplayUIController.Instance.GameCompleted();
+                GameplayUIController.Instance.GameCompletedView();
                 _levelNumber = 1;
                 PlayerPrefs.SetInt("LevelSaved", _levelNumber);
             }
