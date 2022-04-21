@@ -72,6 +72,8 @@ MonoBehaviour:
   cubeCollector: {fileID: 5519792523762702571}
   diamondCollector: {fileID: 4614334520012249354}
   playerCollider: {fileID: 454772356134611058}
+  magnetCollider: {fileID: 389745509034583804, guid: 860a26042ffe56842968c254213dadcb,
+    type: 3}
 --- !u!114 &802394250568839842
 MonoBehaviour:
   m_ObjectHideFlags: 0

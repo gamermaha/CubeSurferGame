@@ -17,8 +17,7 @@ namespace Player_Scripts
         {
             if (other.gameObject.CompareTag("Diamond"))
             {
-                GameManager.Instance.DiamondCountUpdate(2);
-                GameManager.Instance.DiamondCountUpdate(2);
+                ;
                 
                 
             }

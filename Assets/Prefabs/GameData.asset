@@ -15,7 +15,7 @@ MonoBehaviour:
   playerSpeed: 10
   pathLength: 20
   distanceInWeightPoints: 2
-  noOflevels: 5
+  noOfLevels: 5
   cubeLength: 1
   destroyMagnetTime: 10
   diamondTimer: 6

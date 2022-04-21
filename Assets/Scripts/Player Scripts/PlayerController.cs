@@ -15,6 +15,7 @@ namespace Player_Scripts
         [SerializeField] private GameObject cubeCollector;
         [SerializeField] private GameObject diamondCollector;
         [SerializeField] private GameObject playerCollider;
+        [SerializeField] private Magnet magnetCollider;
         
         private PlayerMovement _playerManager;
         private Canvas _myCanvas;
@@ -30,6 +31,7 @@ namespace Player_Scripts
         private Vector3 _cubeStopPos;
         private Vector3 _playerPosAtCol;
         private Camera _cam;
+        private float _destroyMagnetTime;
         
         private int _wayPtIncrement;
         private float _xValue;
@@ -55,6 +57,7 @@ namespace Player_Scripts
             {
                 _cubeSize = MetaData.Instance.scriptableInstance.cubeLength;
                 _timeForDiamondTimes2 = MetaData.Instance.scriptableInstance.diamondTimer;
+                _destroyMagnetTime = MetaData.Instance.scriptableInstance.destroyMagnetTime;
             }
             _cubePos = Vector3.up * (float)_cubeSize/4;
             _cubes.Add(cubeCollector.transform.GetChild(0).gameObject);
@@ -75,7 +78,7 @@ namespace Player_Scripts
                 if (_timeForDiamondTimes2 <= 0)
                 {
                     diamondMulti = false;
-                    DiamondMultiAnimation("");
+                    GameplayUIController.Instance.DiamondAnimationTimesTwo("");
                 }
             }
         }
@@ -91,7 +94,7 @@ namespace Player_Scripts
                 _loopDiamond = 2;
             }
             AudioManager.Instance.PlaySounds(AudioManager.DIAMONDCOLLECTEDSOUND);
-            GameManager.Instance.DiamondCountUpdate(_loopDiamond);
+            GameManager.Instance.AddDiamonds(_loopDiamond);
             Vector3 screenPos = collided.transform.position;
             GameplayUIController.Instance.DiamondAnimation(screenPos, _cam);
             Destroy(collided);
@@ -126,14 +129,14 @@ namespace Player_Scripts
             }
             else
             {
-                GameManager.Instance.GameOverCall();
+                GameManager.Instance.GameOver();
                 _playerManager.StopPlayer();
             }
             playerCollider.transform.localScale -= new Vector3(0f, (float) _cubeSize, 0f);
         }
         public void PullTrigger(Collider other)
         {
-            if (other.CompareTag("CubeDestroy") && PlayerCollider.DestroyCubeCalled)
+            if (other.CompareTag("CubeDestroy") && PlayerCollider.DESTROYCUBECALLED)
             {
                 cubeToDestroyScripts = other.gameObject.GetComponentsInChildren<CubeToDestroy>();
                 if (!_playerManager.wayPtFinished)
@@ -170,7 +173,7 @@ namespace Player_Scripts
             if (other.CompareTag("EndLevel"))
             {
                 //AudioManager.Instance.PlaySounds("end level");
-                GameManager.Instance.EndGameCall();
+                GameManager.Instance.LevelCompleted();
                 _playerManager.StopPlayer();
             }
             
@@ -195,7 +198,7 @@ namespace Player_Scripts
                 _cubes.RemoveAt(0);
             }
             _cubePositions.Clear();
-            PlayerCollider.DestroyCubeCalled = false;
+            PlayerCollider.DESTROYCUBECALLED = false;
             
         }
 
@@ -236,19 +239,29 @@ namespace Player_Scripts
 
             if (_cubes.Count <= 0)
             {
-                GameManager.Instance.GameOverCall();
+                GameManager.Instance.GameOver();
                 _playerManager.StopPlayer();
             }
         }
 
-        public void Magnet()
+        public void MagnetCollected(GameObject magnet)
         {
+            AudioManager.Instance.PlaySounds(AudioManager.MAGNETCOLLECTEDSOUND);
+            magnet.tag = "MagnetGrabbed";
+            Magnet magnetCol = Instantiate(magnetCollider);
+            magnetCol.transform.SetParent(transform.GetChild(0));
+            magnetSprite = magnet;
+            Destroy(magnetCol, _destroyMagnetTime);
+            Destroy(magnet, _destroyMagnetTime);
             
         }
 
-        public void DiamondMultiAnimation(string display)
+        public void DiamondMulti(GameObject diamondMultiplier)
         {
-            GameplayUIController.Instance.DiamondAnimationTimesTwo(display);
+            AudioManager.Instance.PlaySounds(AudioManager.DIAMONDMULTIPLIERSOUND);
+            diamondMulti = true;
+            Destroy(diamondMultiplier);
+            GameplayUIController.Instance.DiamondAnimationTimesTwo("X2");
         }
         
         

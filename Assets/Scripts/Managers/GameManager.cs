@@ -1,9 +1,6 @@
-﻿//REVIEW: remove unused usings
-using Controllers; 
-using Environment_Setters;
+﻿using Environment_Setters;
 using Player_Scripts;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 namespace Managers
@@ -12,27 +9,17 @@ namespace Managers
     {
         
         public static GameManager Instance;
-        public int levelNumber; //REVIEW: no need to make it public
-
-        //REVIEW: no need of serialize them as all of these are initialized internaly
-        [Header(" GameObjects Imported")]
-        [SerializeField] private PlayerController player; 
-        [SerializeField] private Path path;
-        [SerializeField] private Level level01;
-        [SerializeField] private GameplayUIController uIController;
-        [SerializeField] private Slider slider;
-
-
-        private PlayerMovement _inputManager; //REVIEW: rename this to _playerMovement
-        private Level _levelTBD; //REVIEW: either remove level01 or this
-        private Path _path; //REVIEW: remove as its not in use anymore
-        private PlayerController _player; //REVIEW: rename _playerController;
-        private int _diamondCount;
         
-        private float _playerXValue; //REVIEW: remove
-        private float _playerYValue; //REVIEW: remove
-        private float _playerZValue; //REVIEW: remove
-
+        [Header("Reference to Player Prefab")]
+        [SerializeField] private PlayerController playerPrefab;
+        
+        private PlayerMovement _playerMovement;
+        private Level _currentLevel;
+        private PlayerController _playerController;
+        private int _diamondCount;
+        private int _levelNumber;
+        private int _totalLevels;
+        
         private void Awake()
         {
             if (Instance == null)
@@ -45,92 +32,100 @@ namespace Managers
                 Destroy(gameObject);
             }
         }
-        //REVIEW: space
+        
         private void OnEnable()
         {
             SceneManager.sceneLoaded += OnLevelFinishLoading;
         }
-        //REVIEW: space
+        
         void Start()
         {
-            //REVIEW: why you need to save its reference as its Singleton it self
-            uIController = FindObjectOfType<GameplayUIController>();
-
-            //REVIEW: it should load last saved level
-            //REVIEW: use string interpolation or string.format for "Level 01"
-            SceneManager.LoadScene("Level 01");
-
-            //REVIEW: it should be loaded from prefs
-            levelNumber = 1;
+            _totalLevels = MetaData.Instance.scriptableInstance.noOfLevels;
+            LoadCurrentLevel();
         }
         
         private void OnDisable()
         {
             SceneManager.sceneLoaded -= OnLevelFinishLoading;
         }
-        //REVIEW: space
+        
+        public void LoadFirstLevel()
+        {
+            _levelNumber = 1;
+            LoadLevel(1);
+        }
+        
+        public void LoadNextLevel()
+        {
+            _levelNumber++;
+            LoadLevel(_levelNumber);
+        }
+
+        public void LoadCurrentLevel()
+        {
+            int levelToLoad = PlayerPrefs.GetInt("LevelSaved", 0);
+            _levelNumber = levelToLoad;
+            LoadLevel(_levelNumber);
+        }
+        
+        public void GameOver()
+        {
+            AudioManager.Instance.PlaySounds(AudioManager.GAMEOVERSOUND);
+            GameplayUIController.Instance.GameOver(); 
+        }
+        
+        public void LevelCompleted()
+        {
+            AudioManager.Instance.PlaySounds(AudioManager.GAMECOMPLETEDSOUND);
+            GameplayUIController.Instance.EndGame();
+        }
+        
+        public void AddDiamonds(int diamonds)
+        {
+            _diamondCount += diamonds;
+            GameplayUIController.Instance.UpdateDiamondCount(_diamondCount);
+        }
         private void OnLevelFinishLoading(Scene scene, LoadSceneMode mode)
         {
-            //REVIEW: use string interpolation or string.format for "Level 01"
-            //REVIEW: use .Equals instead of ==
-            //REVIEW: you can even skip this check 
-            if (scene.name == "Level 0" + levelNumber)
-            {
+            if(scene.name != "SplashScreen")
                 Init();
-            }
         }
         
         private void Init()
         {
-            _player = Instantiate(player);
-            _inputManager = _player.GetComponent<PlayerMovement>();
-            _levelTBD = LevelDecider();
-            _inputManager.SetStartPos(_levelTBD.StartPosition);
-            //REVIEW: use the above method to update player position as well
-            _player.transform.position = _levelTBD.StartPosition.position;
-            _inputManager.PlayerPositions(_levelTBD.GiveWayPoints());
-
-
-            //REVIEW: remove space
+            _playerController = Instantiate(playerPrefab);
+            _playerMovement = _playerController.GetComponent<PlayerMovement>();
+            _currentLevel = GetCurrentLevel();
+            _playerMovement.SetStartPos(_currentLevel.StartPosition);
+            _playerController.transform.position = _currentLevel.StartPosition.position;
+            _playerMovement.PlayerPositions(_currentLevel.GiveWayPoints());
+            //PlayerMovement.startMoving = true;
         }
 
-        //REVIEW: rename this to GetCurrentLevel and add a null as well
-        private Level LevelDecider()
+        private Level GetCurrentLevel()
         {
             return FindObjectOfType<Level>();
         }
-
-        //REVIEW: rename this to GameOver
-        public void GameOverCall()
+       
+        private void LoadLevel(int levelID)
         {
-            AudioManager.Instance.PlaySounds(AudioManager.GAMEOVERSOUND);
-            uIController.GameOver(); 
-        }
-        //REVIEW: space
-        //REVIEW: LevelCompleted
-        public void EndGameCall()
-        {
-            AudioManager.Instance.PlaySounds(AudioManager.GAMECOMPLETEDSOUND);
-            uIController.EndGame();
-        }
-        //REVIEW: space
-        //REVIEW: LoadLevel (int levelId)
-        //REVIEW: also add a new function for LoadNextLevel () with no params as currentl level is already present in scope
-        //REVIEW: 
-        public void LoadNewLevel(string levelName)
-        {
-            SceneManager.LoadScene(levelName); 
-            string activeScene = SceneManager.GetActiveScene().name;
-            PlayerPrefs.SetString("LevelSaved", activeScene);
-            Debug.Log(activeScene);
-        }
-        //REVIEW: space
-        //REVIEW: rename AddDiamonds (int diamonds)
-        public void DiamondCountUpdate(int addDiamonds)
-        {
-            _diamondCount += addDiamonds;
-            //REVIEW: rename UpdateDiamondCount
-            uIController.DiamondCountIncrement(_diamondCount);
+            
+            if (levelID != 0 && levelID <= _totalLevels)
+            {
+                AudioManager.Instance.PlaySounds(AudioManager.GAMESTARTSOUND);
+                SceneManager.LoadScene("Level 0" + levelID);
+                PlayerPrefs.SetInt("LevelSaved", _levelNumber);
+            }
+            else if (levelID > _totalLevels)
+            {
+                GameplayUIController.Instance.GameCompleted();
+                _levelNumber = 1;
+                PlayerPrefs.SetInt("LevelSaved", _levelNumber);
+            }
+            else if (levelID == 0)
+            {
+                SceneManager.LoadScene("SplashScreen");
+            }
         }
     }
 }

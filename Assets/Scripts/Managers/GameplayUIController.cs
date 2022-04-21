@@ -11,20 +11,17 @@ namespace Managers
     {
         public static GameplayUIController Instance;
         public GameObject gameStartView;
-        public Slider mySlider;
         public GameObject gameRestartView;
+        public GameObject diamondSprite;
         public GameObject hUDView;
         public GameObject gameEndView;
         public GameObject gameOverView;
         public GameObject gameCompletedView;
         public Text diamondCountDisplay;
-        public GameObject diamondSprite;
         public Text times2;
         public Image hUDDiamondImage;
-
-        private int _totalLevels;
+        public Slider mySlider;
         
-
         private void Awake()
         {
             if (Instance == null)
@@ -37,34 +34,17 @@ namespace Managers
                 Destroy(gameObject);
             }
         }
-        private void Start()
-        {
-            _totalLevels = MetaData.Instance.scriptableInstance.noOflevels;
-            mySlider.value = 0;
-        }
-
+        private void Start() => mySlider.value = 0;
+        
         public void NewGame()
         {
-            AudioManager.Instance.PlaySounds(AudioManager.GAMESTARTSOUND);
-            GameManager.Instance.levelNumber = 1;
-            GameManager.Instance.LoadNewLevel("Level 01");
+            GameManager.Instance.LoadFirstLevel();
             DisableSlider();
             
         }
         public void LoadGame()
         {
-            AudioManager.Instance.PlaySounds(AudioManager.GAMESTARTSOUND);
-            if (PlayerPrefs.HasKey("LevelSaved"))
-            {
-                string levelToLoad = PlayerPrefs.GetString("LevelSaved");
-                string levelno = levelToLoad.Substring(levelToLoad.Length - 1);
-                
-                if (levelToLoad != "Level 05" || levelToLoad != "SplashScreen")
-                {
-                    GameManager.Instance.LoadNewLevel(levelToLoad);
-                    GameManager.Instance.levelNumber = Int32.Parse(levelno);
-                }
-            }
+            GameManager.Instance.LoadCurrentLevel();
         }
         public void DisableSlider()
         {
@@ -89,29 +69,20 @@ namespace Managers
             gameOverView.SetActive(false);
             gameEndView.SetActive(false);
             gameRestartView.SetActive(true);
-            GameManager.Instance.LoadNewLevel("Level 0" + GameManager.Instance.levelNumber);
+            GameManager.Instance.LoadCurrentLevel();
 
         }
 
         public void EndLevel()
         {
-            if (GameManager.Instance.levelNumber < _totalLevels)
-            {
-                GameManager.Instance.levelNumber++;
-                PlayerMovement.startMoving = false;
-                gameEndView.SetActive(false);
-                gameRestartView.SetActive(true);
-                GameManager.Instance.LoadNewLevel("Level 0" + GameManager.Instance.levelNumber);
-            }
-            else
-            {
-                GameCompleted();
-            }
+            GameManager.Instance.LoadNextLevel();
+            gameEndView.SetActive(false);
+            gameRestartView.SetActive(true);
         }
         
         
 
-        private void GameCompleted()
+        public void GameCompleted()
         {
             
             gameCompletedView.SetActive(true);
@@ -119,15 +90,9 @@ namespace Managers
             
         }
 
-        public void DiamondCountIncrement(int diamondCount)
-        {
-            diamondCountDisplay.text = "" + diamondCount;
-        }
+        public void UpdateDiamondCount(int diamondCount) => diamondCountDisplay.text = "" + diamondCount;
 
-        public void SliderUpdate(float sliderValue)
-        {
-            mySlider.value = sliderValue;
-        }
+        public void SliderUpdate(float sliderValue) => mySlider.value = sliderValue;
 
         public void DiamondAnimation(Vector3 instantiatePos, Camera cam)
         {

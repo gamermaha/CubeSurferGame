@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Managers
 {
@@ -13,7 +14,7 @@ namespace Managers
         public float distanceInWeightPoints;
 
         [Header("Level Dynamics")] 
-        public int noOflevels;
+        public int noOfLevels;
         public double cubeLength;
         public float destroyMagnetTime;
         public float diamondTimer;
