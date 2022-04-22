@@ -79,7 +79,10 @@ namespace Managers
             if(_levelNumber != _totalLevels)
                 GameplayUIController.Instance.EndLevelView();
             else
+            {
                 GameplayUIController.Instance.GameCompletedView();
+                LoadNextLevel();
+            }
         }
         
         public void AddDiamonds(int diamonds)
