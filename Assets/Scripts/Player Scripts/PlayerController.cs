@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Environment_Setters;
 using Managers;
 using UnityEngine;
 
@@ -46,7 +47,7 @@ namespace Player_Scripts
             }
             _cubePos = Vector3.up * (float)_cubeSize/4;
             _cubesAdded.Add(cubeCollector.transform.GetChild(0).gameObject);
-            _cubesAdded[0].gameObject.tag = "Cube";
+            _cubesAdded[0].gameObject.tag = Constants.TAG_CUBE;
         }
 
         private void Update()
@@ -74,7 +75,7 @@ namespace Player_Scripts
             else
                 _diamondMultiplier = 2;
             
-            AudioManager.Instance.PlaySounds(AudioManager.DIAMONDCOLLECTEDSOUND);
+            AudioManager.Instance.PlaySounds(Constants.AUDIO_DIAMONDCOLLECTEDSOUND);
             GameManager.Instance.AddDiamonds(_diamondMultiplier);
             Vector3 screenPos = collided.transform.position;
             GameplayUIController.Instance.DiamondAnimation(screenPos, _cam);
@@ -83,8 +84,8 @@ namespace Player_Scripts
         
         public void AddCube(GameObject collided)
         {
-            AudioManager.Instance.PlaySounds(AudioManager.CUBECOLLECTEDSOUND);
-            collided.gameObject.tag = "CubeAdded";
+            AudioManager.Instance.PlaySounds(Constants.AUDIO_CUBECOLLECTEDSOUND);
+            collided.gameObject.tag = Constants.TAG_CUBEADDED;
             _playerManager.MoveUp(1);
             _cubesAdded.Add(collided);
             collided.transform.SetParent(cubeCollector.transform, false);
@@ -103,8 +104,8 @@ namespace Player_Scripts
             {
                 for (int o = 0; o < _obstacleSize; o++)
                 {
-                    AudioManager.Instance.PlaySounds(AudioManager.DESTROYCUBESOUND);
-                    _cubesAdded[o].gameObject.tag = "CubeDestroyed";
+                    AudioManager.Instance.PlaySounds(Constants.AUDIO_DESTROYCUBESOUND);
+                    _cubesAdded[o].gameObject.tag = Constants.TAG_CUBEDESTROYED;
                     cubeCollector.transform.GetChild(0).SetParent(null);
                     _cubePos -= Vector3.up * (float) _cubeSize;
                 } 
@@ -119,13 +120,13 @@ namespace Player_Scripts
         
         public void PullTrigger(Collider other)
         {
-            if (other.CompareTag("CubeDestroy") && _isCubeDestroyed)
+            if (other.CompareTag(Constants.TAG_DESTROYCUBE) && _isCubeDestroyed)
             {
                 cubeToDestroyScripts = other.gameObject.GetComponentsInChildren<CubeToDestroy>();
                 if (!_playerManager.wayPtFinished)
                     WaitToFall(cubeToDestroyScripts[_incrementForObstacle].obstacleSize);
             }
-            else if (other.CompareTag("EndLevel"))
+            else if (other.CompareTag(Constants.TAG_ENDLEVEL))
             {
                 GameManager.Instance.LevelCompleted();
                 _playerManager.StopPlayer();
@@ -145,7 +146,7 @@ namespace Player_Scripts
                 _addedCubePositions.Add(_cubesAdded[i].transform.position);
 
             Destroy(_cubesAdded[0]);
-            AudioManager.Instance.PlaySounds(AudioManager.DESTROYCUBESOUND);
+            AudioManager.Instance.PlaySounds(Constants.AUDIO_DESTROYCUBESOUND);
             playerCollider.transform.localScale -= new Vector3(0f, (float) _cubeSize, 0f);
             
             for (int k = 1; k < _cubesAdded.Count; k++)
@@ -167,8 +168,8 @@ namespace Player_Scripts
 
         public void MagnetCollected(GameObject magnet)
         {
-            AudioManager.Instance.PlaySounds(AudioManager.MAGNETCOLLECTEDSOUND);
-            magnet.tag = "MagnetGrabbed";
+            AudioManager.Instance.PlaySounds(Constants.AUDIO_MAGNETCOLLECTEDSOUND);
+            magnet.tag = Constants.TAG_MAGNETGRABBED;
             Magnet magnetCol = Instantiate(magnetCollider);
             magnetCol.transform.SetParent(transform.GetChild(0));
             _magnetSprite = magnet;
@@ -178,7 +179,7 @@ namespace Player_Scripts
 
         public void DiamondMulti(GameObject diamondMultiplier)
         {
-            AudioManager.Instance.PlaySounds(AudioManager.DIAMONDMULTIPLIERSOUND);
+            AudioManager.Instance.PlaySounds(Constants.AUDIO_DIAMONDMULTIPLIERSOUND);
             _isDiamondMulti = true;
             Destroy(diamondMultiplier);
             GameplayUIController.Instance.DiamondAnimationTimesTwo("X2");

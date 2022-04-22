@@ -4,8 +4,6 @@ namespace Player_Scripts
 {
     public class CubeToDestroy : MonoBehaviour
     {
-        // Start is called before the first frame update
-       public float obstacleSize;
-        
+        public float obstacleSize;
     }
 }

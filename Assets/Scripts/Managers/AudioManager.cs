@@ -1,19 +1,11 @@
-﻿using UnityEngine;
+﻿using Environment_Setters;
+using UnityEngine;
 
 namespace Managers
 {
     public class AudioManager : MonoBehaviour
     {
         public static AudioManager Instance;
-        public const string CUBECOLLECTEDSOUND = "cube_collected";
-        public const string DIAMONDCOLLECTEDSOUND = "diamond_collected";
-        public const string MAGNETCOLLECTEDSOUND = "magnet_collected";
-        public const string DIAMONDMULTIPLIERSOUND = "diamond_multiplier";
-        public const string DESTROYCUBESOUND = "cube_destroyed";
-        public const string GAMEOVERSOUND = "game_over";
-        public const string ENDLEVELSOUND = "end_level";
-        public const string GAMESTARTSOUND = "game_is_started";
-        public const string GAMECOMPLETEDSOUND = "game_completed";
         
         [SerializeField] private AudioSource cubeCollectSound;
         [SerializeField] private AudioSource diamondCollectSound;
@@ -40,31 +32,31 @@ namespace Managers
         {
             switch (action)
             {
-                case CUBECOLLECTEDSOUND:
+                case Constants.AUDIO_CUBECOLLECTEDSOUND:
                     cubeCollectSound.Play();
                     break;
-                case DIAMONDCOLLECTEDSOUND:
+                case Constants.AUDIO_DIAMONDCOLLECTEDSOUND:
                     diamondCollectSound.Play();
                     break;
-                case MAGNETCOLLECTEDSOUND:
+                case Constants.AUDIO_MAGNETCOLLECTEDSOUND:
                     magnetCollectSound.Play();
                     break;
-                case DIAMONDMULTIPLIERSOUND:
+                case Constants.AUDIO_DIAMONDMULTIPLIERSOUND:
                     diamondMultiplierSound.Play();
                     break;
-                case DESTROYCUBESOUND:
+                case Constants.AUDIO_DESTROYCUBESOUND:
                     destroyCubeSound.Play();
                     break;
-                case GAMEOVERSOUND:
+                case Constants.AUDIO_GAMEOVERSOUND:
                     gameOver.Play();
                     break;
-                case ENDLEVELSOUND:
+                case Constants.AUDIO_ENDLEVELSOUND:
                     endLevel.Play();
                     break;
-                case GAMESTARTSOUND:
+                case Constants.AUDIO_GAMESTARTSOUND:
                     gameStart.Play();
                     break;
-                case GAMECOMPLETEDSOUND:
+                case Constants.AUDIO_GAMECOMPLETEDSOUND:
                     gameCompleted.Play();
                     break;
             }

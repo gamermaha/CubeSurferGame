@@ -1,4 +1,4 @@
-﻿using Managers;
+﻿using Environment_Setters;
 using UnityEngine;
 
 namespace Player_Scripts
@@ -7,7 +7,6 @@ namespace Player_Scripts
     {
         public CubeToDestroy[] cubeToDestroyScripts;
         
-        [SerializeField] private Magnet magnetCollider;
         [SerializeField] private PlayerController player;
         
         private void OnTriggerEnter(Collider other)
@@ -16,10 +15,10 @@ namespace Player_Scripts
             
             switch (collidedTag)
             {
-                case "Cube":
+                case Constants.TAG_CUBE:
                     player.AddCube(other.gameObject);
                     break;
-                case "CubeDestroy":
+                case Constants.TAG_DESTROYCUBE:
                 {
                     cubeToDestroyScripts = other.gameObject.GetComponentsInChildren<CubeToDestroy>(); 
                     Vector3 playerLocalPos = player.transform.GetChild(0).localPosition;
@@ -40,22 +39,22 @@ namespace Player_Scripts
                     player.DestroyCube(other.gameObject, cubeToDestroyScripts[increment].obstacleSize, increment);
                 }
                     break;
-                case "Diamond":
+                case Constants.TAG_DIAMOND:
                     player.AddDiamond(other.gameObject);
                     break;
-                case "EndLadder":
+                case Constants.TAG_ENDLADDER:
                     player.EndLadder(other.gameObject);
                     break;
-                case "EndLevel":
+                case Constants.TAG_ENDLEVEL:
                     player.EndLadder(other.gameObject);
                     break;
-                case "WaterObstacle":
+                case Constants.TAG_WATEROBSTACLE:
                     player.WaterObstacle();
                     break;
-                case "Magnet":
+                case Constants.TAG_MAGNET:
                 player.MagnetCollected(other.gameObject);
                     break;
-                case "DiamondMultiplier":
+                case Constants.TAG_DIAMONDMULTIPLIER:
                     player.DiamondMulti(other.gameObject);
                     break;
             }

@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
-using Player_Scripts;
-using UnityEngine.Serialization;
 
 namespace Managers
 {

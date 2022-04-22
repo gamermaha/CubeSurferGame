@@ -68,13 +68,13 @@ namespace Managers
         
         public void GameOver()
         {
-            AudioManager.Instance.PlaySounds(AudioManager.GAMEOVERSOUND);
+            AudioManager.Instance.PlaySounds(Constants.AUDIO_GAMEOVERSOUND);
             GameplayUIController.Instance.GameOverView(); 
         }
         
         public void LevelCompleted()
         {
-            AudioManager.Instance.PlaySounds(AudioManager.GAMECOMPLETEDSOUND);
+            AudioManager.Instance.PlaySounds(Constants.AUDIO_GAMECOMPLETEDSOUND);
             
             if(_levelNumber != _totalLevels)
                 GameplayUIController.Instance.EndLevelView();
@@ -113,7 +113,7 @@ namespace Managers
             
             if (levelID != 0 && levelID <= _totalLevels)
             {
-                AudioManager.Instance.PlaySounds(AudioManager.GAMESTARTSOUND);
+                AudioManager.Instance.PlaySounds(Constants.AUDIO_GAMESTARTSOUND);
                 SceneManager.LoadScene("Level 0" + levelID);
                 PlayerPrefs.SetInt("LevelSaved", _levelNumber);
             }

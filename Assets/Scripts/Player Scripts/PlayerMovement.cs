@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Environment_Setters;
 using Managers;
 using UnityEngine;
 
@@ -125,7 +126,7 @@ namespace Player_Scripts
         
         public void MoveUp(int up)
         {
-            _playerAnimator.SetTrigger("jump");
+            _playerAnimator.SetTrigger(Constants.PLAYER_ANIMATION_STATE);
             playerCapsule.transform.Translate(0f, (float) _cubeSize * up, 0f);
         }
 
