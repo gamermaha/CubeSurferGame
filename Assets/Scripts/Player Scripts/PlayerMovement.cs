@@ -13,6 +13,7 @@ namespace Player_Scripts
         
         [SerializeField] private GameObject playerCapsule;
         private Vector3 _prevMousePos;
+        private Vector3 _prevTouchPos;
 
         private float _totalLength;
         private float _lengthCovered;
@@ -134,22 +135,37 @@ namespace Player_Scripts
         
         private void MovePlayerRightOrLeft()
         {
-            if (Input.GetMouseButton(0) && (Input.mousePosition.x - _prevMousePos.x) > 0)
-                MoveRight();
+            // if (Input.GetMouseButton(0) && (Input.mousePosition.x - _prevMousePos.x) > 0)
+            //     MoveRight();
+            //
+            // if (Input.GetMouseButton(0) && (Input.mousePosition.x - _prevMousePos.x) < 0)
+            //     MoveLeft();
+            if (Input.touches.Length > 0)
+            { 
+                Touch touch = Input.touches[0];
 
-            if (Input.GetMouseButton(0) && (Input.mousePosition.x - _prevMousePos.x) < 0)
-                MoveLeft();
+                if (touch.phase == TouchPhase.Moved)
+                {
+                    if (Input.touches[0].position.x - _prevTouchPos.x > 0)
+                        MoveRight();
+                    if (Input.touches[0].position.x - _prevTouchPos.x < 0)
+                        MoveLeft();
+                }
+            }
+
         }
         
         private void MoveRight()
         {
-            _prevMousePos = Input.mousePosition;
+            //_prevMousePos = Input.mousePosition;
+            _prevTouchPos = Input.touches[0].position;
             transform.GetChild(0).localPosition = new Vector3(Mathf.Clamp(transform.GetChild(0).localPosition.x + 0.1f,-_halfPathWidth, _halfPathWidth), 0f, 0f);
         }
         
         private void MoveLeft()
         {
-            _prevMousePos = Input.mousePosition;
+            //_prevMousePos = Input.mousePosition;
+            _prevTouchPos = Input.touches[0].position;
             transform.GetChild(0).localPosition = new Vector3(Mathf.Clamp(transform.GetChild(0).localPosition.x - 0.1f, -_halfPathWidth, _halfPathWidth), 0f, 0f);
         }
     } 
