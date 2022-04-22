@@ -61,7 +61,7 @@ namespace Managers
 
         public void LoadCurrentLevel()
         {
-            int levelToLoad = PlayerPrefs.GetInt("LevelSaved", 0);
+            int levelToLoad = PlayerPrefs.GetInt("LevelSaved", 1);
             _levelNumber = levelToLoad;
             LoadLevel(_levelNumber);
         }
@@ -113,17 +113,16 @@ namespace Managers
        
         private void LoadLevel(int levelID)
         {
-            
+            if (levelID > _totalLevels)
+            {
+                _levelNumber = 1;
+                levelID = 1;
+                PlayerPrefs.SetInt("LevelSaved", _levelNumber);
+            }
             if (levelID != 0 && levelID <= _totalLevels)
             {
                 AudioManager.Instance.PlaySounds(Constants.AUDIO_GAMESTARTSOUND);
                 SceneManager.LoadScene("Level 0" + levelID);
-                PlayerPrefs.SetInt("LevelSaved", _levelNumber);
-            }
-            else if (levelID > _totalLevels)
-            {
-                GameplayUIController.Instance.GameCompletedView();
-                _levelNumber = 1;
                 PlayerPrefs.SetInt("LevelSaved", _levelNumber);
             }
             else if (levelID == 0)

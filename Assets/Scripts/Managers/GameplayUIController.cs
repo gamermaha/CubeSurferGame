@@ -67,6 +67,12 @@ namespace Managers
             endLevelView.SetActive(false);
             gameRestartView.SetActive(true);
         }
+
+        public void GameCompletedButton()
+        {
+            gameCompletedView.SetActive(false);
+            gameRestartView.SetActive(true);
+        }
         
         public void GameCompletedView()
         {
