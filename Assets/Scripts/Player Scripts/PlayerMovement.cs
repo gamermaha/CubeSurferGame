@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Environment_Setters;
 using Managers;
 using UnityEngine;
@@ -80,8 +81,6 @@ namespace Player_Scripts
                 if (_wayPtIncrement >= _wayPoints.Count)
                     wayPtFinished = true;
 
-                MovePlayerRightOrLeft();
-                
                 if (_wayPtIncrement == 0)
                     _lengthCovered = Vector3.Distance(transform.position, _startPlayerPos.position); 
             
@@ -100,7 +99,12 @@ namespace Player_Scripts
             lengthCoveredPercentage =  _lengthCovered/_totalLength;
             GameplayUIController.Instance.SliderUpdate(lengthCoveredPercentage);
         }
-        
+
+        private void LateUpdate()
+        {
+            MovePlayerRightOrLeft();
+        }
+
         public void SetStartPos(Transform startPos) => _startPlayerPos = startPos;
         
         public void PlayerPositions(List<Transform> playerPositions)
