@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Managers;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Player_Scripts
 {
@@ -130,22 +129,15 @@ namespace Player_Scripts
             playerCapsule.transform.Translate(0f, (float) _cubeSize * up, 0f);
         }
 
-        public void MoveDown(int down)
-        { 
-            playerCapsule.transform.Translate(0f, -1 * (float) _cubeSize * down, 0f);
-        }
+        public void MoveDown(int down) => playerCapsule.transform.Translate(0f, -1 * (float) _cubeSize * down, 0f);
         
         private void MovePlayerRightOrLeft()
         {
             if (Input.GetMouseButton(0) && (Input.mousePosition.x - _prevMousePos.x) > 0)
-            {
                 MoveRight();
-            }
 
             if (Input.GetMouseButton(0) && (Input.mousePosition.x - _prevMousePos.x) < 0)
-            {
                 MoveLeft();
-            }
         }
         
         private void MoveRight()

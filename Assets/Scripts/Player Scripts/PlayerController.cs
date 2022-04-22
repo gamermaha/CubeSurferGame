@@ -79,8 +79,8 @@ namespace Player_Scripts
             Vector3 screenPos = collided.transform.position;
             GameplayUIController.Instance.DiamondAnimation(screenPos, _cam);
             Destroy(collided);
-
         }
+        
         public void AddCube(GameObject collided)
         {
             AudioManager.Instance.PlaySounds(AudioManager.CUBECOLLECTEDSOUND);
@@ -91,7 +91,6 @@ namespace Player_Scripts
             collided.transform.localPosition = _cubePos;
             playerCollider.transform.localScale += new Vector3(0f, (float) _cubeSize, 0f);
             _cubePos += Vector3.up * (float) _cubeSize;
-            
         }
 
         public void DestroyCube(GameObject collided, float obstacleSize, int incrementForObstacle)
@@ -117,6 +116,7 @@ namespace Player_Scripts
             }
             playerCollider.transform.localScale -= new Vector3(0f, (float) _cubeSize, 0f);
         }
+        
         public void PullTrigger(Collider other)
         {
             if (other.CompareTag("CubeDestroy") && _isCubeDestroyed)
@@ -137,7 +137,6 @@ namespace Player_Scripts
             DestroyCube(collided,1, 0);
             playerCollider.transform.localScale -= new Vector3(0f, (float) _cubeSize, 0f);
             _cubesAdded.RemoveAt(0);
-            
         }
         
         public void WaterObstacle()
