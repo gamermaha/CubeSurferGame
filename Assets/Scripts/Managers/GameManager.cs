@@ -75,7 +75,11 @@ namespace Managers
         public void LevelCompleted()
         {
             AudioManager.Instance.PlaySounds(AudioManager.GAMECOMPLETEDSOUND);
-            GameplayUIController.Instance.EndLevelView();
+            
+            if(_levelNumber != _totalLevels)
+                GameplayUIController.Instance.EndLevelView();
+            else
+                GameplayUIController.Instance.GameCompletedView();
         }
         
         public void AddDiamonds(int diamonds)
