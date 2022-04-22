@@ -21,7 +21,6 @@ namespace Player_Scripts
         private double _cubeSize;
         private bool _isCubeDestroyed;
         
-        private GameObject _magnetSprite;
         private float _destroyMagnetTime;
 
         private float _timeForDiamondTimes2;
@@ -52,11 +51,6 @@ namespace Player_Scripts
 
         private void Update()
         {
-            if (_magnetSprite != null)
-            {
-                if (_cubesAdded.Count > 0) 
-                    _magnetSprite.transform.localPosition = new Vector3(_cubesAdded[0].transform.position.x, _cubesAdded[0].transform.position.y + 6f, _cubesAdded[0].transform.position.z);
-            }
             if (_isDiamondMulti)
             {
                 _timeForDiamondTimes2 -= Time.deltaTime;
@@ -172,7 +166,8 @@ namespace Player_Scripts
             magnet.tag = Constants.TAG_MAGNETGRABBED;
             Magnet magnetCol = Instantiate(magnetCollider);
             magnetCol.transform.SetParent(transform.GetChild(0));
-            _magnetSprite = magnet;
+            magnet.transform.SetParent(transform.GetChild(0));
+            magnet.transform.localPosition = new Vector3(0.5f, 2f, -2f);
             Destroy(magnetCol, _destroyMagnetTime);
             Destroy(magnet, _destroyMagnetTime);
         }

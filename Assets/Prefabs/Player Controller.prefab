@@ -66,11 +66,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce4efd817558cb84a9e38da34de753ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  diamondMulti: 0
-  magnetSprite: {fileID: 7147334416721441751, guid: 91c94641a147a6a4d9456607a29c5381,
-    type: 3}
   cubeCollector: {fileID: 5519792523762702571}
-  diamondCollector: {fileID: 4614334520012249354}
   playerCollider: {fileID: 454772356134611058}
   magnetCollider: {fileID: 389745509034583804, guid: 860a26042ffe56842968c254213dadcb,
     type: 3}
@@ -227,7 +223,7 @@ GameObject:
   m_Layer: 0
   m_Name: PlayerCapsule
   m_TagString: Player
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -636,7 +632,8 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 122
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -6120074090811559432, guid: 157fdff30804fbf43ab1b9958e5f3bea, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 157fdff30804fbf43ab1b9958e5f3bea, type: 3}
 --- !u!4 &908777619981464064 stripped
 Transform:
