@@ -185,9 +185,6 @@ namespace Player_Scripts
             _prevMousePos = Input.mousePosition;
             transform.GetChild(0).localPosition = new Vector3(Mathf.Clamp(transform.GetChild(0).localPosition.x - 0.1f, -_halfPathWidth, _halfPathWidth), 0f, 0f);
         }
-        
-        
-        
     } 
 }
 

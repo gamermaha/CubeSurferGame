@@ -138,26 +138,31 @@ namespace Player_Scripts
         { 
             for (int i = 0; i < _cubesAdded.Count; i++)
                 _addedCubePositions.Add(_cubesAdded[i].transform.position);
-
-            Destroy(_cubesAdded[0]);
-            AudioManager.Instance.PlaySounds(Constants.AUDIO_DESTROYCUBESOUND);
-            playerCollider.transform.localScale -= new Vector3(0f, (float) _cubeSize, 0f);
-            
-            for (int k = 1; k < _cubesAdded.Count; k++)
-            {
-                var pos = _cubesAdded[k].transform.position;
-                _cubesAdded[k].transform.position = new Vector3(pos.x, _addedCubePositions[k-1].y, pos.z);
-            }
-            _cubesAdded.RemoveAt(0);
-            _addedCubePositions.Clear();
-            _cubePos -= Vector3.up * (float) _cubeSize;
-            _playerManager.MoveDown(1);
             
             if (_cubesAdded.Count <= 0)
             {
                 GameManager.Instance.GameOver();
                 _playerManager.StopPlayer();
             }
+            else
+            {
+                Destroy(_cubesAdded[0]);
+                AudioManager.Instance.PlaySounds(Constants.AUDIO_DESTROYCUBESOUND);
+                playerCollider.transform.localScale -= new Vector3(0f, (float) _cubeSize, 0f);
+            
+                for (int k = 1; k < _cubesAdded.Count; k++)
+                {
+                    var pos = _cubesAdded[k].transform.position;
+                    _cubesAdded[k].transform.position = new Vector3(pos.x, _addedCubePositions[k-1].y, pos.z);
+                }
+                _cubesAdded.RemoveAt(0);
+                _addedCubePositions.Clear();
+                _cubePos -= Vector3.up * (float) _cubeSize;
+                _playerManager.MoveDown(1);
+            }
+            
+            
+            
         }
 
         public void MagnetCollected(GameObject magnet)

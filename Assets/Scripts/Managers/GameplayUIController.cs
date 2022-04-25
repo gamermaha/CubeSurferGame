@@ -1,6 +1,8 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.Serialization;
 
 namespace Managers
 {
@@ -18,7 +20,8 @@ namespace Managers
         public Text diamondCountDisplay;
         public Text times2;
         public Image hUDDiamondImage;
-        public Slider mySlider;
+        public Slider levelProgression;
+        public Slider handSlider;
         
         private void Awake()
         {
@@ -35,17 +38,30 @@ namespace Managers
 
         private void Start()
         {
-            mySlider.value = 0;
+            levelProgression.value = 0;
+            handSlider.value = 0;
+            StartCoroutine(HandSlider());
             gameRestartView.SetActive(false);
+        }
+        IEnumerator HandSlider()
+        {
+            while (handSlider.value < 2f)
+            {
+                yield return new WaitForSeconds(0.05f);
+                handSlider.value += 0.1f;
+                if (handSlider.value >= 1)
+                    handSlider.value = 0;
+            }
         }
 
         public void PlayGameButton()
         {
             GameManager.Instance.LoadCurrentLevel();
-            DisableSlider();
+            StopCoroutine(HandSlider());
+            PlayGame();
         }
 
-        public void DisableSlider()
+        public void PlayGame()
         {
             gameStartView.SetActive(false);
             gameRestartView.SetActive(false);
@@ -88,7 +104,7 @@ namespace Managers
 
         public void UpdateDiamondCount(int diamondCount) => diamondCountDisplay.text = "" + diamondCount;
 
-        public void SliderUpdate(float sliderValue) => mySlider.value = sliderValue;
+        public void SliderUpdate(float sliderValue) => levelProgression.value = sliderValue;
         
         public void DiamondAnimation(Vector3 instantiatePos, Camera cam)
         {

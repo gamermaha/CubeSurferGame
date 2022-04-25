@@ -1,4 +1,5 @@
-﻿using Environment_Setters;
+﻿using System;
+using Environment_Setters;
 using Player_Scripts;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -19,6 +20,7 @@ namespace Managers
         private int _diamondCount;
         private int _levelNumber;
         private int _totalLevels;
+        private bool _isOnStart;
         
         private void Awake()
         {
@@ -41,9 +43,33 @@ namespace Managers
         void Start()
         {
             _totalLevels = MetaData.Instance.scriptableInstance.noOfLevels;
+            _isOnStart = true;
             LoadCurrentLevel();
         }
-        
+
+        private void Update()
+        {
+            if (_isOnStart)
+            { 
+                #if UNITY_EDITOR
+                if (Input.GetMouseButton(0))
+                {
+                    GameplayUIController.Instance.PlayGameButton();
+                    _isOnStart = false;
+                }
+
+                #elif UNITY_ANDROID
+                if (Input.touches.Length > 0)
+                {
+                    GameplayUIController.Instance.PlayGameButton();
+                    _isOnStart = false;
+                }
+
+                #endif
+            }
+
+        }
+
         private void OnDisable()
         {
             SceneManager.sceneLoaded -= OnLevelFinishLoading;
