@@ -193,10 +193,7 @@ namespace Player_Scripts
                 var pos = _cubesAdded[k].transform.position;
                 _cubesAdded[k].transform.position = new Vector3(pos.x, _addedCubePositions[k-_obstacleSize].y, pos.z);
             }
-            
-            for (int o = 0; o < _obstacleSize; o++)
-                _cubesAdded.RemoveAt(0);
-            
+            _cubesAdded.RemoveRange(0,_obstacleSize);
             _addedCubePositions.Clear();
             _isCubeDestroyed = false;
         }

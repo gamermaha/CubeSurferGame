@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Environment_Setters;
 using Managers;
 using UnityEngine;
@@ -13,7 +12,7 @@ namespace Player_Scripts
         public float lengthCoveredPercentage;
         
         [SerializeField] private GameObject playerCapsule;
-        private Vector3 _prevMousePos;
+        //private Vector3 _prevMousePos;
         private Vector3 _prevTouchPos;
 
         private float _totalLength;
@@ -33,7 +32,7 @@ namespace Player_Scripts
         void Awake()
         {
             _playerAnimator = playerCapsule.GetComponentInChildren<Animator>();
-            _prevMousePos = new Vector3(0f, 0f, 0f);
+            //_prevMousePos = new Vector3(0f, 0f, 0f);
             _coveredDistanceInWayPoints = 0;
         }
         private void Start()
@@ -156,7 +155,6 @@ namespace Player_Scripts
                         MoveLeft();
                 }
             }
-
         }
         
         private void MoveRight()

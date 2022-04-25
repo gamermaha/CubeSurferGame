@@ -14,8 +14,8 @@ namespace Managers
         [SerializeField] private PlayerController playerPrefab;
         
         private PlayerMovement _playerMovement;
-        private Level _currentLevel;
         private PlayerController _playerController;
+        private Level _currentLevel;
         private int _diamondCount;
         private int _levelNumber;
         private int _totalLevels;
@@ -124,10 +124,6 @@ namespace Managers
                 AudioManager.Instance.PlaySounds(Constants.AUDIO_GAMESTARTSOUND);
                 SceneManager.LoadScene("Level 0" + levelID);
                 PlayerPrefs.SetInt("LevelSaved", _levelNumber);
-            }
-            else if (levelID == 0)
-            {
-                SceneManager.LoadScene("SplashScreen");
             }
         }
     }

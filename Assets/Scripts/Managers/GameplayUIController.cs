@@ -7,6 +7,7 @@ namespace Managers
     public class GameplayUIController : MonoBehaviour
     {
         public static GameplayUIController Instance;
+        
         public GameObject gameStartView;
         public GameObject gameRestartView;
         public GameObject hUDView;
