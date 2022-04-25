@@ -12,7 +12,7 @@ namespace Player_Scripts
         public float lengthCoveredPercentage;
         
         [SerializeField] private GameObject playerCapsule;
-        //private Vector3 _prevMousePos;
+        private Vector3 _prevMousePos;
         private Vector3 _prevTouchPos;
 
         private float _totalLength;
@@ -32,7 +32,7 @@ namespace Player_Scripts
         void Awake()
         {
             _playerAnimator = playerCapsule.GetComponentInChildren<Animator>();
-            //_prevMousePos = new Vector3(0f, 0f, 0f);
+            _prevMousePos = new Vector3(0f, 0f, 0f);
             _coveredDistanceInWayPoints = 0;
         }
         private void Start()
@@ -138,38 +138,56 @@ namespace Player_Scripts
         
         private void MovePlayerRightOrLeft()
         {
-            // if (Input.GetMouseButton(0) && (Input.mousePosition.x - _prevMousePos.x) > 0)
-            //     MoveRight();
-            //
-            // if (Input.GetMouseButton(0) && (Input.mousePosition.x - _prevMousePos.x) < 0)
-            //     MoveLeft();
-            if (Input.touches.Length > 0)
-            { 
-                Touch touch = Input.touches[0];
+            #if UNITY_EDITOR
+                if (Input.GetMouseButton(0) && (Input.mousePosition.x - _prevMousePos.x) > 0)
+                    MoveRightMouseIP();
+                
+                if (Input.GetMouseButton(0) && (Input.mousePosition.x - _prevMousePos.x) < 0)
+                    MoveLeftMouseIP();
+                
+            #elif UNITY_ANDROID
+                if (Input.touches.Length > 0)
+                { 
+                    Touch touch = Input.touches[0];
 
-                if (touch.phase == TouchPhase.Moved)
-                {
-                    if (Input.touches[0].position.x - _prevTouchPos.x > 0)
-                        MoveRight();
-                    if (Input.touches[0].position.x - _prevTouchPos.x < 0)
-                        MoveLeft();
+                    if (touch.phase == TouchPhase.Moved)
+                    {
+                        if (Input.touches[0].position.x - _prevTouchPos.x > 0)
+                            MoveRightTouchIP();
+                        if (Input.touches[0].position.x - _prevTouchPos.x < 0)
+                            MoveLeftTouchIP();
+                    }
                 }
-            }
+            
+            #endif
         }
         
-        private void MoveRight()
+        private void MoveRightTouchIP()
         {
-            //_prevMousePos = Input.mousePosition;
             _prevTouchPos = Input.touches[0].position;
             transform.GetChild(0).localPosition = new Vector3(Mathf.Clamp(transform.GetChild(0).localPosition.x + 0.1f,-_halfPathWidth, _halfPathWidth), 0f, 0f);
         }
         
-        private void MoveLeft()
+        private void MoveLeftTouchIP()
         {
-            //_prevMousePos = Input.mousePosition;
             _prevTouchPos = Input.touches[0].position;
             transform.GetChild(0).localPosition = new Vector3(Mathf.Clamp(transform.GetChild(0).localPosition.x - 0.1f, -_halfPathWidth, _halfPathWidth), 0f, 0f);
         }
+        
+        private void MoveRightMouseIP()
+        {
+            _prevMousePos = Input.mousePosition;
+            transform.GetChild(0).localPosition = new Vector3(Mathf.Clamp(transform.GetChild(0).localPosition.x + 0.1f,-_halfPathWidth, _halfPathWidth), 0f, 0f);
+        }
+        
+        private void MoveLeftMouseIP()
+        {
+            _prevMousePos = Input.mousePosition;
+            transform.GetChild(0).localPosition = new Vector3(Mathf.Clamp(transform.GetChild(0).localPosition.x - 0.1f, -_halfPathWidth, _halfPathWidth), 0f, 0f);
+        }
+        
+        
+        
     } 
 }
 
