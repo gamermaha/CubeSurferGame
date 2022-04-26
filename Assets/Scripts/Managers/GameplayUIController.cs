@@ -2,7 +2,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
-using UnityEngine.Serialization;
 
 namespace Managers
 {
@@ -54,7 +53,7 @@ namespace Managers
             }
         }
 
-        public void PlayGameButton()
+        public void StartGame()
         {
             GameManager.Instance.LoadCurrentLevel();
             StopCoroutine(HandSlider());
@@ -101,11 +100,11 @@ namespace Managers
         public void EndLevelView() => endLevelView.SetActive(true);
         
         public void GameOverView() => gameOverView.SetActive(true);
-
+        //taken to hudview script 
         public void UpdateDiamondCount(int diamondCount) => diamondCountDisplay.text = "" + diamondCount;
-
+        //taken to hudview script 
         public void SliderUpdate(float sliderValue) => levelProgression.value = sliderValue;
-        
+        //taken to hudview script 
         public void DiamondAnimation(Vector3 instantiatePos, Camera cam)
         {
             GameObject diamond = Instantiate(diamondSprite);
@@ -117,7 +116,7 @@ namespace Managers
                     Destroy(diamond);
                 });
         }
-
+ //taken to hudview script 
         public void DiamondAnimationTimesTwo(string display)
         {
             times2.transform.position = hUDDiamondImage.transform.position;

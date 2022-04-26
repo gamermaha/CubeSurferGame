@@ -57,7 +57,8 @@ namespace Player_Scripts
                 if (_timeForDiamondTimes2 <= 0)
                 {
                     _isDiamondMulti = false;
-                    GameplayUIController.Instance.DiamondAnimationTimesTwo("");
+                    // GameplayUIController.Instance.DiamondAnimationTimesTwo("");
+                    MenuManager.Instance.CallDiamondAnimationTimesTwo("");
                 }
             }
         }
@@ -72,7 +73,8 @@ namespace Player_Scripts
             AudioManager.Instance.PlaySounds(Constants.AUDIO_DIAMONDCOLLECTEDSOUND);
             GameManager.Instance.AddDiamonds(_diamondMultiplier);
             Vector3 screenPos = collided.transform.position;
-            GameplayUIController.Instance.DiamondAnimation(screenPos, _cam);
+            // GameplayUIController.Instance.DiamondAnimation(screenPos, _cam);
+            MenuManager.Instance.CallDiamondAnimation(screenPos, _cam);
             Destroy(collided);
         }
         
@@ -129,9 +131,17 @@ namespace Player_Scripts
         
         public void EndLadder(GameObject collided)
         {
-            DestroyCube(collided,1, 0);
-            playerCollider.transform.localScale -= new Vector3(0f, (float) _cubeSize, 0f);
-            _cubesAdded.RemoveAt(0);
+            if (_cubesAdded.Count > 0)
+            {
+                DestroyCube(collided, 1, 0);
+                playerCollider.transform.localScale -= new Vector3(0f, (float) _cubeSize, 0f);
+                _cubesAdded.RemoveAt(0);
+            }
+            else
+            {
+                GameManager.Instance.GameOver();
+                _playerManager.StopPlayer();
+            }
         }
         
         public void WaterObstacle()
@@ -182,9 +192,10 @@ namespace Player_Scripts
             AudioManager.Instance.PlaySounds(Constants.AUDIO_DIAMONDMULTIPLIERSOUND);
             _isDiamondMulti = true;
             Destroy(diamondMultiplier);
-            GameplayUIController.Instance.DiamondAnimationTimesTwo("X2");
+            // GameplayUIController.Instance.DiamondAnimationTimesTwo("X2");
+            MenuManager.Instance.CallDiamondAnimationTimesTwo("X2");
         }
-        
+
         private void WaitToFall(float obstacleSize)
         {
             int _obstacleSize = (int) obstacleSize;

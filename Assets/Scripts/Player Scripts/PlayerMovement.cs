@@ -96,7 +96,8 @@ namespace Player_Scripts
                 transform.Translate(0f, 0f, _playerSpeed * Time.deltaTime);
             }
             lengthCoveredPercentage =  _lengthCovered/_totalLength;
-            GameplayUIController.Instance.SliderUpdate(lengthCoveredPercentage);
+            //GameplayUIController.Instance.SliderUpdate(lengthCoveredPercentage);
+            MenuManager.Instance.CallSliderUpdate(lengthCoveredPercentage);
         }
 
         private void LateUpdate()

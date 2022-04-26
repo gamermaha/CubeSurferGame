@@ -54,27 +54,24 @@ namespace Managers
                 #if UNITY_EDITOR
                 if (Input.GetMouseButton(0))
                 {
-                    GameplayUIController.Instance.PlayGameButton();
+                    //GameplayUIController.Instance.StartGame();
+                    MenuManager.Instance.StartGame();
                     _isOnStart = false;
                 }
 
                 #elif UNITY_ANDROID
                 if (Input.touches.Length > 0)
                 {
-                    GameplayUIController.Instance.PlayGameButton();
+                    //GameplayUIController.Instance.StartGame();
+                    MenuManager.Instance.StartGame();
                     _isOnStart = false;
                 }
-
                 #endif
             }
-
         }
 
-        private void OnDisable()
-        {
-            SceneManager.sceneLoaded -= OnLevelFinishLoading;
-        }
-        
+        private void OnDisable() => SceneManager.sceneLoaded -= OnLevelFinishLoading;
+
         public void PlayerCanMoveNow() => PlayerMovement.StartMoving = true;
 
         public void PlayerMustStopNow() => PlayerMovement.StartMoving = false;
@@ -95,18 +92,23 @@ namespace Managers
         public void GameOver()
         {
             AudioManager.Instance.PlaySounds(Constants.AUDIO_GAMEOVERSOUND);
-            GameplayUIController.Instance.GameOverView(); 
+            //GameplayUIController.Instance.GameOverView(); 
+            MenuManager.Instance.GameOverView();
         }
         
         public void LevelCompleted()
         {
             AudioManager.Instance.PlaySounds(Constants.AUDIO_GAMECOMPLETEDSOUND);
-            
-            if(_levelNumber != _totalLevels)
-                GameplayUIController.Instance.EndLevelView();
+
+            if (_levelNumber != _totalLevels)
+            {
+                //GameplayUIController.Instance.EndLevelView();
+                MenuManager.Instance.EndLevelView();
+            }
             else
             {
-                GameplayUIController.Instance.GameCompletedView();
+                //GameplayUIController.Instance.GameCompletedView();
+                MenuManager.Instance.GameCompletedView();
                 LoadNextLevel();
             }
         }
@@ -114,7 +116,8 @@ namespace Managers
         public void AddDiamonds(int diamonds)
         {
             _diamondCount += diamonds;
-            GameplayUIController.Instance.UpdateDiamondCount(_diamondCount);
+            // GameplayUIController.Instance.UpdateDiamondCount(_diamondCount);
+            MenuManager.Instance.CallUpdateDiamondCount(_diamondCount);
         }
         private void OnLevelFinishLoading(Scene scene, LoadSceneMode mode)
         {
