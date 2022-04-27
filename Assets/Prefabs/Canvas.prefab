@@ -130,7 +130,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &645097380
 RectTransform:
   m_ObjectHideFlags: 0
@@ -347,7 +347,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1207113639
 RectTransform:
   m_ObjectHideFlags: 0
@@ -429,6 +429,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dfde5f156f110a4983bead90dd0e3ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  handSlider: {fileID: 6301021596108746233}
 --- !u!1 &1424034539
 GameObject:
   m_ObjectHideFlags: 0
@@ -615,7 +616,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 110, y: 0}
+  m_AnchoredPosition: {x: 100.4, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1740945402
@@ -956,7 +957,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 37396263115425540}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -1052,7 +1053,7 @@ GameObject:
   - component: {fileID: 37396263115425539}
   - component: {fileID: 37396263115425538}
   - component: {fileID: 37396263115425537}
-  - component: {fileID: 37396263115425541}
+  - component: {fileID: 5847663271458394662}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1077,6 +1078,7 @@ RectTransform:
   - {fileID: 8536937386713467144}
   - {fileID: 1207113639}
   - {fileID: 645097380}
+  - {fileID: 6811722257400835312}
   - {fileID: 2043843786}
   - {fileID: 355059237475098842}
   m_Father: {fileID: 0}
@@ -1147,7 +1149,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &37396263115425541
+--- !u!114 &5847663271458394662
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1156,22 +1158,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 37396263115425536}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbbe9cfa746c6124985e8b517f3e4419, type: 3}
+  m_Script: {fileID: 11500000, guid: 3b004d7941e20384ca7feb80f926e946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameStartView: {fileID: 1372239756}
-  gameRestartView: {fileID: 4798139860000151057}
-  hUDView: {fileID: 5689572068097587982}
-  endLevelView: {fileID: 1399179878785640413}
-  gameOverView: {fileID: 645097379}
-  gameCompletedView: {fileID: 1207113638}
-  diamondSprite: {fileID: 5145693980990650559, guid: ad5f6429feb0fcd4db8c7402e4499dcd,
-    type: 3}
-  diamondCountDisplay: {fileID: 1440220665}
-  times2: {fileID: 1059575641}
-  hUDDiamondImage: {fileID: 1740945401}
-  levelProgression: {fileID: 1018533080}
-  handSlider: {fileID: 6301021596108746233}
+  gameStartView: {fileID: 3739604830548341796}
+  gameRestartView: {fileID: 7767006952275727042}
+  hUDView: {fileID: 7390715155510449092}
+  endLevelView: {fileID: 4543913876350857706}
+  gameOverView: {fileID: 2306115489861058155}
+  gameCompletedView: {fileID: 1109355299285478125}
+  baseView: {fileID: 8317797380542295449}
 --- !u!1 &37396265017233896
 GameObject:
   m_ObjectHideFlags: 0
@@ -1418,7 +1414,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8536937386713467144
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1542,7 +1538,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2907691042965178896
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1625,6 +1621,54 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7a5ea772d0a85f46b96c5a088c1ec18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  diamondSprite: {fileID: 1740945399}
+  diamondCountDisplay: {fileID: 1440220665}
+  times2: {fileID: 1059575641}
+  hUDDiamondImage: {fileID: 1740945401}
+  levelProgression: {fileID: 1018533080}
+--- !u!1 &7913446606612020642
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6811722257400835312}
+  - component: {fileID: 8317797380542295449}
+  m_Layer: 0
+  m_Name: BaseView
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6811722257400835312
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7913446606612020642}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 37396263115425540}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8317797380542295449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7913446606612020642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 903e870fe0f4c0245977c74929ad76fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &9219167066472808168
@@ -1725,7 +1769,7 @@ PrefabInstance:
     - target: {fileID: 355059237401391589, guid: 058a85f2f5c3f9d4cb0fbcafc898a9c1,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 355059237401391589, guid: 058a85f2f5c3f9d4cb0fbcafc898a9c1,
         type: 3}
@@ -1931,7 +1975,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 37396263115425541}
+      objectReference: {fileID: 2306115489861058155}
     - target: {fileID: 1775221624457560527, guid: 7e51d3fbda237484398eab2ff6067b24,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -1940,7 +1984,7 @@ PrefabInstance:
     - target: {fileID: 1775221624457560527, guid: 7e51d3fbda237484398eab2ff6067b24,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: RestartOnGameOverButton
+      value: GameOverButton
       objectReference: {fileID: 0}
     - target: {fileID: 1775221624457560527, guid: 7e51d3fbda237484398eab2ff6067b24,
         type: 3}
@@ -2101,7 +2145,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 37396263115425541}
+      objectReference: {fileID: 1109355299285478125}
     - target: {fileID: 1775221624457560527, guid: 7e51d3fbda237484398eab2ff6067b24,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -2271,7 +2315,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 37396263115425541}
+      objectReference: {fileID: 7767006952275727042}
     - target: {fileID: 1775221624457560527, guid: 7e51d3fbda237484398eab2ff6067b24,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -2280,7 +2324,7 @@ PrefabInstance:
     - target: {fileID: 1775221624457560527, guid: 7e51d3fbda237484398eab2ff6067b24,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PlayGame
+      value: NewLevelButton
       objectReference: {fileID: 0}
     - target: {fileID: 1775221624457560527, guid: 7e51d3fbda237484398eab2ff6067b24,
         type: 3}
@@ -2436,7 +2480,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 37396263115425541}
+      objectReference: {fileID: 4543913876350857706}
     - target: {fileID: 1775221624457560527, guid: 7e51d3fbda237484398eab2ff6067b24,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState

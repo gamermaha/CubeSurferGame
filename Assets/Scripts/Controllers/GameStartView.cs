@@ -9,10 +9,7 @@ namespace Controllers
     {
         public Slider handSlider;
 
-        private void Start()
-        {
-            handSlider.value = 0;
-        }
+        private void Start()=> handSlider.value = 0;
 
         public IEnumerator HandSlider()
         {
@@ -24,16 +21,5 @@ namespace Controllers
                     handSlider.value = 0;
             }
         }
-        // public void SetActiveTrue()
-        // {
-        //     gameObject.SetActive(true);
-        //     
-        // }
-        // public void SetActiveFalse()
-        // {
-        //     
-        //     gameObject.SetActive(false);
-        // }
-        
     }
 }

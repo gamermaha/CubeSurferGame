@@ -13,20 +13,10 @@ namespace Controllers
         public Image hUDDiamondImage;
         public Slider levelProgression;
 
-        private void Start()
-        {
-            levelProgression.value = 0;
-        }
-
-        // public void SetActiveTrue()
-        // {
-        //     gameObject.SetActive(true);
-        // }
-        // public void SetActiveFalse()
-        // {
-        //     gameObject.SetActive(false);
-        // }
+        private void Start() => levelProgression.value = 0;
+       
         public void UpdateDiamondCount(int diamondCount) => diamondCountDisplay.text = "" + diamondCount;
+        
         public void DiamondAnimation(Vector3 instantiatePos, Camera cam)
         {
             GameObject diamond = Instantiate(diamondSprite);

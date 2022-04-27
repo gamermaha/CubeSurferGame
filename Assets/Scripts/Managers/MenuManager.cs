@@ -7,12 +7,13 @@ namespace Managers
     {
         public static MenuManager Instance;
         
-        [SerializeField] private GameStartView _gameStartView;
-        [SerializeField] private GameRestartView _gameRestartView;
-        [SerializeField] private HUDView _hUDView;
-        [SerializeField] private EndLevelView _endLevelView;
-        [SerializeField] private GameOverView _gameOverView;
-        [SerializeField] private GameCompletedView _gameCompletedView;
+        [SerializeField] private GameStartView gameStartView;
+        [SerializeField] private GameRestartView gameRestartView;
+        [SerializeField] private HUDView hUDView;
+        [SerializeField] private EndLevelView endLevelView;
+        [SerializeField] private GameOverView gameOverView;
+        [SerializeField] private GameCompletedView gameCompletedView;
+        [SerializeField] private BaseView baseView;
         
         private void Awake()
         {
@@ -29,69 +30,68 @@ namespace Managers
 
         private void Start()
         {
-            _gameStartView.gameObject.SetActive(true);
-            _gameRestartView.gameObject.SetActive(false);
-            _hUDView.gameObject.SetActive(false);
-            _endLevelView.gameObject.SetActive(false);
-            _gameOverView.gameObject.SetActive(false);
-            _gameCompletedView.gameObject.SetActive(false);
-            StartCoroutine(_gameStartView.HandSlider());
+            baseView.ShowView(gameStartView.gameObject);
+            baseView.HideView(gameRestartView.gameObject);
+            baseView.HideView(hUDView.gameObject);
+            baseView.HideView(endLevelView.gameObject);
+            baseView.HideView(gameOverView.gameObject);
+            baseView.HideView(gameCompletedView.gameObject);
+            StartCoroutine(gameStartView.HandSlider());
         }
 
         public void StartGame()
         {
-            StopCoroutine(_gameStartView.HandSlider());
+            StopCoroutine(gameStartView.HandSlider());
             PlayGame();
         }
+        
         public void PlayGame()
         {
-            _gameStartView.gameObject.SetActive(false);
-            _gameRestartView.gameObject.SetActive(false);
-            _hUDView.gameObject.SetActive(true);
+            baseView.HideView(gameStartView.gameObject);
+            baseView.HideView(gameRestartView.gameObject);
+            baseView.ShowView(hUDView.gameObject);
             GameManager.Instance.PlayerCanMoveNow();
         }
+        
         public void RestartOnGameOverButton()
         {
             GameManager.Instance.PlayerMustStopNow();
-            _gameOverView.gameObject.SetActive(false);
-            _endLevelView.gameObject.SetActive(false);
-            _gameRestartView.gameObject.SetActive(true);
+            baseView.HideView(gameOverView.gameObject);
+            baseView.HideView(endLevelView.gameObject);
+            baseView.ShowView(gameRestartView.gameObject);
             GameManager.Instance.LoadCurrentLevel();
         }
         
         public void EndLevel()
         {
             GameManager.Instance.LoadNextLevel();
-            _endLevelView.gameObject.SetActive(false);
-            _gameRestartView.gameObject.SetActive(true);
+            baseView.HideView(endLevelView.gameObject);
+            baseView.ShowView(gameRestartView.gameObject);
         }
         
         public void GameCompleted()
         {
-            _gameCompletedView.gameObject.SetActive(false);
-            _gameRestartView.gameObject.SetActive(true);
+            baseView.HideView(gameCompletedView.gameObject);
+            baseView.ShowView(gameRestartView.gameObject);
         }
         
         public void GameCompletedView()
         {
-            _gameCompletedView.gameObject.SetActive(true);
-            _endLevelView.gameObject.SetActive(false);
-            _gameRestartView.gameObject.SetActive(false); 
+            baseView.ShowView(gameCompletedView.gameObject);
+            baseView.HideView(endLevelView.gameObject);
+            baseView.HideView(gameRestartView.gameObject); 
         }
 
-        public void EndLevelView() => _endLevelView.gameObject.SetActive(true);
+        public void EndLevelView() => baseView.ShowView(endLevelView.gameObject);
         
-        public void GameOverView() => _gameOverView.gameObject.SetActive(true);
+        public void GameOverView() => baseView.ShowView(gameOverView.gameObject);
 
-        public void CallUpdateDiamondCount(int diamondCount) => _hUDView.UpdateDiamondCount(diamondCount);
+        public void CallUpdateDiamondCount(int diamondCount) => hUDView.UpdateDiamondCount(diamondCount);
         
-        public void CallDiamondAnimation(Vector3 instantiatePos, Camera cam) => _hUDView.DiamondAnimation(instantiatePos, cam);
+        public void CallDiamondAnimation(Vector3 instantiatePos, Camera cam) => hUDView.DiamondAnimation(instantiatePos, cam);
         
-        public void CallDiamondAnimationTimesTwo(string display) => _hUDView.DiamondAnimationTimesTwo(display);
+        public void CallDiamondAnimationTimesTwo(string display) => hUDView.DiamondAnimationTimesTwo(display);
 
-        public void CallSliderUpdate(float lengthCoveredPercentage)
-        {
-            _hUDView.SliderUpdate(lengthCoveredPercentage);
-        }
+        public void CallSliderUpdate(float lengthCoveredPercentage) => hUDView.SliderUpdate(lengthCoveredPercentage);
     }
 }
