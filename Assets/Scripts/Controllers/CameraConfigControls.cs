@@ -1,4 +1,5 @@
 ﻿using System;
+using Managers;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -48,6 +49,8 @@ namespace Controllers
             PlayerPrefs.SetFloat("CamxRot", xRotSlider.value);
             PlayerPrefs.SetFloat("CamyRot", yRotSlider.value);
         }
+
+        public void BackButton() => GameManager.Instance.BackFromDebugScene();
     }
     
 }

@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using Managers;
 
 namespace Controllers
 {
@@ -34,5 +35,7 @@ namespace Controllers
             times2.text = display;
         }
         public void SliderUpdate(float sliderValue) => levelProgression.value = sliderValue;
+
+        public void CameraConfigButton() => GameManager.Instance.LoadDebugScene();
     }
 }

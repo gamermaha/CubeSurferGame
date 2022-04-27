@@ -75,6 +75,20 @@ namespace Managers
         public void PlayerCanMoveNow() => PlayerMovement.StartMoving = true;
 
         public void PlayerMustStopNow() => PlayerMovement.StartMoving = false;
+
+        public void LoadDebugScene()
+        {
+            MenuManager.Instance.HideAllViews();
+            PlayerMustStopNow();
+            SceneManager.LoadScene("Debug Scene");
+            
+        }
+
+        public void BackFromDebugScene()
+        {
+            LoadCurrentLevel();
+            MenuManager.Instance.PlayGame();
+        }
         
         public void LoadNextLevel()
         {

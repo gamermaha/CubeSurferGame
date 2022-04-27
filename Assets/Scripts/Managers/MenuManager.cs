@@ -32,7 +32,7 @@ namespace Managers
         {
             baseView.ShowView(gameStartView.gameObject);
             baseView.HideView(gameRestartView.gameObject);
-            baseView.HideView(hUDView.gameObject);
+            baseView.ShowView(hUDView.gameObject);
             baseView.HideView(endLevelView.gameObject);
             baseView.HideView(gameOverView.gameObject);
             baseView.HideView(gameCompletedView.gameObject);
@@ -80,6 +80,16 @@ namespace Managers
             baseView.ShowView(gameCompletedView.gameObject);
             baseView.HideView(endLevelView.gameObject);
             baseView.HideView(gameRestartView.gameObject); 
+        }
+
+        public void HideAllViews()
+        {
+            baseView.HideView(gameStartView.gameObject);
+            baseView.HideView(gameRestartView.gameObject);
+            baseView.HideView(hUDView.gameObject);
+            baseView.HideView(endLevelView.gameObject);
+            baseView.HideView(gameOverView.gameObject);
+            baseView.HideView(gameCompletedView.gameObject);
         }
 
         public void EndLevelView() => baseView.ShowView(endLevelView.gameObject);
