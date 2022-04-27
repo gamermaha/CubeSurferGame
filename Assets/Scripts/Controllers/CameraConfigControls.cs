@@ -20,7 +20,7 @@ namespace Controllers
             xTransSlider.minValue = -3;
             xTransSlider.maxValue = 10;
             yTransSlider.minValue = 1;
-            yTransSlider.maxValue = 10;
+            yTransSlider.maxValue = 30;
             zTransSlider.minValue = -75;
             zTransSlider.maxValue = -25;
             xRotSlider.minValue = -45;

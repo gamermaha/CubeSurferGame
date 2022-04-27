@@ -147,12 +147,7 @@ namespace Player_Scripts
             for (int i = 0; i < _cubesAdded.Count; i++)
                 _addedCubePositions.Add(_cubesAdded[i].transform.position);
             
-            if (_cubesAdded.Count <= 0)
-            {
-                GameManager.Instance.GameOver();
-                _playerManager.StopPlayer();
-            }
-            else
+            if (_cubesAdded.Count > 0)
             {
                 Destroy(_cubesAdded[0]);
                 AudioManager.Instance.PlaySounds(Constants.AUDIO_DESTROYCUBESOUND);
@@ -167,6 +162,11 @@ namespace Player_Scripts
                 _addedCubePositions.Clear();
                 _cubePos -= Vector3.up * (float) _cubeSize;
                 _playerManager.MoveDown(1);
+            }
+            else
+            {
+                GameManager.Instance.GameOver();
+                _playerManager.StopPlayer();
             }
         }
 
