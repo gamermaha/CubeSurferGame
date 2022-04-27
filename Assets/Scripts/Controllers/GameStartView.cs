@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Controllers
 { 
-    public class GameStartView : MonoBehaviour
+    public class GameStartView : BaseView
     {
         public Slider handSlider;
 

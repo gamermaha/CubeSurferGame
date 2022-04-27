@@ -1,12 +1,11 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using Managers;
 
 namespace Controllers
 {
-    public class HUDView : MonoBehaviour
+    public class HUDView : BaseView
     {
         public GameObject diamondSprite;
         public Text diamondCountDisplay;

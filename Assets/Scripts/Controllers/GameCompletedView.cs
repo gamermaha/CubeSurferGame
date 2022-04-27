@@ -1,9 +1,8 @@
 ﻿using Managers;
-using UnityEngine;
 
 namespace Controllers
 {
-    public class GameCompletedView : MonoBehaviour
+    public class GameCompletedView : BaseView
     {
         public void GameCompletedButton() => MenuManager.Instance.GameCompleted();
     }

@@ -30,12 +30,14 @@ namespace Managers
 
         private void Start()
         {
-            baseView.ShowView(gameStartView.gameObject);
-            baseView.HideView(gameRestartView.gameObject);
-            baseView.ShowView(hUDView.gameObject);
-            baseView.HideView(endLevelView.gameObject);
-            baseView.HideView(gameOverView.gameObject);
-            baseView.HideView(gameCompletedView.gameObject);
+            gameStartView.ShowView();
+            
+            
+            gameRestartView.HideView();
+            hUDView.ShowView();
+            endLevelView.HideView();
+            gameOverView.HideView();
+            gameCompletedView.HideView();
             StartCoroutine(gameStartView.HandSlider());
         }
 
@@ -47,54 +49,54 @@ namespace Managers
         
         public void PlayGame()
         {
-            baseView.HideView(gameStartView.gameObject);
-            baseView.HideView(gameRestartView.gameObject);
-            baseView.ShowView(hUDView.gameObject);
+            gameStartView.HideView();
+            gameRestartView.HideView();
+            hUDView.ShowView();
             GameManager.Instance.PlayerCanMoveNow();
         }
         
         public void RestartOnGameOverButton()
         {
             GameManager.Instance.PlayerMustStopNow();
-            baseView.HideView(gameOverView.gameObject);
-            baseView.HideView(endLevelView.gameObject);
-            baseView.ShowView(gameRestartView.gameObject);
+            gameOverView.HideView();
+            endLevelView.HideView();
+            gameRestartView.ShowView();
             GameManager.Instance.LoadCurrentLevel();
         }
         
         public void EndLevel()
         {
             GameManager.Instance.LoadNextLevel();
-            baseView.HideView(endLevelView.gameObject);
-            baseView.ShowView(gameRestartView.gameObject);
+            endLevelView.HideView();
+            gameRestartView.ShowView();
         }
         
         public void GameCompleted()
         {
-            baseView.HideView(gameCompletedView.gameObject);
-            baseView.ShowView(gameRestartView.gameObject);
+            gameCompletedView.HideView();
+            gameRestartView.ShowView();
         }
         
         public void GameCompletedView()
         {
-            baseView.ShowView(gameCompletedView.gameObject);
-            baseView.HideView(endLevelView.gameObject);
-            baseView.HideView(gameRestartView.gameObject); 
+            gameCompletedView.ShowView();
+            endLevelView.HideView();
+            gameRestartView.HideView(); 
         }
 
         public void HideAllViews()
         {
-            baseView.HideView(gameStartView.gameObject);
-            baseView.HideView(gameRestartView.gameObject);
-            baseView.HideView(hUDView.gameObject);
-            baseView.HideView(endLevelView.gameObject);
-            baseView.HideView(gameOverView.gameObject);
-            baseView.HideView(gameCompletedView.gameObject);
+            gameStartView.HideView();
+            gameRestartView.HideView();
+            hUDView.HideView();
+            endLevelView.HideView();
+            gameOverView.HideView();
+            gameCompletedView.HideView();
         }
 
-        public void EndLevelView() => baseView.ShowView(endLevelView.gameObject);
+        public void EndLevelView() => endLevelView.ShowView();
         
-        public void GameOverView() => baseView.ShowView(gameOverView.gameObject);
+        public void GameOverView() => gameOverView.ShowView();
 
         public void CallUpdateDiamondCount(int diamondCount) => hUDView.UpdateDiamondCount(diamondCount);
         

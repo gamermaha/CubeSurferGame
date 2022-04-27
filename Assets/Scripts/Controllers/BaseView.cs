@@ -4,8 +4,8 @@ namespace Controllers
 {
     public class BaseView : MonoBehaviour
     {
-        public void ShowView(GameObject viewToShow) => viewToShow.SetActive(true);
+        public void ShowView() => gameObject.SetActive(true);
 
-        public void HideView(GameObject viewToHide) => viewToHide.SetActive(false);
+        public void HideView() => gameObject.SetActive(false);
     }
 }
