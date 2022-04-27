@@ -92,12 +92,10 @@ namespace Managers
 
             if (_levelNumber != _totalLevels)
             {
-                //GameplayUIController.Instance.EndLevelView();
                 MenuManager.Instance.EndLevelView();
             }
             else
             {
-                //GameplayUIController.Instance.GameCompletedView();
                 MenuManager.Instance.GameCompletedView();
                 LoadNextLevel();
             }
@@ -106,7 +104,6 @@ namespace Managers
         public void AddDiamonds(int diamonds)
         {
             _diamondCount += diamonds;
-            // GameplayUIController.Instance.UpdateDiamondCount(_diamondCount);
             MenuManager.Instance.CallUpdateDiamondCount(_diamondCount);
         }
         private void OnLevelFinishLoading(Scene scene, LoadSceneMode mode)

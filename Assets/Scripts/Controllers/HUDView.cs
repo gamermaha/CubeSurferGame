@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using Managers;
@@ -14,18 +13,10 @@ namespace Controllers
         public Image hUDDiamondImage;
         public Slider levelProgression;
         public GameObject settingsContainer;
-
-        private Image _settingsContainerImg;
-        private Color _settingsContainerColor;
-
-
+        
         private void Start()
         {
             levelProgression.value = 0;
-            _settingsContainerImg = settingsContainer.GetComponent<Image>();
-            _settingsContainerColor = _settingsContainerImg.color;
-            _settingsContainerColor.a = 255;
-
         }
        
         public void UpdateDiamondCount(int diamondCount) => diamondCountDisplay.text = "" + diamondCount;
@@ -41,34 +32,21 @@ namespace Controllers
                     Destroy(diamond);
                 });
         }
+        
         public void DiamondAnimationTimesTwo(string display)
         {
             times2.transform.position = hUDDiamondImage.transform.position;
             times2.text = display;
         }
+        
         public void SliderUpdate(float sliderValue) => levelProgression.value = sliderValue;
 
         public void SettingsContainer()
         {
             if (settingsContainer.activeSelf)
-            {
                 settingsContainer.SetActive(false);
-            }
             else
-            { 
                 settingsContainer.SetActive(true);
-            }
-        }
-
-        private IEnumerator SettingsContainerFader()
-        {
-            while (_settingsContainerColor.a >= 0)
-            {
-                //settingsContainer.SetActive(false);
-                yield return new WaitForSeconds(0.1f);
-                _settingsContainerColor.a -= 5f;
-            }
-            
         }
 
         public void CameraConfigButton() => GameManager.Instance.LoadDebugScene();

@@ -57,7 +57,6 @@ namespace Player_Scripts
                 if (_timeForDiamondTimes2 <= 0)
                 {
                     _isDiamondMulti = false;
-                    // GameplayUIController.Instance.DiamondAnimationTimesTwo("");
                     MenuManager.Instance.CallDiamondAnimationTimesTwo("");
                 }
             }
@@ -73,7 +72,6 @@ namespace Player_Scripts
             AudioManager.Instance.PlaySounds(Constants.AUDIO_DIAMONDCOLLECTEDSOUND);
             GameManager.Instance.AddDiamonds(_diamondMultiplier);
             Vector3 screenPos = collided.transform.position;
-            // GameplayUIController.Instance.DiamondAnimation(screenPos, _cam);
             MenuManager.Instance.CallDiamondAnimation(screenPos, _cam);
             Destroy(collided);
         }
@@ -170,9 +168,6 @@ namespace Player_Scripts
                 _cubePos -= Vector3.up * (float) _cubeSize;
                 _playerManager.MoveDown(1);
             }
-            
-            
-            
         }
 
         public void MagnetCollected(GameObject magnet)
@@ -192,7 +187,6 @@ namespace Player_Scripts
             AudioManager.Instance.PlaySounds(Constants.AUDIO_DIAMONDMULTIPLIERSOUND);
             _isDiamondMulti = true;
             Destroy(diamondMultiplier);
-            // GameplayUIController.Instance.DiamondAnimationTimesTwo("X2");
             MenuManager.Instance.CallDiamondAnimationTimesTwo("X2");
         }
 
