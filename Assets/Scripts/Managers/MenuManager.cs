@@ -13,8 +13,7 @@ namespace Managers
         [SerializeField] private EndLevelView endLevelView;
         [SerializeField] private GameOverView gameOverView;
         [SerializeField] private GameCompletedView gameCompletedView;
-        [SerializeField] private BaseView baseView;
-        
+
         private void Awake()
         {
             if (Instance == null)
@@ -31,24 +30,24 @@ namespace Managers
         private void Start()
         {
             gameStartView.ShowView();
-            
-            
             gameRestartView.HideView();
             hUDView.ShowView();
             endLevelView.HideView();
             gameOverView.HideView();
             gameCompletedView.HideView();
-            StartCoroutine(gameStartView.HandSlider());
+            
         }
-
+        
         public void StartGame()
         {
-            StopCoroutine(gameStartView.HandSlider());
-            PlayGame();
+            gameStartView.ShowView();
+            hUDView.ShowView();
+            StartCoroutine(gameStartView.HandSlider());
         }
         
         public void PlayGame()
         {
+            StopCoroutine(gameStartView.HandSlider());
             gameStartView.HideView();
             gameRestartView.HideView();
             hUDView.ShowView();

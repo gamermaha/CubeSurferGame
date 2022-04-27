@@ -1,4 +1,5 @@
-﻿using Environment_Setters;
+﻿using System;
+using Environment_Setters;
 using UnityEngine;
 
 namespace Managers
@@ -16,6 +17,8 @@ namespace Managers
         [SerializeField] private AudioSource endLevel;
         [SerializeField] private AudioSource gameStart;
         [SerializeField] private AudioSource gameCompleted;
+
+        private int _audioOnOff;
         
         public void Awake()
         {
@@ -28,37 +31,64 @@ namespace Managers
                 Destroy(this);
         }
 
+        private int GetOnOff()
+        {
+            if (PlayerPrefs.GetInt("audio", 0) == 1)
+                _audioOnOff = 1;
+            else if (PlayerPrefs.GetInt("audio", 0) == 0)
+                _audioOnOff = 0;
+            return _audioOnOff;
+        }
+
+        public void SetOnOff()
+        {
+            if (PlayerPrefs.GetInt("audio", 0) == 1)
+            {
+                PlayerPrefs.SetInt("audio", 0);
+                _audioOnOff = 0;
+            }
+            else if (PlayerPrefs.GetInt("audio", 0) == 0)
+            {
+                PlayerPrefs.SetInt("audio", 1);
+                _audioOnOff = 1;
+            }
+        }
+
         public void PlaySounds(string action)
         {
-            switch (action)
+            if (GetOnOff() == 1)
             {
-                case Constants.AUDIO_CUBECOLLECTEDSOUND:
-                    cubeCollectSound.Play();
-                    break;
-                case Constants.AUDIO_DIAMONDCOLLECTEDSOUND:
-                    diamondCollectSound.Play();
-                    break;
-                case Constants.AUDIO_MAGNETCOLLECTEDSOUND:
-                    magnetCollectSound.Play();
-                    break;
-                case Constants.AUDIO_DIAMONDMULTIPLIERSOUND:
-                    diamondMultiplierSound.Play();
-                    break;
-                case Constants.AUDIO_DESTROYCUBESOUND:
-                    destroyCubeSound.Play();
-                    break;
-                case Constants.AUDIO_GAMEOVERSOUND:
-                    gameOver.Play();
-                    break;
-                case Constants.AUDIO_ENDLEVELSOUND:
-                    endLevel.Play();
-                    break;
-                case Constants.AUDIO_GAMESTARTSOUND:
-                    gameStart.Play();
-                    break;
-                case Constants.AUDIO_GAMECOMPLETEDSOUND:
-                    gameCompleted.Play();
-                    break;
+                switch (action)
+                {
+                    case Constants.AUDIO_CUBECOLLECTEDSOUND:
+                        cubeCollectSound.Play();
+                        break;
+                    case Constants.AUDIO_DIAMONDCOLLECTEDSOUND:
+                        diamondCollectSound.Play();
+                        break;
+                    case Constants.AUDIO_MAGNETCOLLECTEDSOUND:
+                        magnetCollectSound.Play();
+                        break;
+                    case Constants.AUDIO_DIAMONDMULTIPLIERSOUND:
+                        diamondMultiplierSound.Play();
+                        break;
+                    case Constants.AUDIO_DESTROYCUBESOUND:
+                        destroyCubeSound.Play();
+                        break;
+                    case Constants.AUDIO_GAMEOVERSOUND:
+                        gameOver.Play();
+                        break;
+                    case Constants.AUDIO_ENDLEVELSOUND:
+                        endLevel.Play();
+                        break;
+                    case Constants.AUDIO_GAMESTARTSOUND:
+                        gameStart.Play();
+                        break;
+                    case Constants.AUDIO_GAMECOMPLETEDSOUND:
+                        gameCompleted.Play();
+                        break;
+                }
+                
             }
         }
     }

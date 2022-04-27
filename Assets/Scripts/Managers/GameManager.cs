@@ -21,6 +21,7 @@ namespace Managers
         private int _levelNumber;
         private int _totalLevels;
         private bool _isOnStart;
+        private int _audioOnOff;
         
         private void Awake()
         {
@@ -46,30 +47,7 @@ namespace Managers
             _isOnStart = true;
             LoadCurrentLevel();
         }
-
-        private void Update()
-        {
-            if (_isOnStart)
-            { 
-                #if UNITY_EDITOR
-                if (Input.GetMouseButton(0))
-                {
-                    //GameplayUIController.Instance.StartGame();
-                    MenuManager.Instance.StartGame();
-                    _isOnStart = false;
-                }
-
-                #elif UNITY_ANDROID
-                if (Input.touches.Length > 0)
-                {
-                    //GameplayUIController.Instance.StartGame();
-                    MenuManager.Instance.StartGame();
-                    _isOnStart = false;
-                }
-                #endif
-            }
-        }
-
+        
         private void OnDisable() => SceneManager.sceneLoaded -= OnLevelFinishLoading;
 
         public void PlayerCanMoveNow() => PlayerMovement.StartMoving = true;
@@ -81,13 +59,12 @@ namespace Managers
             MenuManager.Instance.HideAllViews();
             PlayerMustStopNow();
             SceneManager.LoadScene("Debug Scene");
-            
         }
 
         public void BackFromDebugScene()
         {
             LoadCurrentLevel();
-            MenuManager.Instance.PlayGame();
+            MenuManager.Instance.StartGame();
         }
         
         public void LoadNextLevel()
@@ -106,12 +83,11 @@ namespace Managers
         public void GameOver()
         {
             AudioManager.Instance.PlaySounds(Constants.AUDIO_GAMEOVERSOUND);
-            //GameplayUIController.Instance.GameOverView(); 
             MenuManager.Instance.GameOverView();
         }
         
         public void LevelCompleted()
-        {
+        { 
             AudioManager.Instance.PlaySounds(Constants.AUDIO_GAMECOMPLETEDSOUND);
 
             if (_levelNumber != _totalLevels)

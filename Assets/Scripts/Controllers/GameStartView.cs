@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Managers;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,6 +20,11 @@ namespace Controllers
                 if (handSlider.value >= 1)
                     handSlider.value = 0;
             }
+        }
+
+        public void GameStartButton()
+        {
+            MenuManager.Instance.PlayGame();
         }
     }
 }

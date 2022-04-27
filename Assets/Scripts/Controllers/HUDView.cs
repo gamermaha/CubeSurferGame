@@ -12,6 +12,8 @@ namespace Controllers
         public Text times2;
         public Image hUDDiamondImage;
         public Slider levelProgression;
+        public GameObject settingsContainer;
+        
 
         private void Start() => levelProgression.value = 0;
        
@@ -35,6 +37,19 @@ namespace Controllers
         }
         public void SliderUpdate(float sliderValue) => levelProgression.value = sliderValue;
 
+        public void SettingsContainer()
+        {
+            if (settingsContainer.activeSelf)
+                settingsContainer.SetActive(false);
+            else
+                settingsContainer.SetActive(true);
+        }
+
         public void CameraConfigButton() => GameManager.Instance.LoadDebugScene();
+
+        public void AudioOnOff()
+        {
+            AudioManager.Instance.SetOnOff();
+        }
     }
 }
