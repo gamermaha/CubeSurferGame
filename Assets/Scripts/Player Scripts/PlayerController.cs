@@ -129,7 +129,7 @@ namespace Player_Scripts
         
         public void EndLadder(GameObject collided)
         {
-            if (_cubesAdded.Count > 0)
+            if (_cubesAdded.Count > 1)
             {
                 DestroyCube(collided, 1, 0);
                 playerCollider.transform.localScale -= new Vector3(0f, (float) _cubeSize, 0f);
@@ -147,7 +147,7 @@ namespace Player_Scripts
             for (int i = 0; i < _cubesAdded.Count; i++)
                 _addedCubePositions.Add(_cubesAdded[i].transform.position);
             
-            if (_cubesAdded.Count > 0)
+            if (_cubesAdded.Count > 1)
             {
                 Destroy(_cubesAdded[0]);
                 AudioManager.Instance.PlaySounds(Constants.AUDIO_DESTROYCUBESOUND);
@@ -177,7 +177,7 @@ namespace Player_Scripts
             Magnet magnetCol = Instantiate(magnetCollider);
             magnetCol.transform.SetParent(transform.GetChild(0));
             magnet.transform.SetParent(transform.GetChild(0));
-            magnet.transform.localPosition = new Vector3(0.5f, 2f, -2f);
+            magnet.transform.localPosition = new Vector3(0.5f, 1f, -2f);
             Destroy(magnetCol, _destroyMagnetTime);
             Destroy(magnet, _destroyMagnetTime);
         }

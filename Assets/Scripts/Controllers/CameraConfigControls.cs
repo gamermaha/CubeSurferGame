@@ -17,10 +17,10 @@ namespace Controllers
         void Start()
         {
             _cam = FindObjectOfType<Camera>();
-            xTransSlider.minValue = -3;
-            xTransSlider.maxValue = 10;
-            yTransSlider.minValue = 1;
-            yTransSlider.maxValue = 30;
+            xTransSlider.minValue = -20;
+            xTransSlider.maxValue = 20;
+            yTransSlider.minValue = 0;
+            yTransSlider.maxValue = 40;
             zTransSlider.minValue = -75;
             zTransSlider.maxValue = -25;
             xRotSlider.minValue = -45;
