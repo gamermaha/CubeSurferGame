@@ -101,6 +101,8 @@ namespace Player_Scripts
 
         private void LateUpdate()
         {
+            if (!StartMoving)
+                return;
             MovePlayerRightOrLeft();
         }
 

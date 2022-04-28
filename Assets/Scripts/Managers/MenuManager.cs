@@ -35,6 +35,7 @@ namespace Managers
             endLevelView.HideView();
             gameOverView.HideView();
             gameCompletedView.HideView();
+            StartGame();
         }
         
         public void StartGame()
