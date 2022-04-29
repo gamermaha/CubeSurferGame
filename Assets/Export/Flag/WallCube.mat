@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: WallCube
-  m_Shader: {fileID: 14000, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: 4609c28b77ae6c04689a8ba2b2fccba7, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -84,8 +84,8 @@ Material:
     - _WireThickness: 100
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.9245283, g: 0.30147216, b: 0.02180491, a: 1}
+    - _Color: {r: 1, g: 0.42352942, b: 0.13725491, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _HColor: {r: 0.45882353, g: 0.54901963, b: 0.63529414, a: 1}
+    - _HColor: {r: 0.7169812, g: 0.3142387, b: 0.08454966, a: 1}
     - _HueVariation: {r: 1, g: 0.5, b: 0, a: 0.1}
     - _SColor: {r: 0.29803923, g: 0.29803923, b: 0.29803923, a: 1}
