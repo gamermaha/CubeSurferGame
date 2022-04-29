@@ -1161,7 +1161,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameStartView: {fileID: 3739604830548341796}
-  gameRestartView: {fileID: 0}
   hUDView: {fileID: 7390715155510449092}
   endLevelView: {fileID: 4543913876350857706}
   gameOverView: {fileID: 2306115489861058155}
@@ -1200,8 +1199,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 7.3, y: -20.42}
-  m_SizeDelta: {x: 68.98855, y: -13.749702}
+  m_AnchoredPosition: {x: 7.3, y: -30}
+  m_SizeDelta: {x: 90, y: -13.749702}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3615375976070632500
 CanvasRenderer:
@@ -2090,7 +2089,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 80}
+  m_SizeDelta: {x: 400, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6301021596108746233
 MonoBehaviour:

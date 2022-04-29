@@ -12,6 +12,7 @@ namespace Managers
         [SerializeField] private EndLevelView endLevelView;
         [SerializeField] private GameOverView gameOverView;
         [SerializeField] private GameCompletedView gameCompletedView;
+        [SerializeField] private CubeSelectionView cubeSelectionView;
 
         private void Awake()
         {
@@ -33,6 +34,7 @@ namespace Managers
             endLevelView.HideView();
             gameOverView.HideView();
             gameCompletedView.HideView();
+            cubeSelectionView.HideView();
             StartGame();
         }
         
@@ -87,6 +89,7 @@ namespace Managers
             endLevelView.HideView();
             gameOverView.HideView();
             gameCompletedView.HideView();
+            cubeSelectionView.HideView();
         }
 
         public void EndLevelView() => endLevelView.ShowView();
@@ -100,5 +103,8 @@ namespace Managers
         public void CallDiamondAnimationTimesTwo(string display) => hUDView.DiamondAnimationTimesTwo(display);
 
         public void CallSliderUpdate(float lengthCoveredPercentage) => hUDView.SliderUpdate(lengthCoveredPercentage);
+        public void ChangeCubeColourEnabled() => cubeSelectionView.ShowView();
+        
+        public void ChangeCubeColourDisabled() => cubeSelectionView.HideView();
     }
 }
