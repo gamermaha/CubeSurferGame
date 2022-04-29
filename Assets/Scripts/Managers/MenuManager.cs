@@ -103,8 +103,18 @@ namespace Managers
         public void CallDiamondAnimationTimesTwo(string display) => hUDView.DiamondAnimationTimesTwo(display);
 
         public void CallSliderUpdate(float lengthCoveredPercentage) => hUDView.SliderUpdate(lengthCoveredPercentage);
-        public void ChangeCubeColourEnabled() => cubeSelectionView.ShowView();
-        
-        public void ChangeCubeColourDisabled() => cubeSelectionView.HideView();
+
+        public void ChangeCubeColourEnabled()
+        {
+            GameManager.Instance.PlayerMustStopNow();
+            HideAllViews();
+            cubeSelectionView.ShowView();
+        }
+
+        public void ChangeCubeColourDisabled()
+        {
+            cubeSelectionView.HideView();
+            GameManager.Instance.BackFromDebugScene();
+        }
     }
 }

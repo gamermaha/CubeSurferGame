@@ -67,6 +67,7 @@ namespace Managers
             MenuManager.Instance.StartGame();
         }
         
+        
         public void LoadNextLevel()
         {
             _levelNumber++;
