@@ -31,8 +31,8 @@ namespace Controllers
             _xRot= PlayerPrefs.GetFloat("CamxRot", _xRotSliderDefValue);
             _yRot = PlayerPrefs.GetFloat("CamyRot", _yRotSliderDefValue);
             
-            transform.position = new Vector3(_xValue, _yValue, _zValue);
-            transform.rotation = Quaternion.Euler(_xRot, _yRot, 0f);
+            transform.localPosition = new Vector3(_xValue, _yValue, _zValue);
+            transform.localRotation = Quaternion.Euler(_xRot, _yRot, 0f);
         }
     }
 }

@@ -154,9 +154,9 @@ namespace Player_Scripts
 
                     if (touch.phase == TouchPhase.Moved)
                     {
-                        if (Input.touches[0].position.x - _prevTouchPos.x > 15)
+                        if (Input.touches[0].position.x - _prevTouchPos.x > 7.5f)
                             MoveRightTouchIP();
-                        if (Input.touches[0].position.x - _prevTouchPos.x < -15)
+                        if (Input.touches[0].position.x - _prevTouchPos.x < -7.5f)
                             MoveLeftTouchIP();
                     }
                 }

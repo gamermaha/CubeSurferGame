@@ -19,17 +19,17 @@ namespace Managers
         public float diamondTimer;
         
         [Header("Camera Config")]
-        public float xTransSliderMinValue = -20;
-        public float xTransSliderMaxValue = 20;
-        public float xTransSliderDefValue = 10;
+        public float xTransSliderMinValue = -10;
+        public float xTransSliderMaxValue = 10;
+        public float xTransSliderDefValue = 0;
         
-        public float yTransSliderMinValue = 0;
-        public float yTransSliderMaxValue = 40;
-        public float yTransSliderDefValue = 20;
+        public float yTransSliderMinValue = -10;
+        public float yTransSliderMaxValue = 10;
+        public float yTransSliderDefValue = 0;
         
-        public float zTransSliderMinValue = -75;
-        public float zTransSliderMaxValue = -25;
-        public float zTransSliderDefValue = -50;
+        public float zTransSliderMinValue = -50;
+        public float zTransSliderMaxValue = 0;
+        public float zTransSliderDefValue = -25;
         
         public float xRotSliderMinValue = -45;
         public float xRotSliderMaxValue = 45;
@@ -37,7 +37,7 @@ namespace Managers
         
         public float yRotSliderMinValue = -45;
         public float yRotSliderMaxValue = 45;
-        public float yRotSliderDefValue = 0;
+        public float yRotSliderDefValue = -10;
 
     }
 }

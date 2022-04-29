@@ -52,8 +52,8 @@ namespace Controllers
 
         void Update()
         {
-            _cam.transform.position = new Vector3(xTransSlider.value, yTransSlider.value, zTransSlider.value);
-            _cam.transform.rotation = Quaternion.Euler(xRotSlider.value, yRotSlider.value, 0f);
+            _cam.transform.localPosition = new Vector3(xTransSlider.value, yTransSlider.value, zTransSlider.value);
+            _cam.transform.localRotation = Quaternion.Euler(xRotSlider.value, yRotSlider.value, 0f);
         }
         
         public void SaveCameraValues()
