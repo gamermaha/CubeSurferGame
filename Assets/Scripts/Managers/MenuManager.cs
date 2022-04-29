@@ -8,7 +8,6 @@ namespace Managers
         public static MenuManager Instance;
         
         [SerializeField] private GameStartView gameStartView;
-        [SerializeField] private GameRestartView gameRestartView;
         [SerializeField] private HUDView hUDView;
         [SerializeField] private EndLevelView endLevelView;
         [SerializeField] private GameOverView gameOverView;
@@ -30,7 +29,6 @@ namespace Managers
         private void Start()
         {
             gameStartView.ShowView();
-            gameRestartView.HideView();
             hUDView.ShowView();
             endLevelView.HideView();
             gameOverView.HideView();
@@ -49,7 +47,6 @@ namespace Managers
         {
             StopCoroutine(gameStartView.HandSlider());
             gameStartView.HideView();
-            gameRestartView.HideView();
             hUDView.ShowView();
             GameManager.Instance.PlayerCanMoveNow();
         }
@@ -59,7 +56,7 @@ namespace Managers
             GameManager.Instance.PlayerMustStopNow();
             gameOverView.HideView();
             endLevelView.HideView();
-            gameRestartView.ShowView();
+            gameStartView.ShowView();
             GameManager.Instance.LoadCurrentLevel();
         }
         
@@ -67,26 +64,25 @@ namespace Managers
         {
             GameManager.Instance.LoadNextLevel();
             endLevelView.HideView();
-            gameRestartView.ShowView();
+            gameStartView.ShowView();
         }
         
         public void GameCompleted()
         {
             gameCompletedView.HideView();
-            gameRestartView.ShowView();
+            gameStartView.ShowView();
         }
         
         public void GameCompletedView()
         {
             gameCompletedView.ShowView();
             endLevelView.HideView();
-            gameRestartView.HideView(); 
+            gameStartView.HideView(); 
         }
 
         public void HideAllViews()
         {
             gameStartView.HideView();
-            gameRestartView.HideView();
             hUDView.HideView();
             endLevelView.HideView();
             gameOverView.HideView();
