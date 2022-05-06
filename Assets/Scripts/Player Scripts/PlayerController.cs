@@ -175,7 +175,7 @@ namespace Player_Scripts
             AudioManager.Instance.PlaySounds(Constants.AUDIO_MAGNETCOLLECTEDSOUND);
             magnet.tag = Constants.TAG_MAGNETGRABBED;
             Magnet magnetCol = Instantiate(magnetCollider);
-            magnetCol.transform.SetParent(transform.GetChild(0));
+            magnetCol.transform.SetParent(transform.GetChild(0), false);
             magnet.transform.SetParent(transform.GetChild(0));
             magnet.transform.localPosition = new Vector3(0.5f, 1f, -2f);
             Destroy(magnetCol, _destroyMagnetTime);

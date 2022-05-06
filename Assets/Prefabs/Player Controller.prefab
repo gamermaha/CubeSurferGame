@@ -68,7 +68,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cubeCollector: {fileID: 5519792523762702571}
   playerCollider: {fileID: 454772356134611058}
-  magnetCollider: {fileID: 389745509034583804, guid: 860a26042ffe56842968c254213dadcb,
+  magnetCollider: {fileID: 4425912579034398498, guid: 860a26042ffe56842968c254213dadcb,
     type: 3}
 --- !u!114 &802394250568839842
 MonoBehaviour:

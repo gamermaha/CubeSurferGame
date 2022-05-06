@@ -27,7 +27,6 @@ namespace Player_Scripts
                     {
                         Destroy(animation);
                         player.AddCube(other.gameObject);
-
                     });
                 
             }
