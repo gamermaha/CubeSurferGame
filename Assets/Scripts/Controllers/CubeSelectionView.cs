@@ -26,8 +26,29 @@ namespace Controllers
         {
             cubeColour.color = Color.blue;
             cubeImage.color = Color.blue;
+        }
+        
+        public void CyanColButton()
+        {
+            cubeColour.color = Color.cyan;
+            cubeImage.color = Color.cyan;
         
         }
+        
+        public void RedColButton()
+        {
+            cubeColour.color = Color.red;
+            cubeImage.color = Color.red;
+        
+        }
+        
+        public void GreyColButton()
+        {
+            cubeColour.color = Color.grey;
+            cubeImage.color = Color.grey;
+        
+        }
+        
 
         public void BackButton()
         {
