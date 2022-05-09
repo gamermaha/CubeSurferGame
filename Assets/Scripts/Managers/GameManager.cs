@@ -17,7 +17,8 @@ namespace Managers
         private PlayerMovement _playerMovement;
         private PlayerController _playerController;
         private Level _currentLevel;
-        private int _diamondCount;
+        private int _totalDiamondCount;
+        private int _diamondCountAtEachLevel;
         private int _levelNumber;
         private int _totalLevels;
         private bool _isOnStart;
@@ -90,23 +91,25 @@ namespace Managers
         public void LevelCompleted()
         { 
             AudioManager.Instance.PlaySounds(Constants.AUDIO_GAMECOMPLETEDSOUND);
-
-            if (_levelNumber != _totalLevels)
-            {
-                MenuManager.Instance.EndLevelView();
-            }
-            else
+            MenuManager.Instance.EndLevelView();
+            if (_levelNumber == _totalLevels)
             {
                 MenuManager.Instance.GameCompletedView();
-                LoadNextLevel();
             }
         }
         
         public void AddDiamonds(int diamonds)
         {
-            _diamondCount += diamonds;
-            MenuManager.Instance.CallUpdateDiamondCount(_diamondCount);
+            _totalDiamondCount += diamonds;
+            _diamondCountAtEachLevel += diamonds;
+            MenuManager.Instance.CallUpdateDiamondCount(_totalDiamondCount);
         }
+
+        public void ShowDiamondCountAtLevelEnd()
+        {
+            MenuManager.Instance.CallShowDiamondCount(_diamondCountAtEachLevel);
+        }
+        
         private void OnLevelFinishLoading(Scene scene, LoadSceneMode mode)
         {
             if(scene.name != "SplashScreen")
@@ -130,6 +133,7 @@ namespace Managers
        
         private void LoadLevel(int levelID)
         {
+            _diamondCountAtEachLevel = 0;
             if (levelID > _totalLevels)
             {
                 _levelNumber = 1;
@@ -140,6 +144,7 @@ namespace Managers
             {
                 AudioManager.Instance.PlaySounds(Constants.AUDIO_GAMESTARTSOUND);
                 SceneManager.LoadScene("Level 0" + levelID);
+                
                 PlayerPrefs.SetInt("LevelSaved", _levelNumber);
             }
         }

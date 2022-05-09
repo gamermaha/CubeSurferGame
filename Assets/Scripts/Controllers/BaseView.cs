@@ -6,6 +6,6 @@ namespace Controllers
     {
         public void ShowView() => gameObject.SetActive(true);
 
-        public void HideView() => gameObject.SetActive(false);
+        public virtual void HideView() => gameObject.SetActive(false);
     }
 }

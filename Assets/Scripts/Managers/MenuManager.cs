@@ -14,6 +14,8 @@ namespace Managers
         [SerializeField] private GameCompletedView gameCompletedView;
         [SerializeField] private CubeSelectionView cubeSelectionView;
 
+        private int _diamondCount;
+
         private void Awake()
         {
             if (Instance == null)
@@ -72,13 +74,14 @@ namespace Managers
         public void GameCompleted()
         {
             gameCompletedView.HideView();
+            // GameManager.Instance.LoadNextLevel();
             gameStartView.ShowView();
         }
         
         public void GameCompletedView()
         {
             gameCompletedView.ShowView();
-            endLevelView.HideView();
+            //endLevelView.HideView();
             gameStartView.HideView(); 
         }
 
@@ -92,17 +95,30 @@ namespace Managers
             cubeSelectionView.HideView();
         }
 
-        public void EndLevelView() => endLevelView.ShowView();
+        public void EndLevelView()
+        {
+            endLevelView.ShowView();
+            GameManager.Instance.ShowDiamondCountAtLevelEnd();
+        }
         
         public void GameOverView() => gameOverView.ShowView();
 
-        public void CallUpdateDiamondCount(int diamondCount) => hUDView.UpdateDiamondCount(diamondCount);
+        public void CallUpdateDiamondCount(int diamondCount)
+        {
+            hUDView.UpdateDiamondCount(diamondCount);
+        }
+
+        public void CallShowDiamondCount(int diamondCountAtEndLevel)
+        {
+            endLevelView.ShowDiamondCount(diamondCountAtEndLevel);
+        }
         
         public void CallDiamondAnimation(Vector3 instantiatePos, Camera cam) => hUDView.DiamondAnimation(instantiatePos, cam);
         
         public void CallDiamondAnimationTimesTwo(string display) => hUDView.DiamondAnimationTimesTwo(display);
-
+        
         public void CallSliderUpdate(float lengthCoveredPercentage) => hUDView.SliderUpdate(lengthCoveredPercentage);
+        public void CallShowConfetti(Vector3 confettiPos) => endLevelView.ShowConfetti(confettiPos); 
 
         public void ChangeCubeColourEnabled()
         {

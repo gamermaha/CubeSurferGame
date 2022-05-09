@@ -109,7 +109,7 @@ namespace Player_Scripts
                 GameManager.Instance.GameOver();
                 _playerManager.StopPlayer();
             }
-            playerCollider.transform.localScale -= new Vector3(0f, (float) _cubeSize, 0f);
+            //playerCollider.transform.localScale -= new Vector3(0f, (float) _cubeSize, 0f);
         }
         
         public void PullTrigger(Collider other)
@@ -122,17 +122,19 @@ namespace Player_Scripts
             }
             else if (other.CompareTag(Constants.TAG_ENDLEVEL))
             {
+                MenuManager.Instance.CallShowConfetti(new Vector3(transform.position.x + 2f,transform.position.y + 30f, transform.position.z));
                 GameManager.Instance.LevelCompleted();
                 _playerManager.StopPlayer();
+                
             }
         }
         
-        public void EndLadder(GameObject collided)
+        public void EndLadder(GameObject collided, float camMovement)
         {
+            _cam.transform.position += new Vector3(0f, camMovement, 0f);
             if (_cubesAdded.Count > 1)
             {
                 DestroyCube(collided, 1, 0);
-                playerCollider.transform.localScale -= new Vector3(0f, (float) _cubeSize, 0f);
                 _cubesAdded.RemoveAt(0);
             }
             else
@@ -151,8 +153,7 @@ namespace Player_Scripts
             {
                 Destroy(_cubesAdded[0]);
                 AudioManager.Instance.PlaySounds(Constants.AUDIO_DESTROYCUBESOUND);
-                playerCollider.transform.localScale -= new Vector3(0f, (float) _cubeSize, 0f);
-            
+
                 for (int k = 1; k < _cubesAdded.Count; k++)
                 {
                     var pos = _cubesAdded[k].transform.position;
