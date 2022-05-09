@@ -9,14 +9,8 @@ namespace Player_Scripts
     {
         public GameObject cubeAnimation;
         [SerializeField] private PlayerController player;
-        [SerializeField] private GameObject playerCollider;
-        private double _cubeSize;
 
-        private void Start()
-        {
-            player = FindObjectOfType<PlayerController>();
-            _cubeSize = MetaData.Instance.scriptableInstance.cubeLength;
-        }
+        private void Start() => player = FindObjectOfType<PlayerController>();
         private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.CompareTag("Cube"))

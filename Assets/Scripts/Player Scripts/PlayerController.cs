@@ -109,7 +109,6 @@ namespace Player_Scripts
                 GameManager.Instance.GameOver();
                 _playerManager.StopPlayer();
             }
-            //playerCollider.transform.localScale -= new Vector3(0f, (float) _cubeSize, 0f);
         }
         
         public void PullTrigger(Collider other)
@@ -125,15 +124,15 @@ namespace Player_Scripts
                 MenuManager.Instance.CallShowConfetti(new Vector3(transform.position.x + 2f,transform.position.y + 30f, transform.position.z));
                 GameManager.Instance.LevelCompleted();
                 _playerManager.StopPlayer();
-                
             }
         }
         
         public void EndLadder(GameObject collided, float camMovement)
         {
-            _cam.transform.position += new Vector3(0f, camMovement, 0f);
+            
             if (_cubesAdded.Count > 1)
             {
+                _cam.transform.position += new Vector3(0f, camMovement, 0f);
                 DestroyCube(collided, 1, 0);
                 _cubesAdded.RemoveAt(0);
             }

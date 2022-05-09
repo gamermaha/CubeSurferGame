@@ -16,7 +16,7 @@ namespace Environment_Setters
         public const string TAG_MAGNETGRABBED = "MagnetGrabbed";
         public const string TAG_DIAMONDMULTIPLIER = "DiamondMultiplier";
        
-        public const string PLAYER_ANIMATION_STATE = "jump";
+        public const string PLAYER_ANIMATION_STATE_JUMP = "jump";
         
         public const string AUDIO_CUBECOLLECTEDSOUND = "cube_collected";
         public const string AUDIO_DIAMONDCOLLECTEDSOUND = "diamond_collected";

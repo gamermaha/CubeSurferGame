@@ -37,11 +37,8 @@ namespace Managers
             }
         }
         
-        private void OnEnable()
-        {
-            SceneManager.sceneLoaded += OnLevelFinishLoading;
-        }
-        
+        private void OnEnable() => SceneManager.sceneLoaded += OnLevelFinishLoading;
+
         void Start()
         {
             _totalLevels = MetaData.Instance.scriptableInstance.noOfLevels;
@@ -68,7 +65,6 @@ namespace Managers
             MenuManager.Instance.StartGame();
         }
         
-        
         public void LoadNextLevel()
         {
             _levelNumber++;
@@ -93,9 +89,7 @@ namespace Managers
             AudioManager.Instance.PlaySounds(Constants.AUDIO_GAMECOMPLETEDSOUND);
             MenuManager.Instance.EndLevelView();
             if (_levelNumber == _totalLevels)
-            {
                 MenuManager.Instance.GameCompletedView();
-            }
         }
         
         public void AddDiamonds(int diamonds)
@@ -144,7 +138,6 @@ namespace Managers
             {
                 AudioManager.Instance.PlaySounds(Constants.AUDIO_GAMESTARTSOUND);
                 SceneManager.LoadScene("Level 0" + levelID);
-                
                 PlayerPrefs.SetInt("LevelSaved", _levelNumber);
             }
         }

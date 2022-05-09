@@ -132,7 +132,7 @@ namespace Player_Scripts
         
         public void MoveUp(int up)
         {
-            _playerAnimator.SetTrigger(Constants.PLAYER_ANIMATION_STATE);
+            _playerAnimator.SetTrigger(Constants.PLAYER_ANIMATION_STATE_JUMP);
             playerCapsule.transform.Translate(0f, (float) _cubeSize * up, 0f);
         }
 
