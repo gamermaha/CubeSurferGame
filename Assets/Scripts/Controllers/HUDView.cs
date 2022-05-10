@@ -55,11 +55,5 @@ namespace Controllers
         {
             AudioManager.Instance.SetOnOff();
         }
-
-        public void ChangeCubeColButton()
-        {
-            MenuManager.Instance.ChangeCubeColourEnabled();
-        }
-        
     }
 }

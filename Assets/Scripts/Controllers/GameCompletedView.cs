@@ -1,6 +1,4 @@
 ﻿using Managers;
-using UnityEngine;
-using UnityEngine.UI;
 
 namespace Controllers
 {

@@ -69,6 +69,7 @@ namespace Managers
             GameManager.Instance.LoadNextLevel();
             endLevelView.HideView();
             gameStartView.ShowView();
+            gameCompletedView.HideView();
         }
         
         public void GameCompleted()

@@ -15,7 +15,7 @@ namespace Controllers
         {
             while (handSlider.value < 2f)
             {
-                yield return new WaitForSeconds(0.05f);
+                yield return new WaitForSeconds(0.04f);
                 handSlider.value += 0.01f;
                 if (handSlider.value >= 1)
                     handSlider.value = 0;
@@ -25,6 +25,11 @@ namespace Controllers
         public void GameStartButton()
         {
             MenuManager.Instance.PlayGame();
+        }
+        
+        public void ChangeCubeColButton()
+        {
+            MenuManager.Instance.ChangeCubeColourEnabled();
         }
     }
 }
