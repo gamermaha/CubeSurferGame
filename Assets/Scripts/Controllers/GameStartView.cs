@@ -15,7 +15,7 @@ namespace Controllers
         {
             while (handSlider.value < 2f)
             {
-                yield return new WaitForSeconds(0.01f);
+                yield return new WaitForSeconds(0.05f);
                 handSlider.value += 0.01f;
                 if (handSlider.value >= 1)
                     handSlider.value = 0;

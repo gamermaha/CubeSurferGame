@@ -632,6 +632,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7018386786426396462, guid: cad62cfed34273d4cac2f07cd10ad0c8,
         type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 7018386786426396462, guid: cad62cfed34273d4cac2f07cd10ad0c8,
+        type: 3}
       propertyPath: m_NormalizedViewPortRect.width
       value: 1
       objectReference: {fileID: 0}
