@@ -44,12 +44,22 @@ namespace Controllers
         public void SettingsContainer()
         {
             if (settingsContainer.activeSelf)
+            {
                 settingsContainer.SetActive(false);
+                Time.timeScale = 1;
+            }
             else
+            {
                 settingsContainer.SetActive(true);
+                Time.timeScale = 0;
+            }
         }
 
-        public void CameraConfigButton() => GameManager.Instance.LoadDebugScene();
+        public void CameraConfigButton()
+        {
+            settingsContainer.SetActive(false);
+            GameManager.Instance.LoadDebugScene();
+        }
 
         public void AudioOnOff()
         {

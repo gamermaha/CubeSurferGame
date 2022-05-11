@@ -63,9 +63,15 @@ namespace Controllers
             PlayerPrefs.SetFloat("CamzValue", zTransSlider.value);
             PlayerPrefs.SetFloat("CamxRot", xRotSlider.value);
             PlayerPrefs.SetFloat("CamyRot", yRotSlider.value);
+            GameManager.Instance.BackFromDebugScene();
+            Time.timeScale = 1;
         }
 
-        public void BackButton() => GameManager.Instance.BackFromDebugScene();
+        public void BackButton()
+        {
+            GameManager.Instance.BackFromDebugScene();
+            Time.timeScale = 1;
+        }
     }
     
 }

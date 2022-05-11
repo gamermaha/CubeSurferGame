@@ -8,12 +8,11 @@ namespace Controllers
     {
         public Material cubeColour;
         public Image cubeImage;
-
+        
         public void DiamondColButton()
         {
             cubeColour.color = Color.magenta;
             cubeImage.color = Color.magenta;
-        
         }
 
         public void YellowColButton()
@@ -32,27 +31,20 @@ namespace Controllers
         {
             cubeColour.color = Color.cyan;
             cubeImage.color = Color.cyan;
-        
         }
         
         public void RedColButton()
         {
             cubeColour.color = Color.red;
             cubeImage.color = Color.red;
-        
         }
         
         public void GreyColButton()
         {
             cubeColour.color = Color.grey;
             cubeImage.color = Color.grey;
-        
         }
         
-
-        public void BackButton()
-        {
-            MenuManager.Instance.ChangeCubeColourDisabled();
-        }
+        public void BackButton() => MenuManager.Instance.ChangeCubeColourDisabled();
     }
 }
