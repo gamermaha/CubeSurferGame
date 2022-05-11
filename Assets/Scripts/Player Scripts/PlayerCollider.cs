@@ -48,14 +48,14 @@ namespace Player_Scripts
             Vector3 playerLocalPos = player.transform.GetChild(0).localPosition;
             int increment = 0;
                         
-            if (cubeToDestroyScripts.Length == 3)
+            if (cubeToDestroyScripts.Length == 12)
             {
                 if (playerLocalPos.x >= -3f && playerLocalPos.x < -1f)
-                    increment = 0;
+                    increment = 6;
                 else if (playerLocalPos.x >= -1f && playerLocalPos.x <= 1f)
-                    increment = 1;
+                    increment = 4;
                 else if (playerLocalPos.x > 1f && playerLocalPos.x <= 3f)
-                    increment = 2;
+                    increment = 0;
             }
             else 
                 increment = 0;

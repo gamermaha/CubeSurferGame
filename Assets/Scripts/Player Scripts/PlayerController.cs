@@ -177,7 +177,8 @@ namespace Player_Scripts
             Magnet magnetCol = Instantiate(magnetCollider);
             magnetCol.transform.SetParent(transform.GetChild(0), false);
             magnet.transform.SetParent(transform.GetChild(0));
-            magnet.transform.localPosition = new Vector3(0.5f, 1f, -2f);
+            magnet.transform.localPosition = new Vector3(0f, -0.5f, -2f);
+            magnet.transform.rotation = Quaternion.Euler(0f, 90f, 90f);
             Destroy(magnetCol, _destroyMagnetTime);
             Destroy(magnet, _destroyMagnetTime);
         }
