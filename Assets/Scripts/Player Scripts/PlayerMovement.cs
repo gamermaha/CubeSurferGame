@@ -35,6 +35,7 @@ namespace Player_Scripts
             _prevMousePos = new Vector3(0f, 0f, 0f);
             _coveredDistanceInWayPoints = 0;
         }
+        
         private void Start()
         {
             if (MetaData.Instance == null)

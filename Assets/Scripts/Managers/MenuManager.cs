@@ -13,9 +13,7 @@ namespace Managers
         [SerializeField] private GameOverView gameOverView;
         [SerializeField] private GameCompletedView gameCompletedView;
         [SerializeField] private CubeSelectionView cubeSelectionView;
-
-        private int _diamondCount;
-
+        
         private void Awake()
         {
             if (Instance == null)
