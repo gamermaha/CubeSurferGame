@@ -7,7 +7,7 @@ namespace Controllers
     public class CubeSelectionView : BaseView
     {
         public Material cubeColour;
-        public Image cubeImage;
+        public RawImage cubeImage;
         
         public void DiamondColButton()
         {

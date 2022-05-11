@@ -128,10 +128,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1092300819, guid: 915c051cf1a27d94ea1ae246770953e7, type: 3}
-      propertyPath: cubeColour
-      value: 
-      objectReference: {fileID: 2100000, guid: e13cb793933be0c4bae9282b1504c509, type: 2}
     - target: {fileID: 1788492442, guid: 915c051cf1a27d94ea1ae246770953e7, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
