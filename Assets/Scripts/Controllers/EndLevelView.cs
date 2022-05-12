@@ -22,6 +22,6 @@ namespace Controllers
             confetti.SetActive(false);
         }
         
-        public void EndLevelButton() =>MenuManager.Instance.EndLevel();
+        public void EndLevelButton() => MenuManager.Instance.EndLevel();
     }
 }

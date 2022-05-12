@@ -22,14 +22,8 @@ namespace Controllers
             }
         }
 
-        public void GameStartButton()
-        {
-            MenuManager.Instance.PlayGame();
-        }
+        public void GameStartButton() => MenuManager.Instance.PlayGame();
         
-        public void ChangeCubeColButton()
-        {
-            MenuManager.Instance.ChangeCubeColourEnabled();
-        }
+        public void ChangeCubeColButton() => MenuManager.Instance.ChangeCubeColourEnabled();
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using Environment_Setters;
+﻿using Environment_Setters;
 using UnityEngine;
 
 namespace Managers
@@ -33,10 +32,7 @@ namespace Managers
 
         private int GetOnOff()
         {
-            if (PlayerPrefs.GetInt("audio", 0) == 1)
-                _audioOnOff = 1;
-            else if (PlayerPrefs.GetInt("audio", 0) == 0)
-                _audioOnOff = 0;
+            _audioOnOff = PlayerPrefs.GetInt("audio", 0) == 1 ? 1 : 0;
             return _audioOnOff;
         }
 

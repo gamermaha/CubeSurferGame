@@ -61,9 +61,6 @@ namespace Controllers
             GameManager.Instance.LoadDebugScene();
         }
 
-        public void AudioOnOff()
-        {
-            AudioManager.Instance.SetOnOff();
-        }
+        public void AudioOnOff() => AudioManager.Instance.SetOnOff();
     }
 }

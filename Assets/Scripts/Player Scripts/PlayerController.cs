@@ -13,19 +13,19 @@ namespace Player_Scripts
         
         private PlayerMovement _playerManager;
         private Camera _cam;
-
+        
         private List<GameObject> _cubesAdded;
         private List<Vector3> _addedCubePositions;
         private Vector3 _cubePos;
-        private CubeToDestroy[] cubeToDestroyScripts;
+        private CubeToDestroy[] _cubeToDestroyScripts;
         private double _cubeSize;
         private bool _isCubeDestroyed;
         
         private float _destroyMagnetTime;
-
+        
         private float _timeForDiamondTimes2;
         private bool _isDiamondMulti;
-        private int _diamondMultiplier;
+        private int _diamondsToBeAdded;
         private int _incrementForObstacle;
         
         void Awake()
@@ -61,16 +61,13 @@ namespace Player_Scripts
                 }
             }
         }
-
+        
         public void AddDiamond(GameObject collided)
         {
-            if (!_isDiamondMulti)
-                _diamondMultiplier = 1;
-            else
-                _diamondMultiplier = 2;
+            _diamondsToBeAdded = _isDiamondMulti ? 2 : 1;
             
             AudioManager.Instance.PlaySounds(Constants.AUDIO_DIAMONDCOLLECTEDSOUND);
-            GameManager.Instance.AddDiamonds(_diamondMultiplier);
+            GameManager.Instance.AddDiamonds(_diamondsToBeAdded);
             Vector3 screenPos = collided.transform.position;
             MenuManager.Instance.CallDiamondAnimation(screenPos, _cam);
             Destroy(collided);
@@ -111,15 +108,15 @@ namespace Player_Scripts
             }
         }
         
-        public void PullTrigger(Collider other)
+        public void PullTrigger(Collider collided)
         {
-            if (other.CompareTag(Constants.TAG_DESTROYCUBE) && _isCubeDestroyed)
+            if (collided.CompareTag(Constants.TAG_DESTROYCUBE) && _isCubeDestroyed)
             {
-                cubeToDestroyScripts = other.gameObject.GetComponentsInChildren<CubeToDestroy>();
+                _cubeToDestroyScripts = collided.gameObject.GetComponentsInChildren<CubeToDestroy>();
                 if (!_playerManager.wayPtFinished)
-                    WaitToFall(cubeToDestroyScripts[_incrementForObstacle].obstacleSize);
+                    WaitToFall(_cubeToDestroyScripts[_incrementForObstacle].obstacleSize);
             }
-            else if (other.CompareTag(Constants.TAG_ENDLEVEL))
+            else if (collided.CompareTag(Constants.TAG_ENDLEVEL))
             {
                 MenuManager.Instance.CallShowConfetti(new Vector3(transform.position.x + 2f,transform.position.y + 30f, transform.position.z));
                 GameManager.Instance.LevelCompleted();
@@ -144,22 +141,13 @@ namespace Player_Scripts
         }
         
         public void WaterObstacle()
-        { 
-            for (int i = 0; i < _cubesAdded.Count; i++)
-                _addedCubePositions.Add(_cubesAdded[i].transform.position);
-            
+        {
             if (_cubesAdded.Count > 1)
             {
                 Destroy(_cubesAdded[0]);
                 AudioManager.Instance.PlaySounds(Constants.AUDIO_DESTROYCUBESOUND);
 
-                for (int k = 1; k < _cubesAdded.Count; k++)
-                {
-                    var pos = _cubesAdded[k].transform.position;
-                    _cubesAdded[k].transform.position = new Vector3(pos.x, _addedCubePositions[k-1].y, pos.z);
-                }
-                _cubesAdded.RemoveAt(0);
-                _addedCubePositions.Clear();
+                MoveCubesDown(1);
                 _cubePos -= Vector3.up * (float) _cubeSize;
                 _playerManager.MoveDown(1);
             }
@@ -176,9 +164,11 @@ namespace Player_Scripts
             magnet.tag = Constants.TAG_MAGNETGRABBED;
             Magnet magnetCol = Instantiate(magnetCollider);
             magnetCol.transform.SetParent(transform.GetChild(0), false);
+            
             magnet.transform.SetParent(transform.GetChild(0));
-            magnet.transform.localPosition = new Vector3(0f, 0f, -2f);
-            //magnet.transform.rotation = Quaternion.Euler(0f, 90f, 90f);
+            magnet.transform.localPosition = new Vector3(0.4f, -0.5f, -2f);
+            magnet.transform.localRotation = Quaternion.Euler(0f, 90f, -50f);
+            
             Destroy(magnetCol, _destroyMagnetTime);
             Destroy(magnet, _destroyMagnetTime);
         }
@@ -195,6 +185,13 @@ namespace Player_Scripts
         {
             int _obstacleSize = (int) obstacleSize;
             _playerManager.MoveDown(_obstacleSize);
+            MoveCubesDown(_obstacleSize);
+            _isCubeDestroyed = false;
+        }
+
+        private void MoveCubesDown(float obstacleSize)
+        {
+            int _obstacleSize = (int) obstacleSize;
             
             for (int i = 0; i < _cubesAdded.Count; i++)
                 _addedCubePositions.Add(_cubesAdded[i].transform.position);
@@ -206,7 +203,6 @@ namespace Player_Scripts
             }
             _cubesAdded.RemoveRange(0,_obstacleSize);
             _addedCubePositions.Clear();
-            _isCubeDestroyed = false;
         }
     }
 }

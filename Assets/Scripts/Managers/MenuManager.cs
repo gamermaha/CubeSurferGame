@@ -22,9 +22,7 @@ namespace Managers
                 DontDestroyOnLoad(this);
             }
             else
-            {
                 Destroy(gameObject);
-            }
         }
 
         private void Start()
@@ -70,11 +68,6 @@ namespace Managers
             gameCompletedView.HideView();
         }
         
-        public void GameCompleted()
-        {
-            gameCompletedView.HideView();
-            gameStartView.ShowView();
-        }
         
         public void GameCompletedView()
         {
@@ -100,16 +93,10 @@ namespace Managers
         
         public void GameOverView() => gameOverView.ShowView();
 
-        public void CallUpdateDiamondCount(int diamondCount)
-        {
-            hUDView.UpdateDiamondCount(diamondCount);
-        }
+        public void CallUpdateDiamondCount(int diamondCount)=> hUDView.UpdateDiamondCount(diamondCount);
 
-        public void CallShowDiamondCount(int diamondCountAtEndLevel)
-        {
-            endLevelView.ShowDiamondCount(diamondCountAtEndLevel);
-        }
-        
+        public void CallShowDiamondCount(int diamondCountAtEndLevel) => endLevelView.ShowDiamondCount(diamondCountAtEndLevel);
+
         public void CallDiamondAnimation(Vector3 instantiatePos, Camera cam) => hUDView.DiamondAnimation(instantiatePos, cam);
         
         public void CallDiamondAnimationTimesTwo(string display) => hUDView.DiamondAnimationTimesTwo(display);

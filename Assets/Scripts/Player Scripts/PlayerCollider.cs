@@ -52,9 +52,9 @@ namespace Player_Scripts
             {
                 if (playerLocalPos.x >= -3f && playerLocalPos.x < -1f)
                     increment = 6;
-                else if (playerLocalPos.x >= -1f && playerLocalPos.x <= 1f)
+                else if (playerLocalPos.x >= -1f && playerLocalPos.x < 1f)
                     increment = 4;
-                else if (playerLocalPos.x > 1f && playerLocalPos.x <= 3f)
+                else if (playerLocalPos.x >= 1f && playerLocalPos.x <= 3f)
                     increment = 0;
             }
             else 

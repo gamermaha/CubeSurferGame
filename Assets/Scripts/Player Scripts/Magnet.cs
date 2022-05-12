@@ -1,7 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using DG.Tweening;
-using Managers;
+using Environment_Setters;
 
 namespace Player_Scripts
 {
@@ -11,12 +10,13 @@ namespace Player_Scripts
         [SerializeField] private PlayerController player;
 
         private void Start() => player = FindObjectOfType<PlayerController>();
+        
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.CompareTag("Cube"))
+            if (other.gameObject.CompareTag(Constants.TAG_CUBE))
             {
                 GameObject animation = Instantiate(cubeAnimation, other.transform.position, Quaternion.identity);
-                animation.transform.DOMove(player.transform.position, 0.2f)
+                animation.transform.DOMove(player.transform.position, 0.3f)
                     .SetEase(Ease.InOutFlash).OnComplete(() =>
                     {
                         Destroy(animation);

@@ -1,5 +1,4 @@
-﻿using System;
-using Environment_Setters;
+﻿using Environment_Setters;
 using Player_Scripts;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -32,9 +31,7 @@ namespace Managers
                 DontDestroyOnLoad(this);
             }
             else
-            {
                 Destroy(gameObject);
-            }
         }
         
         private void OnEnable() => SceneManager.sceneLoaded += OnLevelFinishLoading;
@@ -99,10 +96,7 @@ namespace Managers
             MenuManager.Instance.CallUpdateDiamondCount(_totalDiamondCount);
         }
 
-        public void ShowDiamondCountAtLevelEnd()
-        {
-            MenuManager.Instance.CallShowDiamondCount(_diamondCountAtEachLevel);
-        }
+        public void ShowDiamondCountAtLevelEnd() => MenuManager.Instance.CallShowDiamondCount(_diamondCountAtEachLevel);
         
         private void OnLevelFinishLoading(Scene scene, LoadSceneMode mode)
         {
@@ -139,6 +133,7 @@ namespace Managers
                 AudioManager.Instance.PlaySounds(Constants.AUDIO_GAMESTARTSOUND);
                 SceneManager.LoadScene("Level 0" + levelID);
                 PlayerPrefs.SetInt("LevelSaved", _levelNumber);
+                PlayerPrefs.Save();
             }
         }
     }

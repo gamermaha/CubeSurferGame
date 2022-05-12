@@ -12,8 +12,7 @@ namespace Player_Scripts
         public float lengthCoveredPercentage;
         
         [SerializeField] private GameObject playerCapsule;
-        private Vector3 _prevMousePos;
-        private Vector3 _prevTouchPos;
+        private Vector3 _prevPointerPos;
 
         private float _totalLength;
         private float _lengthCovered;
@@ -32,16 +31,14 @@ namespace Player_Scripts
         void Awake()
         {
             _playerAnimator = playerCapsule.GetComponentInChildren<Animator>();
-            _prevMousePos = new Vector3(0f, 0f, 0f);
+            _prevPointerPos = new Vector3(0f, 0f, 0f);
             _coveredDistanceInWayPoints = 0;
         }
         
         private void Start()
         {
             if (MetaData.Instance == null)
-            {
                 _playerSpeed = 0;
-            }
             else
             {
                 _playerSpeed = MetaData.Instance.scriptableInstance.playerSpeed;
@@ -142,11 +139,11 @@ namespace Player_Scripts
         private void MovePlayerRightOrLeft()
         {
             #if UNITY_EDITOR
-                if (Input.GetMouseButton(0) && (Input.mousePosition.x - _prevMousePos.x) > 0)
-                    MoveRightMouseIP();
+                if (Input.GetMouseButton(0) && (Input.mousePosition.x - _prevPointerPos.x) > 0)
+                    MoveRight(Input.mousePosition);
                 
-                if (Input.GetMouseButton(0) && (Input.mousePosition.x - _prevMousePos.x) < 0)
-                    MoveLeftMouseIP();
+                if (Input.GetMouseButton(0) && (Input.mousePosition.x - _prevPointerPos.x) < 0)
+                    MoveLeft(Input.mousePosition);
                 
             #elif UNITY_ANDROID
                 if (Input.touches.Length > 0)
@@ -155,37 +152,25 @@ namespace Player_Scripts
 
                     if (touch.phase == TouchPhase.Moved)
                     {
-                        if (Input.touches[0].position.x - _prevTouchPos.x > 7.5f)
-                            MoveRightTouchIP();
-                        if (Input.touches[0].position.x - _prevTouchPos.x < -7.5f)
-                            MoveLeftTouchIP();
+                        if (Input.touches[0].position.x - _prevPointerPos.x > 7.5f)
+                            MoveRight(Input.touches[0].position);
+                        if (Input.touches[0].position.x - _prevPointerPos.x < -7.5f)
+                            MoveLeft(Input.touches[0].position);
                     }
                 }
             
             #endif
         }
         
-        private void MoveRightTouchIP()
+        private void MoveRight(Vector3 prevPointPos)
         {
-            _prevTouchPos = Input.touches[0].position;
+            _prevPointerPos = prevPointPos;
             transform.GetChild(0).localPosition = new Vector3(Mathf.Clamp(transform.GetChild(0).localPosition.x + 0.1f,-_halfPathWidth, _halfPathWidth), 0f, 0f);
         }
         
-        private void MoveLeftTouchIP()
+        private void MoveLeft(Vector3 prevPointPos)
         {
-            _prevTouchPos = Input.touches[0].position;
-            transform.GetChild(0).localPosition = new Vector3(Mathf.Clamp(transform.GetChild(0).localPosition.x - 0.1f, -_halfPathWidth, _halfPathWidth), 0f, 0f);
-        }
-        
-        private void MoveRightMouseIP()
-        {
-            _prevMousePos = Input.mousePosition;
-            transform.GetChild(0).localPosition = new Vector3(Mathf.Clamp(transform.GetChild(0).localPosition.x + 0.1f,-_halfPathWidth, _halfPathWidth), 0f, 0f);
-        }
-        
-        private void MoveLeftMouseIP()
-        {
-            _prevMousePos = Input.mousePosition;
+            _prevPointerPos = prevPointPos;
             transform.GetChild(0).localPosition = new Vector3(Mathf.Clamp(transform.GetChild(0).localPosition.x - 0.1f, -_halfPathWidth, _halfPathWidth), 0f, 0f);
         }
     } 
