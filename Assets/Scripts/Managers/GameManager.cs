@@ -82,11 +82,17 @@ namespace Managers
         }
         
         public void LevelCompleted()
-        { 
-            AudioManager.Instance.PlaySounds(Constants.AUDIO_GAMECOMPLETEDSOUND);
+        {
             MenuManager.Instance.EndLevelView();
             if (_levelNumber == _totalLevels)
+            {
+                AudioManager.Instance.PlaySounds(Constants.AUDIO_GAMECOMPLETEDSOUND);
                 MenuManager.Instance.GameCompletedView();
+            }
+            else
+            {
+                AudioManager.Instance.PlaySounds(Constants.AUDIO_ENDLEVELSOUND);
+            }
         }
         
         public void AddDiamonds(int diamonds)

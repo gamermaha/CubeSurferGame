@@ -197,6 +197,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Clouds (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8403518344427190349, guid: 7f3c119730e164d4c82d5b25a79427e5,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8403518344427197573, guid: 7f3c119730e164d4c82d5b25a79427e5,
         type: 3}
       propertyPath: m_RootOrder

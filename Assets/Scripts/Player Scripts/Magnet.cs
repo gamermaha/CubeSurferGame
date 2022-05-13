@@ -16,11 +16,11 @@ namespace Player_Scripts
             if (other.gameObject.CompareTag(Constants.TAG_CUBE))
             {
                 GameObject animation = Instantiate(cubeAnimation, other.transform.position, Quaternion.identity);
+                player.AddCube(other.gameObject);
                 animation.transform.DOMove(player.transform.position, 0.3f)
                     .SetEase(Ease.InOutFlash).OnComplete(() =>
                     {
                         Destroy(animation);
-                        player.AddCube(other.gameObject);
                     });
                 
             }

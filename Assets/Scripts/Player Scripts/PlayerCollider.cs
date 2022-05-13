@@ -25,7 +25,7 @@ namespace Player_Scripts
                     player.AddDiamond(other.gameObject);
                     break;
                 case Constants.TAG_ENDLADDER:
-                    player.EndLadder(other.gameObject, 0f);
+                    player.EndLadder(other.gameObject, 0.2f);
                     break;
                 case Constants.TAG_ENDLEVEL:
                     player.EndLadder(other.gameObject, 5f);
@@ -48,12 +48,12 @@ namespace Player_Scripts
             Vector3 playerLocalPos = player.transform.GetChild(0).localPosition;
             int increment = 0;
                         
-            if (cubeToDestroyScripts.Length == 12)
+            if (cubeToDestroyScripts.Length > 3)
             {
                 if (playerLocalPos.x >= -3f && playerLocalPos.x < -1f)
-                    increment = 6;
+                    increment = 2;
                 else if (playerLocalPos.x >= -1f && playerLocalPos.x < 1f)
-                    increment = 4;
+                    increment = 1;
                 else if (playerLocalPos.x >= 1f && playerLocalPos.x <= 3f)
                     increment = 0;
             }

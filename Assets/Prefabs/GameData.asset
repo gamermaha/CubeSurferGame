@@ -15,7 +15,22 @@ MonoBehaviour:
   playerSpeed: 10
   pathLength: 20
   distanceInWeightPoints: 2
-  noOfLevels: 5
+  noOfLevels: 6
   cubeLength: 1
   destroyMagnetTime: 10
   diamondTimer: 6
+  xTransSliderMinValue: -10
+  xTransSliderMaxValue: 15
+  xTransSliderDefValue: 6.5
+  yTransSliderMinValue: -10
+  yTransSliderMaxValue: 15
+  yTransSliderDefValue: 7
+  zTransSliderMinValue: -50
+  zTransSliderMaxValue: 0
+  zTransSliderDefValue: -15
+  xRotSliderMinValue: -45
+  xRotSliderMaxValue: 45
+  xRotSliderDefValue: 10
+  yRotSliderMinValue: -45
+  yRotSliderMaxValue: 45
+  yRotSliderDefValue: 0
