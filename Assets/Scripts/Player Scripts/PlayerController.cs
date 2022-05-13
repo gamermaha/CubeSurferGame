@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Controllers;
 using Environment_Setters;
 using Managers;
 using UnityEngine;
@@ -169,7 +170,7 @@ namespace Player_Scripts
             magnet.transform.localScale = new Vector3(15f, 15f, 15f);
             magnet.transform.localPosition = new Vector3(0.4f, -0.5f, -2f);
             magnet.transform.localRotation = Quaternion.Euler(0f, 60f, -50f);
-            
+
             Destroy(magnetCol, _destroyMagnetTime);
             Destroy(magnet, _destroyMagnetTime);
         }
