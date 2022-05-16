@@ -65,7 +65,7 @@ namespace Player_Scripts
 
                 var rotation = Quaternion.LookRotation(_wayPoints[_wayPtIncrement].position - transform.position);
                 transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 5f);
-
+                
                 if (distance <= _thresholdInWayPt )
                 {
                     if ( _wayPtIncrement >= 2 && _wayPtIncrement < (_wayPoints.Count - 1)) 
@@ -75,18 +75,19 @@ namespace Player_Scripts
                     }
                     _wayPtIncrement++;
                 }
+                if (_wayPtIncrement == 0 || _wayPtIncrement == 1)
+                    _lengthCovered = Vector3.Distance(transform.position, _startPlayerPos.position); 
+                // else if (_wayPtIncrement == 1) 
+                //     _lengthCovered = Vector3.Distance(transform.position, _wayPoints[0].position);
+                else if (_wayPtIncrement >= 2) 
+                    _lengthCovered = Vector3.Distance(transform.position, _wayPoints[_wayPtIncrement - 1].position) + _coveredDistanceInWayPoints;
+                
+                Debug.Log("length covered " + _lengthCovered);
+                Debug.Log("way point increment " + _wayPtIncrement);
+                Debug.Log("covered distance in waypoints " +_coveredDistanceInWayPoints);
+                
                 if (_wayPtIncrement >= _wayPoints.Count)
                     wayPtFinished = true;
-
-                if (_wayPtIncrement == 0)
-                    _lengthCovered = Vector3.Distance(transform.position, _startPlayerPos.position); 
-            
-                else if (_wayPtIncrement >= 1)
-                {
-                    _lengthCovered = Vector3.Distance(transform.position, _wayPoints[_wayPtIncrement - 1].position);
-                    if (_wayPtIncrement >= 2)
-                        _lengthCovered += _coveredDistanceInWayPoints;
-                }
             }
             else if (wayPtFinished && _onEnd == false)
             {
