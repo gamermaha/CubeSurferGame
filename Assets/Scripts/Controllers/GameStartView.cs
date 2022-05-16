@@ -9,7 +9,17 @@ namespace Controllers
     {
         public Slider handSlider;
 
-        private void Start()=> handSlider.value = 0;
+        private void OnEnable()
+        {
+            handSlider.value = 0;
+            StartCoroutine(HandSlider());
+        }
+        
+        public override void HideView()
+        {
+            base.HideView();
+            StopCoroutine(HandSlider());
+        }
 
         public IEnumerator HandSlider()
         {

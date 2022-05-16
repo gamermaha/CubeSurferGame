@@ -67,20 +67,26 @@ namespace Player_Scripts
                 transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 5f);
                 
                 if (distance <= _thresholdInWayPt )
-                {
+                { 
+                    _wayPtIncrement++;
+                    if (_wayPtIncrement == 1)
+                        _coveredDistanceInWayPoints += Vector3.Distance(_wayPoints[_wayPtIncrement - 1].position,
+                            _startPlayerPos.position);
+                    
                     if ( _wayPtIncrement >= 2 && _wayPtIncrement < (_wayPoints.Count - 1)) 
                     {
                         _coveredDistanceInWayPoints += Vector3.Distance(_wayPoints[_wayPtIncrement - 1].position,
                             _wayPoints[_wayPtIncrement-2].position);
                     }
-                    _wayPtIncrement++;
+                    
                 }
-                if (_wayPtIncrement == 0 || _wayPtIncrement == 1)
+                if (_wayPtIncrement == 0)
                     _lengthCovered = Vector3.Distance(transform.position, _startPlayerPos.position); 
                 // else if (_wayPtIncrement == 1) 
                 //     _lengthCovered = Vector3.Distance(transform.position, _wayPoints[0].position);
-                else if (_wayPtIncrement >= 2) 
+                else if (_wayPtIncrement >= 1) 
                     _lengthCovered = Vector3.Distance(transform.position, _wayPoints[_wayPtIncrement - 1].position) + _coveredDistanceInWayPoints;
+                
                 
                 Debug.Log("length covered " + _lengthCovered);
                 Debug.Log("way point increment " + _wayPtIncrement);

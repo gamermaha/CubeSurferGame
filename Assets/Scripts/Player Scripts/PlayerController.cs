@@ -98,6 +98,7 @@ namespace Player_Scripts
             {
                 for (int o = 0; o < _obstacleSize; o++)
                 {
+                    Handheld.Vibrate();
                     AudioManager.Instance.PlaySounds(Constants.AUDIO_DESTROYCUBESOUND);
                     _cubesAdded[o].gameObject.tag = Constants.TAG_CUBEDESTROYED;
                     cubeCollector.transform.GetChild(0).SetParent(null);
@@ -116,8 +117,7 @@ namespace Player_Scripts
             if (collided.CompareTag(Constants.TAG_DESTROYCUBE) && _isCubeDestroyed)
             {
                 _cubeToDestroyScripts = collided.gameObject.GetComponentsInChildren<CubeToDestroy>();
-                if (!_playerManager.wayPtFinished)
-                    WaitToFall(_cubeToDestroyScripts[_incrementForObstacle].obstacleSize);
+                WaitToFall(_cubeToDestroyScripts[_incrementForObstacle].obstacleSize);
             }
             else if (collided.CompareTag(Constants.TAG_ENDLEVEL))
             {
@@ -130,13 +130,11 @@ namespace Player_Scripts
             
             if (_cubesAdded.Count > 1)
             {
+                
                 _cam.transform.DOMove(new Vector3(_cam.transform.position.x, _cam.transform.position.y + camMovement, _cam.transform.position.z), 1/_playerSpeed);
-                    // .SetEase(Ease.InOutFlash).OnComplete(() =>
-                    // {
-                    // });
-                //_cam.transform.position += new Vector3(0f, camMovement, 0f);
                 DestroyCube(collided, 1, 0);
                 _cubesAdded.RemoveAt(0);
+                Handheld.Vibrate();
             }
             else
             {
@@ -149,6 +147,7 @@ namespace Player_Scripts
             if (_cubesAdded.Count > 1)
             {
                 Destroy(_cubesAdded[0]);
+                Handheld.Vibrate();
                 AudioManager.Instance.PlaySounds(Constants.AUDIO_DESTROYCUBESOUND);
 
                 MoveCubesDown(1);

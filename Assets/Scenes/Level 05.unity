@@ -2415,7 +2415,7 @@ PrefabInstance:
     - target: {fileID: 7217224645312956254, guid: 7bbf1cd6526e195428dac134f02e6a48,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 187.06999
+      value: 187.24
       objectReference: {fileID: 0}
     - target: {fileID: 7217224645312956254, guid: 7bbf1cd6526e195428dac134f02e6a48,
         type: 3}
@@ -5431,7 +5431,7 @@ PrefabInstance:
     - target: {fileID: 7217224645312956254, guid: 7bbf1cd6526e195428dac134f02e6a48,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 187
+      value: 187.31
       objectReference: {fileID: 0}
     - target: {fileID: 7217224645312956254, guid: 7bbf1cd6526e195428dac134f02e6a48,
         type: 3}
@@ -5720,7 +5720,7 @@ PrefabInstance:
     - target: {fileID: 7217224645312956254, guid: 7bbf1cd6526e195428dac134f02e6a48,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 186.86
+      value: 187.17
       objectReference: {fileID: 0}
     - target: {fileID: 7217224645312956254, guid: 7bbf1cd6526e195428dac134f02e6a48,
         type: 3}
@@ -5978,7 +5978,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: -75, y: -200}
-  m_SizeDelta: {x: 150, y: 50}
+  m_SizeDelta: {x: 300, y: 50}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &648923254
 MonoBehaviour:
@@ -5993,14 +5993,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.47529262, b: 0, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 4506bf6ca285b494ab0993e12703d5e6, type: 3}
     m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
@@ -6009,7 +6009,7 @@ MonoBehaviour:
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
+    m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Level 05
@@ -7385,7 +7385,7 @@ PrefabInstance:
     - target: {fileID: 7217224645312956254, guid: 7bbf1cd6526e195428dac134f02e6a48,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 186.93
+      value: 187.14
       objectReference: {fileID: 0}
     - target: {fileID: 7217224645312956254, guid: 7bbf1cd6526e195428dac134f02e6a48,
         type: 3}
@@ -11199,6 +11199,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 371607606334471175, guid: e4ba7ecadeb4d8b4aa545af25451fb8f,
+        type: 3}
+      propertyPath: obstacleSize
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1106019224072903841, guid: e4ba7ecadeb4d8b4aa545af25451fb8f,
+        type: 3}
+      propertyPath: obstacleSize
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2776969738921081309, guid: e4ba7ecadeb4d8b4aa545af25451fb8f,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -11279,10 +11289,25 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -13.2
       objectReference: {fileID: 0}
+    - target: {fileID: 5874617282731919400, guid: e4ba7ecadeb4d8b4aa545af25451fb8f,
+        type: 3}
+      propertyPath: obstacleSize
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6304548627049838342, guid: e4ba7ecadeb4d8b4aa545af25451fb8f,
         type: 3}
       propertyPath: m_Name
       value: WayPoint02
+      objectReference: {fileID: 0}
+    - target: {fileID: 6546378238217129708, guid: e4ba7ecadeb4d8b4aa545af25451fb8f,
+        type: 3}
+      propertyPath: obstacleSize
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7775488411497179540, guid: e4ba7ecadeb4d8b4aa545af25451fb8f,
+        type: 3}
+      propertyPath: obstacleSize
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8456579776847549969, guid: e4ba7ecadeb4d8b4aa545af25451fb8f,
         type: 3}
@@ -11814,6 +11839,11 @@ PrefabInstance:
       propertyPath: wayPoints.Array.data[31]
       value: 
       objectReference: {fileID: 1988110278}
+    - target: {fileID: 8778271018610514357, guid: e4ba7ecadeb4d8b4aa545af25451fb8f,
+        type: 3}
+      propertyPath: obstacleSize
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8778271018843459923, guid: e4ba7ecadeb4d8b4aa545af25451fb8f,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -13842,7 +13872,7 @@ PrefabInstance:
     - target: {fileID: 7217224645312956254, guid: 7bbf1cd6526e195428dac134f02e6a48,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 187
+      value: 187.13
       objectReference: {fileID: 0}
     - target: {fileID: 7217224645312956254, guid: 7bbf1cd6526e195428dac134f02e6a48,
         type: 3}
@@ -14010,7 +14040,7 @@ PrefabInstance:
     - target: {fileID: 7217224645312956254, guid: 7bbf1cd6526e195428dac134f02e6a48,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 187.12999
+      value: 187.2
       objectReference: {fileID: 0}
     - target: {fileID: 7217224645312956254, guid: 7bbf1cd6526e195428dac134f02e6a48,
         type: 3}
@@ -14969,7 +14999,7 @@ PrefabInstance:
     - target: {fileID: 7217224645312956254, guid: 7bbf1cd6526e195428dac134f02e6a48,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 186.86
+      value: 187.2
       objectReference: {fileID: 0}
     - target: {fileID: 7217224645312956254, guid: 7bbf1cd6526e195428dac134f02e6a48,
         type: 3}
@@ -18476,7 +18506,7 @@ PrefabInstance:
     - target: {fileID: 7217224645312956254, guid: 7bbf1cd6526e195428dac134f02e6a48,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 186.93
+      value: 187.27
       objectReference: {fileID: 0}
     - target: {fileID: 7217224645312956254, guid: 7bbf1cd6526e195428dac134f02e6a48,
         type: 3}

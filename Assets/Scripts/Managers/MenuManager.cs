@@ -41,12 +41,10 @@ namespace Managers
         {
             gameStartView.ShowView();
             hUDView.ShowView();
-            StartCoroutine(gameStartView.HandSlider());
         }
         
         public void PlayGame()
         {
-            StopCoroutine(gameStartView.HandSlider());
             gameStartView.HideView();
             hUDView.ShowView();
             GameManager.Instance.PlayerCanMoveNow();

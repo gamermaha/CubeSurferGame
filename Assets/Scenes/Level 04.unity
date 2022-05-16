@@ -5011,6 +5011,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 371607606334471175, guid: e4ba7ecadeb4d8b4aa545af25451fb8f,
+        type: 3}
+      propertyPath: obstacleSize
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1106019224072903841, guid: e4ba7ecadeb4d8b4aa545af25451fb8f,
+        type: 3}
+      propertyPath: obstacleSize
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4590482480199076615, guid: e4ba7ecadeb4d8b4aa545af25451fb8f,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -5080,6 +5090,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: -22.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874617282731919400, guid: e4ba7ecadeb4d8b4aa545af25451fb8f,
+        type: 3}
+      propertyPath: obstacleSize
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6546378238217129708, guid: e4ba7ecadeb4d8b4aa545af25451fb8f,
+        type: 3}
+      propertyPath: obstacleSize
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7775488411497179540, guid: e4ba7ecadeb4d8b4aa545af25451fb8f,
+        type: 3}
+      propertyPath: obstacleSize
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8456579776847549969, guid: e4ba7ecadeb4d8b4aa545af25451fb8f,
         type: 3}
@@ -5451,6 +5476,11 @@ PrefabInstance:
       propertyPath: wayPoints.Array.data[12]
       value: 
       objectReference: {fileID: 1905829061}
+    - target: {fileID: 8778271018610514357, guid: e4ba7ecadeb4d8b4aa545af25451fb8f,
+        type: 3}
+      propertyPath: obstacleSize
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8778271018843459923, guid: e4ba7ecadeb4d8b4aa545af25451fb8f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5897,6 +5927,36 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 868906408}
     m_Modifications:
+    - target: {fileID: 224867241474719341, guid: 77f4756adafdc0a4f9930a1a9d216eb9,
+        type: 3}
+      propertyPath: obstacleSize
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 679913979321032395, guid: 77f4756adafdc0a4f9930a1a9d216eb9,
+        type: 3}
+      propertyPath: obstacleSize
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6241660731312385056, guid: 77f4756adafdc0a4f9930a1a9d216eb9,
+        type: 3}
+      propertyPath: obstacleSize
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6755795559123905252, guid: 77f4756adafdc0a4f9930a1a9d216eb9,
+        type: 3}
+      propertyPath: obstacleSize
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7471375629675531096, guid: 77f4756adafdc0a4f9930a1a9d216eb9,
+        type: 3}
+      propertyPath: obstacleSize
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8472700213369535353, guid: 77f4756adafdc0a4f9930a1a9d216eb9,
+        type: 3}
+      propertyPath: obstacleSize
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8472700214550793748, guid: 77f4756adafdc0a4f9930a1a9d216eb9,
         type: 3}
       propertyPath: m_RootOrder
@@ -7242,7 +7302,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: -75, y: -200}
-  m_SizeDelta: {x: 150, y: 50}
+  m_SizeDelta: {x: 300, y: 50}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1279004361
 MonoBehaviour:
@@ -7257,14 +7317,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.4760489, b: 0, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 4506bf6ca285b494ab0993e12703d5e6, type: 3}
     m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
@@ -7273,7 +7333,7 @@ MonoBehaviour:
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
+    m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Level 04

@@ -1,6 +1,5 @@
 ﻿using Managers;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Controllers
@@ -16,6 +15,7 @@ namespace Controllers
             cubeColour.color = Color.magenta;
             cubeImage.color = Color.magenta;
             cubeImgOnCubeSelButton.color = Color.magenta;
+            
         }
 
         public void YellowColButton()
