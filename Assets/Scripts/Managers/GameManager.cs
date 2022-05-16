@@ -138,7 +138,7 @@ namespace Managers
         private void LoadLevel(int levelID)
         {
             _diamondCountAtEachLevel = 0;
-            if (levelID > _totalLevels)
+            if (levelID > _totalLevels || levelID == 0)
             {
                 _levelNumber = 1;
                 levelID = 1;

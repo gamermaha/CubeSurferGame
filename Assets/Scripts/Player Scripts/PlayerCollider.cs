@@ -25,10 +25,10 @@ namespace Player_Scripts
                     player.AddDiamond(other.gameObject);
                     break;
                 case Constants.TAG_ENDLADDER:
-                    player.EndLadder(other.gameObject, 0.2f);
+                    player.EndLadder(other.gameObject, 1f);
                     break;
                 case Constants.TAG_ENDLEVEL:
-                    player.EndLadder(other.gameObject, 5f);
+                    player.EndLadder(other.gameObject, 1f);
                     break;
                 case Constants.TAG_WATEROBSTACLE:
                     player.WaterObstacle();

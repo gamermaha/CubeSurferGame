@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Controllers;
+using DG.Tweening;
 using Environment_Setters;
 using Managers;
 using UnityEngine;
@@ -13,6 +13,7 @@ namespace Player_Scripts
         [SerializeField] private Magnet magnetCollider;
         
         private PlayerMovement _playerManager;
+        private float _playerSpeed;
         private Camera _cam;
         
         private List<GameObject> _cubesAdded;
@@ -44,6 +45,7 @@ namespace Player_Scripts
                 _cubeSize = MetaData.Instance.scriptableInstance.cubeLength;
                 _timeForDiamondTimes2 = MetaData.Instance.scriptableInstance.diamondTimer;
                 _destroyMagnetTime = MetaData.Instance.scriptableInstance.destroyMagnetTime;
+                _playerSpeed = MetaData.Instance.scriptableInstance.playerSpeed;
             }
             _cubePos = Vector3.up * (float)_cubeSize/4;
             _cubesAdded.Add(cubeCollector.transform.GetChild(0).gameObject);
@@ -128,7 +130,11 @@ namespace Player_Scripts
             
             if (_cubesAdded.Count > 1)
             {
-                _cam.transform.position += new Vector3(0f, camMovement, 0f);
+                _cam.transform.DOMove(new Vector3(_cam.transform.position.x, _cam.transform.position.y + camMovement, _cam.transform.position.z), 1/_playerSpeed);
+                    // .SetEase(Ease.InOutFlash).OnComplete(() =>
+                    // {
+                    // });
+                //_cam.transform.position += new Vector3(0f, camMovement, 0f);
                 DestroyCube(collided, 1, 0);
                 _cubesAdded.RemoveAt(0);
             }

@@ -17,7 +17,7 @@ namespace Player_Scripts
             {
                 GameObject animation = Instantiate(cubeAnimation, other.transform.position, Quaternion.identity);
                 player.AddCube(other.gameObject);
-                animation.transform.DOMove(player.transform.position, 0.3f)
+                animation.transform.DOMove(player.transform.GetChild(0).position, 0.3f)
                     .SetEase(Ease.InOutFlash).OnComplete(() =>
                     {
                         Destroy(animation);
