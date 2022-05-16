@@ -46,12 +46,12 @@ namespace Controllers
             if (settingsContainer.activeSelf)
             {
                 settingsContainer.SetActive(false);
-                Time.timeScale = 1;
+                GameManager.Instance.PlayGame();
             }
             else
             {
                 settingsContainer.SetActive(true);
-                Time.timeScale = 0;
+                GameManager.Instance.PauseGame();
             }
         }
 

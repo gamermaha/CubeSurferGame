@@ -119,9 +119,7 @@ namespace Player_Scripts
             }
             else if (collided.CompareTag(Constants.TAG_ENDLEVEL))
             {
-                MenuManager.Instance.CallShowConfetti(new Vector3(transform.position.x + 2f,transform.position.y + 30f, transform.position.z));
-                GameManager.Instance.LevelCompleted();
-                _playerManager.StopPlayer();
+                OnLevelComplete();
             }
         }
         
@@ -136,8 +134,7 @@ namespace Player_Scripts
             }
             else
             {
-                GameManager.Instance.GameOver();
-                _playerManager.StopPlayer();
+                OnLevelComplete();
             }
         }
         
@@ -168,8 +165,8 @@ namespace Player_Scripts
             
             magnet.transform.SetParent(transform.GetChild(0));
             magnet.transform.localScale = new Vector3(15f, 15f, 15f);
-            magnet.transform.localPosition = new Vector3(0.4f, -0.5f, -2f);
-            magnet.transform.localRotation = Quaternion.Euler(0f, 60f, -50f);
+            magnet.transform.localPosition = new Vector3(0.4f, -0.2f, -2f);
+            magnet.transform.localRotation = Quaternion.Euler(0f, 50f, -50f);
 
             Destroy(magnetCol, _destroyMagnetTime);
             Destroy(magnet, _destroyMagnetTime);
@@ -205,6 +202,13 @@ namespace Player_Scripts
             }
             _cubesAdded.RemoveRange(0,_obstacleSize);
             _addedCubePositions.Clear();
+        }
+
+        private void OnLevelComplete()
+        {
+            MenuManager.Instance.CallShowConfetti(new Vector3(transform.position.x + 2f,transform.position.y + 30f, transform.position.z));
+            GameManager.Instance.LevelCompleted();
+            _playerManager.StopPlayer();
         }
     }
 }

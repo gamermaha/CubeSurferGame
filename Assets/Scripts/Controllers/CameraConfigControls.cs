@@ -63,13 +63,13 @@ namespace Controllers
             PlayerPrefs.SetFloat("CamxRot", xRotSlider.value);
             PlayerPrefs.SetFloat("CamyRot", yRotSlider.value);
             GameManager.Instance.BackFromDebugScene();
-            Time.timeScale = 1;
+            GameManager.Instance.PlayGame();
         }
 
         public void BackButton()
         {
             GameManager.Instance.BackFromDebugScene();
-            Time.timeScale = 1;
+            GameManager.Instance.PlayGame();
         }
     }
     

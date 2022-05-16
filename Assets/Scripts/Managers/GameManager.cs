@@ -49,6 +49,16 @@ namespace Managers
 
         public void PlayerMustStopNow() => PlayerMovement.StartMoving = false;
 
+        public void PlayGame()
+        {
+            Time.timeScale = 1;
+        }
+
+        public void PauseGame()
+        {
+            Time.timeScale = 0;
+        }
+
         public void LoadDebugScene()
         {
             MenuManager.Instance.HideAllViews();

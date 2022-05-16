@@ -2383,7 +2383,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 868906408}
-  m_RootOrder: 89
+  m_RootOrder: 86
   m_LocalEulerAnglesHint: {x: 0, y: 26.1, z: 0}
 --- !u!1001 &453714149
 PrefabInstance:
@@ -7430,7 +7430,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-11996
+  m_Name: pb_Mesh-42140
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -9486,6 +9486,11 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1351414673}
+    - target: {fileID: 6950460415760568445, guid: 6c0be2e7ac8c8e642972914565522ff6,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4078521521c721449aaae857ec48f2cf, type: 2}
     - target: {fileID: 8810778948438990572, guid: 6c0be2e7ac8c8e642972914565522ff6,
         type: 3}
       propertyPath: m_Mesh
