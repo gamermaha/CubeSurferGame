@@ -92,10 +92,9 @@ namespace Player_Scripts
         { 
             int _obstacleSize = (int) obstacleSize;
             _incrementForObstacle = incrementForObstacle;
-            _isCubeDestroyed = true;
-            
             if (_cubesAdded.Count > obstacleSize)
             {
+                _isCubeDestroyed = true;
                 for (int o = 0; o < _obstacleSize; o++)
                 {
                     Handheld.Vibrate();
