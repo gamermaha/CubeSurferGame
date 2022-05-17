@@ -21,11 +21,11 @@ namespace Managers
         [Header("Camera Config")]
         public float xTransSliderMinValue = -10;
         public float xTransSliderMaxValue = 15;
-        public float xTransSliderDefValue = 5;
+        public float xTransSliderDefValue = 9;
         
         public float yTransSliderMinValue = -10;
         public float yTransSliderMaxValue = 15;
-        public float yTransSliderDefValue = 9;
+        public float yTransSliderDefValue = 11;
         
         public float zTransSliderMinValue = -50;
         public float zTransSliderMaxValue = 0;
@@ -33,7 +33,7 @@ namespace Managers
         
         public float xRotSliderMinValue = -45;
         public float xRotSliderMaxValue = 45;
-        public float xRotSliderDefValue = 3;
+        public float xRotSliderDefValue = 10;
         
         public float yRotSliderMinValue = -45;
         public float yRotSliderMaxValue = 45;

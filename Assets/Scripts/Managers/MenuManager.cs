@@ -1,6 +1,7 @@
 ﻿using Controllers;
 using Environment_Setters;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Managers
 {
@@ -14,6 +15,7 @@ namespace Managers
         [SerializeField] private GameOverView gameOverView;
         [SerializeField] private GameCompletedView gameCompletedView;
         [SerializeField] private CubeSelectionView cubeSelectionView;
+        
         
         private void Awake()
         {

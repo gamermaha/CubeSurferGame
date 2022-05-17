@@ -13,6 +13,7 @@ namespace Controllers
         public Image hUDDiamondImage;
         public Slider levelProgression;
         public GameObject settingsContainer;
+        public GameObject crossOnVolumeButtonImg;
         
         private void Start()
         {
@@ -57,6 +58,10 @@ namespace Controllers
             GameManager.Instance.LoadDebugScene();
         }
 
-        public void AudioOnOff() => AudioManager.Instance.SetOnOff();
+        public void AudioOnOff()
+        {
+            AudioManager.Instance.SetOnOff();
+            crossOnVolumeButtonImg.SetActive(!crossOnVolumeButtonImg.activeSelf);
+        }
     }
 }

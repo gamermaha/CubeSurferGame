@@ -85,11 +85,6 @@ namespace Player_Scripts
                 else if (_wayPtIncrement >= 1) 
                     _lengthCovered = Vector3.Distance(transform.position, _wayPoints[_wayPtIncrement - 1].position) + _coveredDistanceInWayPoints;
                 
-                
-                Debug.Log("length covered " + _lengthCovered);
-                Debug.Log("way point increment " + _wayPtIncrement);
-                Debug.Log("covered distance in waypoints " +_coveredDistanceInWayPoints);
-                
                 if (_wayPtIncrement >= _wayPoints.Count)
                     wayPtFinished = true;
             }
@@ -106,6 +101,9 @@ namespace Player_Scripts
         {
             if (!StartMoving)
                 return;
+            if (GameManager.Instance.playerPaused)
+                return;
+            
             MovePlayerRightOrLeft();
         }
 

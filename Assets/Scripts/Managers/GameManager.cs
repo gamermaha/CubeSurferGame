@@ -9,6 +9,7 @@ namespace Managers
     {
         
         public static GameManager Instance;
+        public bool playerPaused;
         
         [Header("Reference to Player Prefab")]
         [SerializeField] private PlayerController playerPrefab;
@@ -40,8 +41,9 @@ namespace Managers
         {
             _totalLevels = MetaData.Instance.scriptableInstance.noOfLevels;
             _isOnStart = true;
-            //LoadCurrentLevel();
-            LoadLevel(3);
+            LoadCurrentLevel();
+            PlayerPrefs.SetInt("audio", 1);
+            AudioManager.Instance.GetOnOff();
         }
         
         private void OnDisable() => SceneManager.sceneLoaded -= OnLevelFinishLoading;
@@ -53,11 +55,13 @@ namespace Managers
         public void PlayGame()
         {
             Time.timeScale = 1;
+            playerPaused = false;
         }
 
         public void PauseGame()
         {
             Time.timeScale = 0;
+            playerPaused = true;
         }
 
         public void LoadDebugScene()

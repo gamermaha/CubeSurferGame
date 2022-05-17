@@ -30,20 +30,20 @@ namespace Managers
                 Destroy(this);
         }
 
-        private int GetOnOff()
+        public int GetOnOff()
         {
-            _audioOnOff = PlayerPrefs.GetInt("audio", 0) == 1 ? 1 : 0;
+            _audioOnOff = PlayerPrefs.GetInt("audio", 1) == 1 ? 1 : 0;
             return _audioOnOff;
         }
 
         public void SetOnOff()
         {
-            if (PlayerPrefs.GetInt("audio", 0) == 1)
+            if (PlayerPrefs.GetInt("audio", 1) == 1)
             {
                 PlayerPrefs.SetInt("audio", 0);
                 _audioOnOff = 0;
             }
-            else if (PlayerPrefs.GetInt("audio", 0) == 0)
+            else if (PlayerPrefs.GetInt("audio", 1) == 0)
             {
                 PlayerPrefs.SetInt("audio", 1);
                 _audioOnOff = 1;
