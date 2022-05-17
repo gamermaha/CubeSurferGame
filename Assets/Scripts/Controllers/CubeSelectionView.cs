@@ -18,7 +18,6 @@ namespace Controllers
             cubeImage.color = Color.magenta;
             cubeImgOnCubeSelButton.color = Color.magenta;
             PlayerPrefs.SetString("CubeColor", "magenta");
-            
         }
 
         public void YellowColButton()

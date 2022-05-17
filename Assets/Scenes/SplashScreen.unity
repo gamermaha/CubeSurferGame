@@ -406,6 +406,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3739604830548341796, guid: 915c051cf1a27d94ea1ae246770953e7,
+        type: 3}
+      propertyPath: cubeMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: e13cb793933be0c4bae9282b1504c509, type: 2}
+    - target: {fileID: 3739604830548341796, guid: 915c051cf1a27d94ea1ae246770953e7,
+        type: 3}
+      propertyPath: trailMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 1565f1b5544945747a5dff4559409d27, type: 2}
     - target: {fileID: 7390715155510449092, guid: 915c051cf1a27d94ea1ae246770953e7,
         type: 3}
       propertyPath: crossOnVolumeButtonImg
