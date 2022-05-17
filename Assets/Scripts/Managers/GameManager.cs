@@ -40,7 +40,8 @@ namespace Managers
         {
             _totalLevels = MetaData.Instance.scriptableInstance.noOfLevels;
             _isOnStart = true;
-            LoadCurrentLevel();
+            //LoadCurrentLevel();
+            LoadLevel(3);
         }
         
         private void OnDisable() => SceneManager.sceneLoaded -= OnLevelFinishLoading;

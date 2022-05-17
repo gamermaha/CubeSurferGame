@@ -4879,8 +4879,28 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: e13cb793933be0c4bae9282b1504c509, type: 2}
     - target: {fileID: 4936898548462715764, guid: e4ba7ecadeb4d8b4aa545af25451fb8f,
         type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4936898548462715764, guid: e4ba7ecadeb4d8b4aa545af25451fb8f,
+        type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.18
+      value: 4.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4936898548462715764, guid: e4ba7ecadeb4d8b4aa545af25451fb8f,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4936898548462715764, guid: e4ba7ecadeb4d8b4aa545af25451fb8f,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4936898548462715764, guid: e4ba7ecadeb4d8b4aa545af25451fb8f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8456579777280207257, guid: e4ba7ecadeb4d8b4aa545af25451fb8f,
         type: 3}
@@ -5131,7 +5151,7 @@ PrefabInstance:
         type: 3}
       propertyPath: wayPoints.Array.data[5]
       value: 
-      objectReference: {fileID: 2089188581}
+      objectReference: {fileID: 1587597364}
     - target: {fileID: 8778271018591962559, guid: e4ba7ecadeb4d8b4aa545af25451fb8f,
         type: 3}
       propertyPath: wayPoints.Array.data[6]

@@ -22,7 +22,7 @@ namespace Player_Scripts
         private int _wayPtIncrement;
         private Transform _startPlayerPos;
         private float _playerSpeed;
-        private float _thresholdInWayPt = 0.5f;
+        private float _thresholdInWayPt = 0.1f;
         private float _halfPathWidth = 2.5f;
         private double _cubeSize;
         private Animator _playerAnimator;
@@ -73,7 +73,7 @@ namespace Player_Scripts
                         _coveredDistanceInWayPoints += Vector3.Distance(_wayPoints[_wayPtIncrement - 1].position,
                             _startPlayerPos.position);
                     
-                    else if ( _wayPtIncrement >= 2 && _wayPtIncrement < (_wayPoints.Count - 1)) 
+                    else if ( _wayPtIncrement >= 2 && _wayPtIncrement <= (_wayPoints.Count - 1)) 
                     {
                         _coveredDistanceInWayPoints += Vector3.Distance(_wayPoints[_wayPtIncrement - 1].position,
                             _wayPoints[_wayPtIncrement-2].position);
