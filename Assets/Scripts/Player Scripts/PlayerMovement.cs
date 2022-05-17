@@ -73,7 +73,7 @@ namespace Player_Scripts
                         _coveredDistanceInWayPoints += Vector3.Distance(_wayPoints[_wayPtIncrement - 1].position,
                             _startPlayerPos.position);
                     
-                    if ( _wayPtIncrement >= 2 && _wayPtIncrement < (_wayPoints.Count - 1)) 
+                    else if ( _wayPtIncrement >= 2 && _wayPtIncrement < (_wayPoints.Count - 1)) 
                     {
                         _coveredDistanceInWayPoints += Vector3.Distance(_wayPoints[_wayPtIncrement - 1].position,
                             _wayPoints[_wayPtIncrement-2].position);
@@ -81,9 +81,7 @@ namespace Player_Scripts
                     
                 }
                 if (_wayPtIncrement == 0)
-                    _lengthCovered = Vector3.Distance(transform.position, _startPlayerPos.position); 
-                // else if (_wayPtIncrement == 1) 
-                //     _lengthCovered = Vector3.Distance(transform.position, _wayPoints[0].position);
+                    _lengthCovered = Vector3.Distance(transform.position, _startPlayerPos.position);
                 else if (_wayPtIncrement >= 1) 
                     _lengthCovered = Vector3.Distance(transform.position, _wayPoints[_wayPtIncrement - 1].position) + _coveredDistanceInWayPoints;
                 

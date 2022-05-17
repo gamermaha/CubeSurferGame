@@ -33,12 +33,8 @@ namespace Controllers
                 });
         }
         
-        public void DiamondAnimationTimesTwo(string display)
-        {
-            times2.transform.position = hUDDiamondImage.transform.position;
-            times2.text = display;
-        }
-        
+        public void DiamondAnimationTimesTwo(string display) => times2.text = display;
+
         public void SliderUpdate(float sliderValue) => levelProgression.value = sliderValue;
 
         public void SettingsContainer()
