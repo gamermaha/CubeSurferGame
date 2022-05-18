@@ -28,5 +28,13 @@ namespace Environment_Setters
         public const string AUDIO_GAMESTARTSOUND = "game_is_started";
         public const string AUDIO_GAMECOMPLETEDSOUND = "game_completed";
 
+        public const string MAGENTA_CUBE_COLOUR = "magenta";
+        public const string BLUE_CUBE_COLOUR = "blue";
+        public const string CYAN_CUBE_COLOUR = "cyan";
+        public const string GREY_CUBE_COLOUR = "grey";
+        public const string YELLOW_CUBE_COLOUR = "yellow";
+        public const string RED_CUBE_COLOUR = "red";
+        
+
     }
 }

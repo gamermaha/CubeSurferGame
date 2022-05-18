@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Environment_Setters;
 using Managers;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,33 +21,33 @@ namespace Controllers
             _cubeCol = PlayerPrefs.GetString("CubeColor", "yellow");
             switch (_cubeCol)
             {
-                case "magenta":
+                case Constants.MAGENTA_CUBE_COLOUR:
                     cubeImgOnChangeColButton.color = Color.magenta;
                     cubeMaterial.color = Color.magenta;
                     trailMaterial.color = Color.magenta;
                     break;
-                case "blue":
+                case Constants.BLUE_CUBE_COLOUR:
                     cubeImgOnChangeColButton.color = Color.blue;
                     cubeMaterial.color = Color.blue;
                     trailMaterial.color = Color.blue;
                     break;
-                case "cyan":
+                case Constants.CYAN_CUBE_COLOUR:
                     cubeImgOnChangeColButton.color = Color.cyan;
                     cubeMaterial.color = Color.cyan;
                     trailMaterial.color = Color.cyan;
                     break;
-                case "grey":
+                case Constants.GREY_CUBE_COLOUR:
                     cubeImgOnChangeColButton.color = Color.gray;
                     cubeMaterial.color = Color.gray;
                     trailMaterial.color = Color.gray;
                     
                     break;
-                case "yellow":
+                case Constants.YELLOW_CUBE_COLOUR:
                     cubeImgOnChangeColButton.color = Color.yellow;
                     cubeMaterial.color = Color.yellow;
                     trailMaterial.color = Color.yellow;
                     break;
-                case "red":
+                case Constants.RED_CUBE_COLOUR:
                     cubeImgOnChangeColButton.color = Color.red;
                     cubeMaterial.color = Color.red;
                     trailMaterial.color = Color.red;
@@ -61,7 +62,7 @@ namespace Controllers
             StopCoroutine(HandSlider());
         }
 
-        public IEnumerator HandSlider()
+        private IEnumerator HandSlider()
         {
             while (handSlider.value < 2f)
             {
